@@ -8,18 +8,22 @@ package edu.gatech.oad.antlab.person;
  *  @author Bob
  *  @version 1.1
  */
-public class Person1 {
-  /** Holds the persons real name */
-  private String name;
-  	/**
+public class Person1
+{
+	/** Holds the persons real name */
+	private String name;
+
+	/**
 	 * The constructor, takes in the persons
 	 * name
 	 * @param pname the person's real name
 	 */
-  public Person1(String pname) {
-    name = pname;
-  }
-  	/**
+	public Person1(String pname)
+	{
+		name = pname;
+	}
+
+	/**
 	 * This method should take the string
 	 * input and return its characters rotated
 	 * 2 positions.
@@ -29,11 +33,16 @@ public class Person1 {
 	 * @param input the string to be modified
 	 * @return the modified string
 	 */
-	private String calc(String input) {
-	  //Person 1 put your implementation here
-	  return null;
+	private String calc(String input)
+	{
+		if ( input == null)
+			return null;
+		else if( input.length() < 3)
+			return input;
+		else
+			return input.substring(2) + input.substring(0,2);
 	}
-	
+
 	/**
 	 * Return a string rep of this object
 	 * that varies with an input string
@@ -42,8 +51,9 @@ public class Person1 {
 	 * @return the string representing the 
 	 *         object
 	 */
-	public String toString(String input) {
-	  return name + calc(input);
+	public String toString(String input)
+	{
+		return name + calc(input);
 	}
 
 }
