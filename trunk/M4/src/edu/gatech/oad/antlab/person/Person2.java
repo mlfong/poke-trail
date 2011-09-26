@@ -1,5 +1,7 @@
 package edu.gatech.oad.antlab.person;
 
+import java.util.Random;
+
 /**
  *  A simple class for person 2
  *  returns their name and a
@@ -30,8 +32,20 @@ public class Person2 {
 	 * @return the modified string
 	 */
 	private String calc(String input) {
-	  //Person 2 put your implementation here
-	  return null;
+		Random random = new Random();
+		int randomNum;
+		String scrambleString = "";
+		while(!input.isEmpty()){
+			randomNum = random.nextInt(input.length());
+			scrambleString = scrambleString+input.charAt(randomNum);
+			try{input = input.substring(0, randomNum)+input.substring(randomNum+1, input.length());}
+			catch(Exception e)
+			{
+				input = input.substring(0,randomNum);
+			}
+		}
+		return scrambleString;
+			
 	}
 	/**
 	 * Return a string rep of this object
