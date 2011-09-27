@@ -19,6 +19,8 @@ public class Person4 {
   public Person4(String pname) {
     name = pname;
   }
+  
+
     /**
      * This method should take the string
      * input and return its characters rotated
@@ -29,9 +31,17 @@ public class Person4 {
      * @param input the string to be modified
      * @return the modified string
      */
-    private String calc(String input) {
-      //Person 1 put your implementation here
-      return null;
+  private String calc(String input) {
+		String result = "";
+		for (int i = 2; i < input.length(); i++){
+			char c = input.charAt(i);        
+			result.append(c);
+		}
+		for (int j = 0; j < 2; j++){
+			char c = input.charAt(j);
+			result.append(c);
+		}
+		return result;
     }
     
     /**
@@ -45,6 +55,5 @@ public class Person4 {
     public String toString(String input) {
       return name + calc(input);
     }
-
 }
 
