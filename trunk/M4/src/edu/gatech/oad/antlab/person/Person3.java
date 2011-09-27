@@ -8,18 +8,18 @@ package edu.gatech.oad.antlab.person;
  *  @version 1.1
  */
 public class Person3 {
-   /** Holds the persons real name */  
+	/** Holds the persons real name */  
 	private String name;
-	
+
 	/**
 	 * The constructor, takes in the persons
 	 * name
 	 * @param pname the person's real name
 	 */
 	public Person3(String pname){
-	  name = pname;
+		name = pname;
 	}
-	
+
 	/**
 	 * Return a string rep of this object
 	 * that varies with an input string
@@ -29,9 +29,9 @@ public class Person3 {
 	 *         object
 	 */
 	public String toString(String input) {
-	  return name + calc(input);
+		return name + calc(input);
 	}
-	
+
 	/**
 	 * This method should take the string
 	 * input and return its reverse.
@@ -41,8 +41,11 @@ public class Person3 {
 	 * @param input the string to be reversed
 	 * @return the reversed string
 	 */
-	private String calc(String input) {
-	  //Person 3 put your implementation here
-	  return null;
+	public static String calc(String input) {
+		String newInput = "";
+		for(int i = 0; i < input.length(); i++) {
+			newInput = input.charAt(i) + newInput;
+		}
+		return newInput;
 	}
 }
