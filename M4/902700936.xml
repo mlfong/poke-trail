@@ -1,0 +1,52 @@
+<!-- Atom Raiff 902700936 -->
+<project name="902700936 Ant Lab" default="all" basedir=".">
+<target name="all" depends="init, prepare, compile, javadoc, jar, run" description="Does init, compare, compile, javadoc, jar, and run">
+</target>
+	<target name="init" description="Set up all your properties.">
+		<property name="src" location="src"/>
+        <property name="lib" location="lib"/>
+        <property name="build" location="build"/>
+        <property name="apidoc" location="apidoc"/>
+        <property name="person" location="src/edu/gatech/oad/antlab/person"/>
+        <property name="pk1" location="src/edu/gatech/oad/antlab/pkg1"/>
+        <property name="pk2" location="src/edu/gatech/oad/antlab/pkg2"/>      
+    </target>
+	
+	<target name="prepare" depends="init" description="Make all the required directories">
+		<mkdir dir="${src}"/>
+        <mkdir dir="${lib}"/>
+        <mkdir dir= "${build}"/>
+        <mkdir dir="${apidoc}"/>
+        <mkdir dir="${person}"/>
+        <mkdir dir="${pk1}"/>
+        <mkdir dir="${pk2}"/>
+	</target>
+	
+	<target name="compile" depends="prepare" description="This will compile all java classes in the 'src' directory tree to the 'build' directory.">
+		<javac srcdir="${src}" destdir="${build}" classpath="${lib}/resources.jar"/>
+	</target>
+	
+	<target name="javadoc" depends="compile" description="This will generate the javadoc documentation for all java classes in the 'src' directory and will be stored in the 'apidoc' directory.">
+		<javadoc sourcepath="${src}" access="public" classpath="${lib}/resources.jar" destdir="${apidoc}"/>
+	</target>
+	
+	<target name="jar" depends="compile" description="This will package the compiled classes (excluding the resources.jar) as a JAR titled AntLabRun.jar.">
+		<jar destfile="${lib}/AntLabRun.jar" basedir="${build}">
+			<manifest>
+				<attribute name="Main-Class" value="edu.gatech.oad.antlab.pkg1.AntLabMain"/>
+                <attribute name="Class-Path" value="resources.jar"/>
+			</manifest>
+		</jar>
+	</target>
+	
+	<target name="run" depends="jar" description="This will start program execution and run the jar file created in the 'jar' task above">
+		<java jar="${lib}/AntLabRun.jar" fork="true"/>
+	</target>
+	
+	<target name="clean" depends="all" description="Deletes the build directory, api directory, and the AntLabRun.jar">
+		<delete dir="${build}"/>
+		<delete dir="${apidoc}"/>
+		<delete dir="${lib}/AntLabRun.jar"/>
+	</target>
+                                
+</project>
