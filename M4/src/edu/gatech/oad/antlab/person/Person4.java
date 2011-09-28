@@ -35,11 +35,11 @@ public class Person4 {
 		String result = "";
 		for (int i = 2; i < input.length(); i++){
 			char c = input.charAt(i);        
-			result.append(c);
+			result += c;
 		}
 		for (int j = 0; j < 2; j++){
 			char c = input.charAt(j);
-			result.append(c);
+			result += c;
 		}
 		return result;
     }
