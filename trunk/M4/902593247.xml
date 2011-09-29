@@ -16,7 +16,7 @@
 	</target>
 	
 	<target name="compile" depends="init,prepare">
-		<javac srcdir="${src}" destdir="${build}">
+		<javac srcdir="${src}" destdir="${build}" includeantruntime="false">
 			<classpath>
 				<pathelement location="${lib}/${resources}" />
 			</classpath>
