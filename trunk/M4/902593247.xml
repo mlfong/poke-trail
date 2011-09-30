@@ -23,10 +23,12 @@
 		</javac>
 	</target>
 	
-	<target name="javadoc" depends="init,prepare">
-		<javadoc destdir="${doc}">
+
+	
+	<target name = "javadoc" depends = "prepare" >
+		<javadoc sourcepath = "${src}" destdir = "${apidoc}" classpath="${lib}/resources.jar">
 			<fileset dir="${src}">
-				<include name="**/*.java"/>
+				<include name = "**/*.java" />
 			</fileset>
 		</javadoc>
 	</target>
