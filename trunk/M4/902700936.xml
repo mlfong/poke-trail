@@ -43,7 +43,7 @@
 		<java jar="${lib}/AntLabRun.jar" fork="true"/>
 	</target>
 	
-	<target name="clean" depends="all" description="Deletes the build directory, api directory, and the AntLabRun.jar">
+	<target name="clean" depends="init" description="Deletes the build directory, api directory, and the AntLabRun.jar">
 		<delete dir="${build}"/>
 		<delete dir="${apidoc}"/>
 		<delete dir="${lib}/AntLabRun.jar"/>
