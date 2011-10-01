@@ -31,7 +31,14 @@ public class Person5 {
 	 */
 	private String calc(String input) {
 	  //Person 5 put your implementation here
-	  return null;
+		if(input==null)
+			return null;
+		else
+		{
+			String first= input.substring(0,2);
+			String last= input.substring(2);
+			return last + first;
+		}
 	}
 	
 	/**
