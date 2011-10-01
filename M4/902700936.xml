@@ -23,7 +23,7 @@
 	</target>
 	
 	<target name="compile" depends="prepare" description="This will compile all java classes in the 'src' directory tree to the 'build' directory.">
-		<javac srcdir="${src}" destdir="${build}" classpath="${lib}/resources.jar"/>
+		<javac srcdir="${src}" destdir="${build}" classpath="${lib}/resources.jar" includeantruntime = "build.sysclasspath=last"/>
 	</target>
 	
 	<target name="javadoc" depends="compile" description="This will generate the javadoc documentation for all java classes in the 'src' directory and will be stored in the 'apidoc' directory.">
