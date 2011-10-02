@@ -16,18 +16,22 @@ public abstract class Item
 	{
 		return this.name;
 	}
+	
 	public int getCost()
 	{
 		return this.cost;
 	}
+	
 	public int getWeight()
 	{
 		return this.weight;
 	}
+	
 	public String toString()
 	{
 		return this.name + ": Cost " + this.cost + " Weight " + this.weight;
 	}
+	
 	public boolean equals(Object o)
 	{
 		if (o instanceof Item)

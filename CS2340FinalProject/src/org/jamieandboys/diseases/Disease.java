@@ -10,6 +10,7 @@ public abstract class Disease
 	{
 		this.name = name;
 	}
+	
 	public abstract void doEffect(Person person);
 	
 	public String toString()
