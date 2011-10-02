@@ -8,6 +8,7 @@ public class Poison extends Disease
 	{
 		super("Poison");
 	}
+	
 	@Override
 	public void doEffect(Person person)
 	{

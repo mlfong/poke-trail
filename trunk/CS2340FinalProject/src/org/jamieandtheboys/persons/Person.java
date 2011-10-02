@@ -33,6 +33,7 @@ public abstract class Person
 	{
 		return this.disease;
 	}
+	
 	public int getFatigue()
 	{
 		return this.fatigue;
@@ -62,6 +63,7 @@ public abstract class Person
 	{
 		return this.type;
 	}
+	
 	public void setDisease(Disease disease)
 	{
 		this.disease = disease;
@@ -76,6 +78,7 @@ public abstract class Person
 	{
 		this.health = health;
 	}
+	
 	public void setHunger(int hunger)
 	{
 		this.hunger = hunger;
@@ -85,6 +88,7 @@ public abstract class Person
 	{
 		this.setMoney(this.money + money);
 	}
+	
 	public void subMoney(int money)
 	{
 		this.setMoney(this.money - money);
@@ -94,6 +98,7 @@ public abstract class Person
 	{
 		this.money = money;
 	}
+	
 	public String toString()
 	{
 		return this.name + "(" + this.type + "): Health " +  this.health + " Hunger " + this.hunger + 

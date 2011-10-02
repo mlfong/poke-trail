@@ -17,26 +17,32 @@ public class Wagon
 		this.pace = 0;
 		inventory = new HashMap<Item, Integer>();
 	}
+	
 	public boolean isOverweight()
 	{
 		return this.weight > MAX_WEIGHT;
 	}
+	
 	public int getMaxWeight()
 	{
 		return MAX_WEIGHT;
 	}
+	
 	public int getHealth()
 	{
 		return this.health;
 	}
+	
 	public int getWeight()
 	{
 		return this.weight;
 	}
+	
 	public int getPace()
 	{
 		return this.pace;
 	}
+	
 	public HashMap<Item, Integer> getInventory()
 	{
 		return this.inventory;
@@ -46,30 +52,37 @@ public class Wagon
 	{
 		setWeight(this.weight + weight);
 	}
+	
 	public void subWeight(int weight)
 	{
 		setWeight(this.weight - weight);
 	}
+	
 	private void setWeight(int weight)
 	{
 		this.weight = weight;
 	}
+	
 	public void addHealth(int health)
 	{
 		setHealth(this.health + health);
 	}
+	
 	public void subHealth(int health)
 	{
 		setHealth(this.health - health);
 	}
+	
 	private void setHealth(int health)
 	{
 		this.health = health;
 	}
+	
 	public void setPace(int pace)
 	{
 		this.pace = pace;
 	}
+	
 	public void addItem(Item i, int amount)
 	{
 		if(this.inventory.containsKey(i))
@@ -77,6 +90,7 @@ public class Wagon
 		else
 			setItem(i, amount);
 	}
+	
 	public void subItem(Item i, int amount)
 	{
 		if(this.inventory.containsKey(i))
@@ -89,6 +103,7 @@ public class Wagon
 		else
 			return;
 	}
+	
 	private void setItem(Item i, int amount)
 	{
 		this.inventory.put(i, amount);
