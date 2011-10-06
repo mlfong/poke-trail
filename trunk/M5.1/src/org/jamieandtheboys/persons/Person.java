@@ -4,9 +4,9 @@ import org.jamieandboys.diseases.*;
 
 public abstract class Person
 {
-	private String name, type;
-	private int health, hunger, money, fatigue;
-	private Disease disease;
+	public String name, type;
+	public int health, hunger, money, fatigue;
+	public Disease disease;
 	
 	public Person(String name, String type, int money)
 	{

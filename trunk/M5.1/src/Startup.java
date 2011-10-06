@@ -19,8 +19,21 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JRadioButton;
 import javax.swing.ImageIcon;
+
+import org.jamieandtheboys.persons.Breeder;
+import org.jamieandtheboys.persons.Person;
+import org.jamieandtheboys.persons.Professor;
+import org.jamieandtheboys.persons.Trainer;
+
 import java.awt.Color;
 import java.awt.SystemColor;
+import org.jdesktop.beansbinding.BeanProperty;
+import org.jdesktop.beansbinding.AutoBinding;
+import org.jdesktop.beansbinding.Bindings;
+import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
+import org.jdesktop.beansbinding.ObjectProperty;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class Startup extends JDialog {
@@ -29,7 +42,11 @@ public class Startup extends JDialog {
 	private JTextField txtPidgioto;
 	private JTextField txtButterfree;
 	private JTextField txtBulbasaur;
-	private JTextField txtSquirtle;
+	public Person Player, party0,party1,party2,party3;
+	public String Pace, Rations;
+	private JComboBox comboBox_1;
+	private JComboBox comboBox_2;
+	private JComboBox comboBox;
 
 	/**
 	 * Launch the application.
@@ -48,6 +65,14 @@ public class Startup extends JDialog {
 	 * Create the dialog.
 	 */
 	public Startup() {
+		Player = new Trainer("Ash");
+		party0 = new Trainer("Pikachu");
+		party1 = new Trainer("Pidgioto");
+		party2 = new Trainer("Buterfree");
+		party3 = new Trainer("Bulbasaur");
+		Pace = "Leasurely";
+		Rations = "Bare-Bones";	
+		
 		getContentPane().setBackground(SystemColor.activeCaption);
 		setBounds(100, 100, 550, 400);
 		getContentPane().setLayout(new MigLayout("", "[434px,grow]", "[217.00px,grow][42.00px]"));
@@ -82,10 +107,10 @@ public class Startup extends JDialog {
 					panel.add(lblChooseProfession, "cell 0 1,alignx trailing");
 				}
 				{
-					JComboBox comboBox = new JComboBox();
-					comboBox.setFont(new Font("Tahoma", Font.PLAIN, 13));
-					comboBox.setModel(new DefaultComboBoxModel(new String[] {"Trainer", "Breeder", "Professor"}));
-					panel.add(comboBox, "cell 1 1,alignx left");
+					comboBox_1 = new JComboBox();
+					comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+					comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Trainer", "Breeder", "Professor"}));
+					panel.add(comboBox_1, "cell 1 1,alignx left");
 				}
 				{
 					JLabel lblBam = new JLabel("");
@@ -153,18 +178,6 @@ public class Startup extends JDialog {
 					panel.add(txtBulbasaur, "cell 1 6,alignx left");
 				}
 				{
-					JLabel label = new JLabel("Name Party Member:");
-					label.setFont(new Font("Tahoma", Font.PLAIN, 13));
-					panel.add(label, "cell 0 8,alignx trailing");
-				}
-				{
-					txtSquirtle = new JTextField();
-					txtSquirtle.setText("Squirtle");
-					txtSquirtle.setFont(new Font("Tahoma", Font.PLAIN, 13));
-					txtSquirtle.setColumns(20);
-					panel.add(txtSquirtle, "cell 1 8,alignx left");
-				}
-				{
 					JLabel lblContinueToStep = new JLabel("Continue to Step 3");
 					lblContinueToStep.setFont(new Font("Tahoma", Font.PLAIN, 13));
 					panel.add(lblContinueToStep, "cell 1 12,alignx right");
@@ -181,10 +194,10 @@ public class Startup extends JDialog {
 					   panel.add(lblSetPace, "cell 0 0,alignx trailing");
 				}
 				{
-					   JComboBox comboBox = new JComboBox();
-					   comboBox.setFont(new Font("Tahoma", Font.PLAIN, 13));
-					   comboBox.setModel(new DefaultComboBoxModel(new String[]{"Leasurely", "Steady", "Grueling"}));
-					   panel.add(comboBox, "cell 1 0,alignx left");
+					   comboBox_2 = new JComboBox();
+					   comboBox_2.setFont(new Font("Tahoma", Font.PLAIN, 13));
+					   comboBox_2.setModel(new DefaultComboBoxModel(new String[]{"Leasurely", "Steady", "Grueling"}));
+					   panel.add(comboBox_2, "cell 1 0,alignx left");
 				}
 				{
 					   JLabel label = new JLabel("");
@@ -197,10 +210,10 @@ public class Startup extends JDialog {
 					   panel.add(lblSetRations, "cell 0 7,alignx trailing");
 				}
 				{
-					   JComboBox comboBox = new JComboBox();
+					   comboBox = new JComboBox();
 					   comboBox.setToolTipText("The more you ration, the healthier your group will be.");
 					   comboBox.setFont(new Font("Tahoma", Font.PLAIN, 13));
-					   comboBox.setModel(new DefaultComboBoxModel(new String[]{"Bare-Bones", "Meager", "Normal", "Well-Fed"}));
+					   comboBox.setModel(new DefaultComboBoxModel(new String[] {"Bare-Bones", "Meager", "Normal", "Well-Fed"}));
 					   panel.add(comboBox, "flowx,cell 1 7,alignx left");
 				}
 				{
@@ -218,6 +231,40 @@ public class Startup extends JDialog {
 			getContentPane().add(buttonPane, "cell 0 1,growx,aligny bottom");
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseReleased(MouseEvent arg0) {
+						//Package game data and send to summary window
+						//need to parse names?
+						party0.name=txtPikachu.getText();
+						party1.name=txtPidgioto.getText();
+						party2.name=txtButterfree.getText();
+						party3.name=txtBulbasaur.getText();
+						Pace = (String) comboBox_2.getSelectedItem();
+						Rations=(String) comboBox.getSelectedItem();
+						Player.name = txtAsh.getText();
+						Player.type = (String) comboBox_1.getSelectedItem();
+						M5Main.gameData.Pace=Pace;
+						M5Main.gameData.Party[0]=party0;
+						M5Main.gameData.Party[1]=party1;
+						M5Main.gameData.Party[2]=party2;
+						M5Main.gameData.Party[3]=party3;
+						M5Main.gameData.Rations=Rations;
+						if(Player.getType().equals("Breeder"))
+							Player = new Breeder(Player.getName());
+						else if(Player.getType().equals("Trainer"))
+							Player = new Trainer(Player.getName());
+						else 
+							Player = new Professor(Player.getName());
+						M5Main.gameData.Player=Player;
+						try {
+							NewGameSummary window = new NewGameSummary();
+							window.frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -228,5 +275,40 @@ public class Startup extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		initDataBindings();
+	}
+	protected void initDataBindings() {
+		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty.create("text");
+		BeanProperty<Person, String> personBeanProperty = BeanProperty.create("name");
+		AutoBinding<JTextField, String, Person, String> autoBinding = Bindings.createAutoBinding(UpdateStrategy.READ, txtAsh, jTextFieldBeanProperty, Player, personBeanProperty, "PName");
+		autoBinding.bind();
+		//
+		BeanProperty<JComboBox, Integer> jComboBoxBeanProperty = BeanProperty.create("selectedIndex");
+		BeanProperty<Person, String> personBeanProperty_1 = BeanProperty.create("type");
+		AutoBinding<JComboBox, Integer, Person, String> autoBinding_1 = Bindings.createAutoBinding(UpdateStrategy.READ, comboBox_1, jComboBoxBeanProperty, Player, personBeanProperty_1, "PType");
+		autoBinding_1.bind();
+		//
+		BeanProperty<JTextField, String> jTextFieldBeanProperty_1 = BeanProperty.create("text");
+		AutoBinding<JTextField, String, Person, String> autoBinding_2 = Bindings.createAutoBinding(UpdateStrategy.READ, txtPikachu, jTextFieldBeanProperty_1, party0, personBeanProperty, "P0");
+		autoBinding_2.bind();
+		//
+		BeanProperty<JTextField, String> jTextFieldBeanProperty_2 = BeanProperty.create("text");
+		AutoBinding<JTextField, String, Person, String> autoBinding_3 = Bindings.createAutoBinding(UpdateStrategy.READ, txtPidgioto, jTextFieldBeanProperty_2, party1, personBeanProperty, "P1");
+		autoBinding_3.bind();
+		//
+		BeanProperty<JTextField, String> jTextFieldBeanProperty_3 = BeanProperty.create("text");
+		AutoBinding<JTextField, String, Person, String> autoBinding_4 = Bindings.createAutoBinding(UpdateStrategy.READ, txtButterfree, jTextFieldBeanProperty_3, party2, personBeanProperty, "P2");
+		autoBinding_4.bind();
+		//
+		BeanProperty<JTextField, String> jTextFieldBeanProperty_4 = BeanProperty.create("text");
+		AutoBinding<JTextField, String, Person, String> autoBinding_5 = Bindings.createAutoBinding(UpdateStrategy.READ, txtBulbasaur, jTextFieldBeanProperty_4, party3, personBeanProperty, "P3");
+		autoBinding_5.bind();
+		//
+		ObjectProperty<String> stringObjectProperty = ObjectProperty.create();
+		AutoBinding<JComboBox, Integer, String, String> autoBinding_6 = Bindings.createAutoBinding(UpdateStrategy.READ, comboBox_2, jComboBoxBeanProperty, Pace, stringObjectProperty, "Pace");
+		autoBinding_6.bind();
+		//
+		AutoBinding<JComboBox, Integer, String, String> autoBinding_7 = Bindings.createAutoBinding(UpdateStrategy.READ, comboBox, jComboBoxBeanProperty, Rations, stringObjectProperty, "Rations");
+		autoBinding_7.bind();
 	}
 }
