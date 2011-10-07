@@ -28,17 +28,23 @@ import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 
+/**
+ * WindowBuilder Generated confirmation screen that displays the initial game info.
+ * @author Atom Raiff
+ *
+ */
 
 public class NewGameSummary {
 	JFrame frame;
-	String PlayerName = M5Main.gameData.Player.getName();
-	String PlayerType = M5Main.gameData.Player.getType();
-	String Pace= M5Main.gameData.Pace;
-	String Rations= M5Main.gameData.Rations;
-	String PartyName0= M5Main.gameData.Party[0].getName();
-	String PartyName1= M5Main.gameData.Party[1].getName();
-	String PartyName2= M5Main.gameData.Party[2].getName();
-	String PartyName3= M5Main.gameData.Party[3].getName();
+	// fields that are databound to JLabels
+	private String PlayerName = M5Main.gameData.Player.getName();
+	private String PlayerType = M5Main.gameData.Player.getType();
+	private String Pace= M5Main.gameData.Pace;
+	private String Rations= M5Main.gameData.Rations;
+	private String PartyName0= M5Main.gameData.Party[0].getName();
+	private String PartyName1= M5Main.gameData.Party[1].getName();
+	private String PartyName2= M5Main.gameData.Party[2].getName();
+	private String PartyName3= M5Main.gameData.Party[3].getName();
 	private JLabel lblNewLabel_11;
 	private JLabel lblrations;
 	private JLabel lblNewLabel_8;
