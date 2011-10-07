@@ -35,6 +35,13 @@ import org.jdesktop.beansbinding.ObjectProperty;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * WidowBuilder Generated class. This provides a way for the user to 
+ * customize the game upon starting one.
+ * See how this data is submitted by viewing the okButton mouse release event.
+ * @author Atom Raiff
+ *
+ */
 
 public class Startup extends JDialog {
 	private JTextField txtAsh;
@@ -232,6 +239,10 @@ public class Startup extends JDialog {
 			{
 				JButton okButton = new JButton("OK");
 				okButton.addMouseListener(new MouseAdapter() {
+					/**
+					 * This stores all the data from the GUI into the gameData obj and 
+					 * sends the user to a confirmation screen.
+					 */
 					@Override
 					public void mouseReleased(MouseEvent arg0) {
 						//Package game data and send to summary window
