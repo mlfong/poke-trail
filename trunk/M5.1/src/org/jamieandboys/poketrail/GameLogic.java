@@ -19,7 +19,7 @@ public class GameLogic
 		/************************
 		 *   start screen       *
 		 *     image            *
-		 *                      * 
+		 *                      *
 		 *     new game         *
  		 *     continue         *
  		 ***********************/
