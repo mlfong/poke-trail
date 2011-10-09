@@ -5,6 +5,12 @@ public abstract class Item
 	private String name;
 	private int cost, weight;
 	
+	/**
+	 * Constructor for Item
+	 * @param name the name of the item
+	 * @param cost how much money the individual item costs
+	 * @param weight how much the item weighs in pounds
+	 */
 	public Item(String name, int cost, int weight)
 	{
 		this.name = name;

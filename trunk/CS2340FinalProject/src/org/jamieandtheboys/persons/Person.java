@@ -4,10 +4,16 @@ import org.jamieandboys.diseases.*;
 
 public abstract class Person
 {
-	private String name, type;
-	private int health, hunger, money, fatigue;
-	private Disease disease;
+	public String name, type;
+	public int health, hunger, money, fatigue;
+	public Disease disease;
 	
+	/**
+	 * Constructor for Person
+	 * @param name the name of the person
+	 * @param type the Profession of the person, affects certain parts of the game
+	 * @param money the amount of money the player starts with
+	 */
 	public Person(String name, String type, int money)
 	{
 		this.name = name;
@@ -19,6 +25,9 @@ public abstract class Person
 		this.money = money;
 	}
 	
+	/**
+	 * Called at the end of the turn to affect the person
+	 */
 	public void doDisease()
 	{
 		this.disease.doEffect(this);
@@ -84,11 +93,19 @@ public abstract class Person
 		this.hunger = hunger;
 	}
 	
+	/**
+	 * Adds the specified amount to money
+	 * @param money the amount to add
+	 */
 	public void addMoney(int money)
 	{
 		this.setMoney(this.money + money);
 	}
 	
+	/**
+	 * Subtracts the specified amount from money
+	 * @param money the amount to subtract
+	 */
 	public void subMoney(int money)
 	{
 		this.setMoney(this.money - money);
@@ -99,6 +116,9 @@ public abstract class Person
 		this.money = money;
 	}
 	
+	/**
+	 * A string summary of this object's attributes
+	 */
 	public String toString()
 	{
 		return this.name + "(" + this.type + "): Health " +  this.health + " Hunger " + this.hunger + 

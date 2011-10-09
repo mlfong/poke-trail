@@ -10,6 +10,23 @@ public class Test
 {
 	public static void main(String[] args)
 	{
+		testM6();
+		
+	}
+	public static void testM6()
+	{
+		Store s = new Store("Viridian PokeMart");
+		s.printStock();
+		Wagon w = new Wagon();
+		System.out.println(w);
+		w.addItem(new Food(), 4);
+		System.out.println(w);
+		System.out.println(w.getInventory());
+		
+	}
+	
+	public static void testM5()
+	{
 		HashMap<String, Integer> hm = new HashMap<String, Integer>();
 		hm.put("A", 1);
 		hm.put("B", 2);
@@ -33,7 +50,5 @@ public class Test
 		
 		Item fh = new FullHeal();
 		System.out.println(fh);
-		
 	}
-
 }
