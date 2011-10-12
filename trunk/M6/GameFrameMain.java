@@ -23,6 +23,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JLayeredPane;
 
 
+
 public class GameFrameMain extends JFrame {
 
 	private JPanel contentPane;
@@ -121,35 +122,35 @@ public class GameFrameMain extends JFrame {
 		displayPanel.add(lblWagonTongue, "cell 8 4,alignx center");
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\jamiejessica\\Documents\\Georgia Tech\\Fall 2011\\CS\\items\\taurosItemIcon.png"));
+		lblNewLabel.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/taurosItemIcon.png")));
 		displayPanel.add(lblNewLabel, "cell 1 5");
 		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon("C:\\Users\\jamiejessica\\Documents\\Georgia Tech\\Fall 2011\\CS\\items\\foodIcon.png"));
+		label.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/foodIcon.png")));
 		displayPanel.add(label, "cell 2 5");
 		
 		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon("C:\\Users\\jamiejessica\\Documents\\Georgia Tech\\Fall 2011\\CS\\items\\clothingIcon.png"));
+		label_1.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/clothingIcon.png")));
 		displayPanel.add(label_1, "cell 3 5");
 		
 		JLabel label_5 = new JLabel("");
-		label_5.setIcon(new ImageIcon("C:\\Users\\jamiejessica\\Documents\\Georgia Tech\\Fall 2011\\CS\\items\\ammoIcon.png"));
+		label_5.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/ammoIcon.png")));
 		displayPanel.add(label_5, "cell 4 5");
 		
 		JLabel label_6 = new JLabel("");
-		label_6.setIcon(new ImageIcon("C:\\Users\\jamiejessica\\Documents\\Georgia Tech\\Fall 2011\\CS\\items\\potionIcon.png"));
+		label_6.setIcon(new ImageIcon(GameFrameMain.class.getResource("images/potionIcon.png")));
 		displayPanel.add(label_6, "cell 5 5");
 		
 		JLabel label_7 = new JLabel("");
-		label_7.setIcon(new ImageIcon("C:\\Users\\jamiejessica\\Documents\\Georgia Tech\\Fall 2011\\CS\\exitgame.png"));
+		label_7.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/exitgame.png")));
 		displayPanel.add(label_7, "cell 6 5");
 		
 		JLabel label_8 = new JLabel("");
-		label_8.setIcon(new ImageIcon("C:\\Users\\jamiejessica\\Documents\\Georgia Tech\\Fall 2011\\CS\\exitgame.png"));
+		label_8.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/exitgame.png")));
 		displayPanel.add(label_8, "cell 7 5");
 		
 		JLabel label_9 = new JLabel("");
-		label_9.setIcon(new ImageIcon("C:\\Users\\jamiejessica\\Documents\\Georgia Tech\\Fall 2011\\CS\\exitgame.png"));
+		label_9.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/exitgame.png")));
 		displayPanel.add(label_9, "cell 8 5");
 		
 		JLabel lblyoke = new JLabel("$40");
@@ -358,7 +359,7 @@ public class GameFrameMain extends JFrame {
 		leftPanel.setLayout(new MigLayout("", "[][119.00]", "[][][][][][][][][][][][][][][][][][][][][][][]"));
 		
 		JLabel label_11 = new JLabel("");
-		label_11.setIcon(new ImageIcon("C:\\Users\\jamiejessica\\Documents\\Georgia Tech\\Fall 2011\\CS\\poketraillogo3.jpg"));
+		label_11.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/poketraillogo3.jpg")));
 		leftPanel.add(label_11, "cell 0 0 2 1,aligny top");
 		
 		JLabel lblTravelLog = new JLabel("Travel Log:");
@@ -484,11 +485,11 @@ public class GameFrameMain extends JFrame {
 		btnNewButton.setMargin(new Insets(2, 4, 2, 4));
 		btnNewButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnNewButton.setVerticalTextPosition(SwingConstants.BOTTOM);
-		btnNewButton.setIcon(new ImageIcon("C:\\Users\\jamiejessica\\Documents\\Georgia Tech\\Fall 2011\\CS\\exitgame.png"));
+		btnNewButton.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/exitgame.png")));
 		menuPanel.add(btnNewButton, "cell 0 0,aligny center");
 		
 		JButton btnS = new JButton("Save Game");
-		btnS.setIcon(new ImageIcon("C:\\Users\\jamiejessica\\Documents\\Georgia Tech\\Fall 2011\\CS\\savegame.png"));
+		btnS.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/savegame.png")));
 		btnS.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnS.setMargin(new Insets(2, 4, 2, 4));
 		btnS.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -497,7 +498,7 @@ public class GameFrameMain extends JFrame {
 		menuPanel.add(btnS, "cell 1 0,aligny center");
 		
 		JButton btnHunt = new JButton("Heal");
-		btnHunt.setIcon(new ImageIcon("C:\\Users\\jamiejessica\\Documents\\Georgia Tech\\Fall 2011\\CS\\items\\potionIcon.png"));
+		btnHunt.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/potionIcon.png")));
 		btnHunt.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnHunt.setMargin(new Insets(2, 6, 2, 5));
 		btnHunt.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -524,7 +525,7 @@ public class GameFrameMain extends JFrame {
 		popupMenu_2.add(mntmMember_3);
 		
 		JButton btnHeal = new JButton("Hunt");
-		btnHeal.setIcon(new ImageIcon("C:\\Users\\jamiejessica\\Documents\\Georgia Tech\\Fall 2011\\CS\\items\\ammoIcon.png"));
+		btnHeal.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/ammoIcon.png")));
 		btnHeal.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnHeal.setMargin(new Insets(2, 6, 2, 5));
 		btnHeal.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -533,7 +534,7 @@ public class GameFrameMain extends JFrame {
 		menuPanel.add(btnHeal, "cell 3 0,aligny center");
 		
 		JButton btnRepairWagon = new JButton("Trade");
-		btnRepairWagon.setIcon(new ImageIcon("C:\\Users\\jamiejessica\\Documents\\Georgia Tech\\Fall 2011\\CS\\exitgame.png"));
+		btnRepairWagon.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/exitgame.png")));
 		btnRepairWagon.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnRepairWagon.setMargin(new Insets(2, 6, 2, 5));
 		btnRepairWagon.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -542,7 +543,7 @@ public class GameFrameMain extends JFrame {
 		menuPanel.add(btnRepairWagon, "cell 4 0,aligny center");
 		
 		JButton btnTrade = new JButton("Repair Wagon");
-		btnTrade.setIcon(new ImageIcon("C:\\Users\\jamiejessica\\Documents\\Georgia Tech\\Fall 2011\\CS\\exitgame.png"));
+		btnTrade.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/exitgame.png")));
 		btnTrade.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnTrade.setMargin(new Insets(2, 6, 2, 5));
 		btnTrade.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -564,7 +565,7 @@ public class GameFrameMain extends JFrame {
 		
 		JButton btnSetPace = new JButton("Set Pace");
 		btnSetPace.setInheritsPopupMenu(true);
-		btnSetPace.setIcon(new ImageIcon("C:\\Users\\jamiejessica\\Documents\\Georgia Tech\\Fall 2011\\CS\\items\\taurosIcon.png"));
+		btnSetPace.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/taurosIcon.png")));
 		btnSetPace.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnSetPace.setMargin(new Insets(2, 6, 2, 5));
 		btnSetPace.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -579,19 +580,19 @@ public class GameFrameMain extends JFrame {
 		popupMenu.add(mntmStopped);
 		
 		JMenuItem mntmLeasurely = new JMenuItem("Leasurely");
-		mntmLeasurely.setIcon(new ImageIcon("C:\\Users\\jamiejessica\\Documents\\Georgia Tech\\Fall 2011\\CS\\items\\slowpokeIcon.png"));
+		mntmLeasurely.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/slowpokeIcon.png")));
 		popupMenu.add(mntmLeasurely);
 		
 		JMenuItem mntmSteady = new JMenuItem("Steady");
-		mntmSteady.setIcon(new ImageIcon("C:\\Users\\jamiejessica\\Documents\\Georgia Tech\\Fall 2011\\CS\\items\\taurosIcon.png"));
+		mntmSteady.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/taurosIcon.png")));
 		popupMenu.add(mntmSteady);
 		
 		JMenuItem mntmGrueling = new JMenuItem("Grueling");
-		mntmGrueling.setIcon(new ImageIcon("C:\\Users\\jamiejessica\\Documents\\Georgia Tech\\Fall 2011\\CS\\items\\rapidashIcon.png"));
+		mntmGrueling.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/rapidashIcon.png")));
 		popupMenu.add(mntmGrueling);
 		
 		JButton btnSetRations = new JButton("Set Rations");
-		btnSetRations.setIcon(new ImageIcon("C:\\Users\\jamiejessica\\Documents\\Georgia Tech\\Fall 2011\\CS\\items\\foodIcon.png"));
+		btnSetRations.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/foodIcon.png")));
 		btnSetRations.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnSetRations.setMargin(new Insets(2, 6, 2, 5));
 		btnSetRations.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -618,7 +619,7 @@ public class GameFrameMain extends JFrame {
 		popupMenu_1.add(mntmWellfed);
 		
 		JButton btnViewSupplies = new JButton("View Supplies");
-		btnViewSupplies.setIcon(new ImageIcon("C:\\Users\\jamiejessica\\Documents\\Georgia Tech\\Fall 2011\\CS\\items\\clothingIcon.png"));
+		btnViewSupplies.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/clothingIcon.png")));
 		btnViewSupplies.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnViewSupplies.setMargin(new Insets(2, 6, 2, 5));
 		btnViewSupplies.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -627,7 +628,7 @@ public class GameFrameMain extends JFrame {
 		menuPanel.add(btnViewSupplies, "cell 8 0,aligny center");
 		
 		JButton btnViewMap = new JButton("View Map");
-		btnViewMap.setIcon(new ImageIcon("C:\\Users\\jamiejessica\\Documents\\Georgia Tech\\Fall 2011\\CS\\exitgame.png"));
+		btnViewMap.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/exitgame.png")));
 		btnViewMap.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnViewMap.setMargin(new Insets(2, 6, 2, 5));
 		btnViewMap.setHorizontalTextPosition(SwingConstants.CENTER);
