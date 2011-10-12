@@ -59,6 +59,9 @@ public class GameLogic
 		storeEvent();
 	}
 	
+	/**
+	 * Text-based store simulator. For reference purposes only
+	 */
 	public static void storeEvent()
 	{
 		System.out.println("Welcome to the " + s.getName());
@@ -141,6 +144,12 @@ public class GameLogic
 				System.out.println("Invalid choice.");
 		}
 	}
+	
+	/**
+	 * Checks if the given string is an integer 
+	 * @param s the string to check
+	 * @return true if string representation of an int, else false
+	 */
 	private static boolean isNum(String s)
 	{
 		try { Integer.parseInt(s); }

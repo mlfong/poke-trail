@@ -8,6 +8,11 @@ public class Store
 	private ArrayList<Item> stock;
 	private String name;
 	
+	/**
+	 * Constructor for store
+	 * @param name The name of the store
+	 * @param items a variable parameter taking in the items that the store will sell
+	 */
 	public Store(String name, Item... items)
 	{
 		this.name = name;
@@ -16,14 +21,22 @@ public class Store
 			stock.add(i);
 		
 	}
+	
 	public String getName()
 	{
 		return this.name;
 	}
+	
 	public ArrayList<Item> getStock()
 	{
 		return stock;
 	}
+	
+	/**
+	 * Checks if an item is in the store, given the Item name
+	 * @param s the name of the item to search for
+	 * @return true if item is in store, else false
+	 */
 	public boolean inStore(String s)
 	{
 		for(int i = 0; i < stock.size(); i++)
@@ -31,6 +44,7 @@ public class Store
 				return true;
 		return false;
 	}
+	
 	public Item getItem(String s)
 	{
 		for(int i = 0; i < stock.size(); i++)
@@ -38,6 +52,7 @@ public class Store
 				return stock.get(i);
 		return null;
 	}
+	
 	public void printStock()
 	{
 		for( int i = 0; i < stock.size(); i++ )
