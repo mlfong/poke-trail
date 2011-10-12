@@ -147,6 +147,7 @@ public class Wagon
 	{
 		this.inventory.put(i, amount);
 	}
+	
 	/**
 	 * Returns available weight of wagon
 	 * @return max weight - current weight
