@@ -7,6 +7,7 @@ public class Store
 {
 	private ArrayList<Item> stock;
 	private String name;
+	private ArrayList<Item> cart;
 	
 	/**
 	 * Constructor for store
@@ -20,6 +21,10 @@ public class Store
 		for(Item i : items)
 			stock.add(i);
 		
+	}
+	
+	public Store(String name){
+		this(name, new Food(), new FullHeal(), new Pokeball(), new SpareAxle(), new SpareTongue(), new SpareWheel(), new Clothing(), new Oxen());
 	}
 	
 	public String getName()

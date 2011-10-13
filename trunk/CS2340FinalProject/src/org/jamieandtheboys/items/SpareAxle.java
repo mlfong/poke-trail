@@ -5,7 +5,7 @@ public class SpareAxle extends Item
 
 	public SpareAxle()
 	{
-		super("SpareAxle", 40, 125);
+		super("SpareAxle", 10, 125);
 	}
 
 }

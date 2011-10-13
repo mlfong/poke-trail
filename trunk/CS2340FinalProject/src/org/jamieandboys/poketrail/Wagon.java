@@ -6,7 +6,7 @@ import org.jamieandtheboys.items.*;
 public class Wagon
 {
 	private int health, weight, pace;
-	private HashMap<Item, Integer> inventory;
+	public HashMap<Item, Integer> inventory;
 	
 	private static final int MAX_WEIGHT = 3500;
 	
@@ -73,7 +73,7 @@ public class Wagon
 		setWeight(this.weight - weight);
 	}
 	
-	private void setWeight(int weight)
+	public void setWeight(int weight)
 	{
 		this.weight = weight;
 	}
@@ -113,8 +113,9 @@ public class Wagon
 	 */
 	public void addItem(Item i, int amount)
 	{
-		if(this.inventory.containsKey(i))
+		if(this.inventory.containsKey(i)){
 			this.inventory.put(i, this.inventory.get(i) + amount);
+		}
 		else
 			setItem(i, amount);
 	}
@@ -131,8 +132,9 @@ public class Wagon
 		{
 			if(this.inventory.get(i) < amount)
 				return;
-			else
+			else{
 				this.inventory.put(i, this.inventory.get(i) - amount);
+			}
 		}
 		else
 			return;
