@@ -5,7 +5,7 @@ public class Pokeball extends Item
 
 	public Pokeball()
 	{
-		super("Pokeball", 5, 1);
+		super("Pokeball", 2, 3);
 	}
 
 }

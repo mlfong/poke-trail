@@ -1,8 +1,16 @@
 package org.jamieandboys.poketrail;
+
+
+import org.jamieandtheboys.UI.Startup;
+import org.jamieandtheboys.UI.GameFrameMain;
 import org.jamieandtheboys.items.*;
 import org.jamieandtheboys.persons.*;
+
+import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import javax.swing.JDialog;
 
 public class GameLogic
 {
@@ -13,12 +21,14 @@ public class GameLogic
 	public static Store s;
 	public static Wagon w;
 	public static ArrayList<Person> p;
+	public static GameInitObj gameData = new GameInitObj();
+	public static Startup dialog;
 	public static void main(String[] args)
 	{
 		//TO-DO
 //		startScreen();
-		run();
 		//run();
+		newGame();
 	}
 	
 	public static void startScreen()
@@ -41,7 +51,16 @@ public class GameLogic
 	
 	public static void newGame()
 	{
-		//we must implement this
+		//new game dialogue
+		try {
+			dialog = new Startup();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 		
 	}
 	
@@ -52,11 +71,20 @@ public class GameLogic
 	
 	public static void run()
 	{
-		s = new Store("Viridian Pokemart", new Food(), new FullHeal());
-		p = new ArrayList<Person>();
-		p.add(new Trainer("Ash"));
+		s = new Store("Pallet Town General Store");
+		p = GameInitObj.Party;
 		w = new Wagon();
-		storeEvent();
+
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GameFrameMain frame = new GameFrameMain();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 	
 	/**
