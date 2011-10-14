@@ -6,7 +6,7 @@ import org.jamieandtheboys.items.*;
 public class Wagon
 {
 	private int health, weight, pace;
-	public HashMap<Item, Integer> inventory;
+	private HashMap<Item, Integer> inventory;
 	
 	private static final int MAX_WEIGHT = 3500;
 	
@@ -73,7 +73,7 @@ public class Wagon
 		setWeight(this.weight - weight);
 	}
 	
-	public void setWeight(int weight)
+	private void setWeight(int weight)
 	{
 		this.weight = weight;
 	}
@@ -113,11 +113,10 @@ public class Wagon
 	 */
 	public void addItem(Item i, int amount)
 	{
-		if(this.inventory.containsKey(i)){
-			this.inventory.put(i, this.inventory.get(i) + amount);
-		}
-		else
-			setItem(i, amount);
+		Integer currAmount = this.inventory.get(i);
+		if(currAmount == null)
+			currAmount = 0;
+		this.inventory.put(i, currAmount + amount);
 	}
 	
 	/**
@@ -128,26 +127,15 @@ public class Wagon
 	 */
 	public void subItem(Item i, int amount)
 	{
-		if(this.inventory.containsKey(i))
-		{
-			if(this.inventory.get(i) < amount)
-				return;
-			else{
-				this.inventory.put(i, this.inventory.get(i) - amount);
-			}
-		}
-		else
+		Integer currAmount = this.inventory.get(i);
+		if(currAmount == null)//i doesn't exist
 			return;
-	}
-	
-	/**
-	 * Sets existing Item in inventory to specified amount
-	 * @param i Item to set
-	 * @param amount amount to set Item to
-	 */
-	private void setItem(Item i, int amount)
-	{
-		this.inventory.put(i, amount);
+		else if(currAmount < amount) // trying to take too much
+			return;
+		else if(currAmount == amount) // exactly 0
+			this.inventory.remove(i);
+		else // subtract
+			this.inventory.put(i, currAmount - amount);
 	}
 	
 	/**

@@ -10,9 +10,45 @@ public class Test
 {
 	public static void main(String[] args)
 	{
-		testM6();
+		testHashAdd();
 		
 	}
+	
+	public static void testHM()
+	{
+		HashMap<String,Integer> hm = new HashMap<String, Integer>();
+		hm.put("One", 1);
+		System.out.println(hm);
+		hm.put("One", 2);
+		System.out.println(hm);
+		Food n = new Food();
+		System.out.println(n);
+	}
+	
+	public static void testHashAdd()
+	{
+		Wagon w = new Wagon();
+		System.out.println(w.getInventory());
+		w.addItem(new Food(), 2);
+		System.out.println(w.getInventory());
+		w.addItem(new Food(), 3);
+		//should be 5
+		System.out.println(w.getInventory());
+		w.subItem(new Food(), 1);
+		//should be 4
+		System.out.println(w.getInventory());
+		w.subItem(new FullHeal(), 2);
+		//nothing happens
+		System.out.println(w.getInventory());
+		w.subItem(new Food(), 5);
+		//nothing happens
+		System.out.println(w.getInventory());
+		w.subItem(new Food(), 4);
+		System.out.println(w.getInventory());
+		
+		
+	}
+	
 	public static void testM6()
 	{
 		Store s = new Store("Viridian PokeMart");

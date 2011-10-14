@@ -45,7 +45,15 @@ public abstract class Item
 			Item other = (Item)o;
 			return this.name.equals(other.name);
 		}
+		
 		return false;
+	}
+	public int hashCode()
+	{
+		int sum = 0;
+		for(int i = 0; i < this.name.length(); i++)
+			sum += this.name.charAt(i);
+		return sum;
 	}
 	
 }

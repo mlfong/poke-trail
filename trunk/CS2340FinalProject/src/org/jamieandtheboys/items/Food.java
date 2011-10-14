@@ -8,5 +8,4 @@ public class Food extends Item
 	{
 		super("Food", 1, 5);
 	}
-
 }
