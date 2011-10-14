@@ -1,6 +1,6 @@
 package org.jamieandtheboys.persons;
 
-import org.jamieandboys.diseases.*;
+import org.jamieandtheboys.diseases.*;
 
 public abstract class Person
 {

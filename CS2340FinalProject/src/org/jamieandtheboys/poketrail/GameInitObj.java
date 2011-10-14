@@ -1,4 +1,4 @@
-package org.jamieandboys.poketrail;
+package org.jamieandtheboys.poketrail;
 import java.util.ArrayList;
 
 import org.jamieandtheboys.persons.Person;

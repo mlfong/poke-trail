@@ -35,7 +35,8 @@ public abstract class Item
 	
 	public String toString()
 	{
-		return this.name + ": Cost " + this.cost + " Weight " + this.weight;
+		//return this.name + ": Cost " + this.cost + " Weight " + this.weight;
+		return this.name;
 	}
 	
 	public boolean equals(Object o)

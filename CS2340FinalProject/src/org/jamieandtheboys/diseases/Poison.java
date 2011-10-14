@@ -1,4 +1,4 @@
-package org.jamieandboys.diseases;
+package org.jamieandtheboys.diseases;
 
 import org.jamieandtheboys.persons.Person;
 
