@@ -1,4 +1,4 @@
-package org.jamieandboys.poketrail;
+package org.jamieandtheboys.poketrail;
 
 import java.util.HashMap;
 import org.jamieandtheboys.items.*;
@@ -73,7 +73,7 @@ public class Wagon
 		setWeight(this.weight - weight);
 	}
 	
-	private void setWeight(int weight)
+	public void setWeight(int weight)
 	{
 		this.weight = weight;
 	}

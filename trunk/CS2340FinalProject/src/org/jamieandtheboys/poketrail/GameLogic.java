@@ -1,4 +1,4 @@
-package org.jamieandboys.poketrail;
+package org.jamieandtheboys.poketrail;
 
 
 import org.jamieandtheboys.UI.Startup;

@@ -28,10 +28,6 @@ import java.util.HashMap;
 import javax.swing.JMenuItem;
 import javax.swing.JLayeredPane;
 
-import org.jamieandboys.poketrail.GameInitObj;
-import org.jamieandboys.poketrail.GameLogic;
-import org.jamieandboys.poketrail.Store;
-import org.jamieandboys.poketrail.Wagon;
 import org.jamieandtheboys.items.Clothing;
 import org.jamieandtheboys.items.Food;
 import org.jamieandtheboys.items.FullHeal;
@@ -42,6 +38,10 @@ import org.jamieandtheboys.items.SpareAxle;
 import org.jamieandtheboys.items.SpareTongue;
 import org.jamieandtheboys.items.SpareWheel;
 import org.jamieandtheboys.persons.Person;
+import org.jamieandtheboys.poketrail.GameInitObj;
+import org.jamieandtheboys.poketrail.GameLogic;
+import org.jamieandtheboys.poketrail.Store;
+import org.jamieandtheboys.poketrail.Wagon;
 import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.Bindings;
@@ -533,7 +533,7 @@ public class GameFrameMain extends JFrame {
 		btnBeginAdventure.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-					HashMap<Item, Integer> inv= w.inventory;
+					HashMap<Item, Integer> inv= w.getInventory();
 					JOptionPane.showMessageDialog(contentPane,
 						    "You're inventory consists of: "+inv.toString(),
 						    "Inventory",

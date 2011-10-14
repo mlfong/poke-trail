@@ -22,11 +22,11 @@ import java.awt.Font;
 import javax.swing.JRadioButton;
 import javax.swing.ImageIcon;
 
-import org.jamieandboys.poketrail.GameLogic;
 import org.jamieandtheboys.persons.Breeder;
 import org.jamieandtheboys.persons.Person;
 import org.jamieandtheboys.persons.Professor;
 import org.jamieandtheboys.persons.Trainer;
+import org.jamieandtheboys.poketrail.GameLogic;
 
 import java.awt.Color;
 import java.awt.SystemColor;

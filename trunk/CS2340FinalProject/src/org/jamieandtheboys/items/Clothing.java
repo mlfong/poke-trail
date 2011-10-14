@@ -1,11 +1,9 @@
 package org.jamieandtheboys.items;
 
-public class Clothing extends Item{
-
-	public Clothing() {
-		super("clothing", 10, 2);
-		
+public class Clothing extends Item
+{
+	public Clothing()
+	{
+		super("Clothing", 10, 2);	
 	}
-	
-
 }

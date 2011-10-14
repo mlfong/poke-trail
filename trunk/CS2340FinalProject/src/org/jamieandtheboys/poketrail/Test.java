@@ -1,6 +1,6 @@
-package org.jamieandboys.poketrail;
+package org.jamieandtheboys.poketrail;
 
-import org.jamieandboys.diseases.*;
+import org.jamieandtheboys.diseases.*;
 import org.jamieandtheboys.items.*;
 import org.jamieandtheboys.persons.*;
 
