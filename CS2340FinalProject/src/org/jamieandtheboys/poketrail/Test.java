@@ -10,8 +10,35 @@ public class Test
 {
 	public static void main(String[] args)
 	{
-		testHashAdd();
+		testHashSL();
 		
+	}
+	
+	public static void testHashSL()
+	{
+		//test hashing for save and loading
+		String s = "jamieandtheboys";
+//		String pw = "33mdmamdasndamd";
+		String pw = "33mdmsam..././4&#*$";
+		int divide = pw.length() / 2;
+		int m = SaveAndLoad.convertToInt( pw.substring(0, divide) );
+		int a = SaveAndLoad.convertToInt( pw.substring(divide) );
+		System.out.println(m + " " + a);
+//		int d = convertToInt( pw.substring(2*divide) );
+		
+		String s2 = "";
+		for(int i = 0; i < s.length(); i++)
+			s2 += "" + (char)(((s.charAt(i) * m ) + a ));
+		
+		String s3 = "";
+		for(int i = 0; i < s2.length(); i++)
+			s3 += "" + (char)(((s2.charAt(i) ) - a) / m);
+		
+		System.out.println(s);
+		System.out.println(s2);
+		System.out.println(s3);
+		System.out.println(s.length() == s3.length());
+		System.out.println(s.equals(s3));
 	}
 	
 	public static void testHM()
