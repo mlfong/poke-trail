@@ -75,9 +75,12 @@ public class GameLogic
 		p = GameInitObj.Party;
 		w = new Wagon();
 
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+		EventQueue.invokeLater(new Runnable()
+		{
+			public void run()
+			{
+				try
+				{
 					GameFrameMain frame = new GameFrameMain();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -85,6 +88,21 @@ public class GameLogic
 				}
 			}
 		});
+	}
+	
+	public static void update()
+	{
+		/*
+		  w.addDistTraveled( pace? ) ;
+		w.subItem(new Food(),  ration plan?  );
+		for(int i = 0; i < p.size(); i++)
+		{
+			p.get(i).setHunger( hunger )
+			p.get(i).setFatigue( fatigue );
+			// later, will check for health, and then death
+		}
+		w.updateLocation();
+		*/
 	}
 	
 	/**
