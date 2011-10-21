@@ -5,10 +5,12 @@ import org.jamieandtheboys.items.*;
 
 public class Wagon
 {
-	private int health, weight, pace;
+	private int health, weight, pace, distTraveled;
 	private HashMap<Item, Integer> inventory;
-	
+	private PokeMap map;
 	private static final int MAX_WEIGHT = 3500;
+	private static final int GAME_LENGTH = 1;
+	private double percentageToNext;
 	
 	/**
 	 * Constructor for Wagon
@@ -18,8 +20,54 @@ public class Wagon
 		this.health = 100;
 		this.weight = 0;
 		this.pace = 0;
+		this.distTraveled = 0;
 		inventory = new HashMap<Item, Integer>();
+		this.map = makeMap();
+		this.percentageToNext = 1;
 	}
+	
+	private PokeMap makeMap()
+	{
+		MapNode m01 = makeMapNode("Pallet Town", true, 0);
+		MapNode m02 = makeMapNode("Viridian City", true, 50 * GAME_LENGTH);
+		MapNode m03 = makeMapNode("Viridian Forest", false, 45 * GAME_LENGTH);
+		MapNode m04 = makeMapNode("Pewter City", true, 20 * GAME_LENGTH);
+		MapNode m05 = makeMapNode("Mt. Moon", false, 40 * GAME_LENGTH);
+		MapNode m06 = makeMapNode("Cerulean City", true, 60 * GAME_LENGTH);
+		MapNode m07 = makeMapNode("Vermilion City", true, 60 * GAME_LENGTH);
+		MapNode m08 = makeMapNode("Dark Cave", false, 65 * GAME_LENGTH);
+		MapNode m09 = makeMapNode("Lavender Town", true, 40 * GAME_LENGTH);
+		MapNode m10 = makeMapNode("Celadon City", true, 45 * GAME_LENGTH);
+		MapNode m11 = makeMapNode("Saffron City", true, 30 * GAME_LENGTH);
+		MapNode m12 = makeMapNode("Fuchsia City", true, 55 * GAME_LENGTH);
+		MapNode m13 = makeMapNode("Seafom Islands", false, 70 * GAME_LENGTH);
+		MapNode m14 = makeMapNode("Cinnabar Island", true, 50 * GAME_LENGTH);
+		MapNode m15 = makeMapNode("Viridian City", true, 35 * GAME_LENGTH);
+		MapNode m16 = makeMapNode("Victory Road", false, 20 * GAME_LENGTH);
+		MapNode m17 = makeMapNode("Indigo Plateau", false, 80 * GAME_LENGTH);
+		m01.setNext(m02);
+		m02.setNext(m03);
+		m03.setNext(m04);
+		m04.setNext(m05);
+		m05.setNext(m06);
+		m06.setNext(m07);
+		m07.setNext(m08);
+		m08.setNext(m09);
+		m09.setNext(m10);
+		m10.setNext(m11);
+		m11.setNext(m12);
+		m12.setNext(m13);
+		m13.setNext(m14);
+		m14.setNext(m15);
+		m15.setNext(m16);
+		m16.setNext(m17);
+		return new PokeMap(m01, m17);
+	}
+	private MapNode makeMapNode(String town, boolean store, int dTo)
+	{
+		return new MapNode(new Location(town, store==false? null : new Store(town+" Market"), dTo));
+	}
+	
 	
 	/**
 	 * Checks if current weight is greater than MAX_WEIGHT
@@ -28,6 +76,11 @@ public class Wagon
 	public boolean isOverweight()
 	{
 		return this.weight > MAX_WEIGHT;
+	}
+	
+	public double getPercentagToNext()
+	{
+		return this.percentageToNext;
 	}
 	
 	public int getMaxWeight()
@@ -55,6 +108,16 @@ public class Wagon
 		return this.inventory;
 	}
 	
+	public PokeMap getMap()
+	{
+		return this.map;
+	}
+	
+	public int getDistTraveled()
+	{
+		return this.distTraveled;
+	}
+	
 	/**
 	 * Adds the specified amount of weight to the total weight in the wagon
 	 * @param weight the weight to add
@@ -73,9 +136,23 @@ public class Wagon
 		setWeight(this.weight - weight);
 	}
 	
+	public void setPercentageToNext(double p)
+	{
+		this.percentageToNext = p;
+	}
+	
 	public void setWeight(int weight)
 	{
 		this.weight = weight;
+	}
+	
+	public void addDistTraveled(int dist)
+	{
+		this.distTraveled += dist;
+	}
+	public void setDistTraveled(int dist)
+	{
+		this.distTraveled = dist;
 	}
 	
 	/**
@@ -145,5 +222,33 @@ public class Wagon
 	public int availableWeight()
 	{
 		return MAX_WEIGHT - this.weight;
+	}
+	
+	public void updateLocation()
+	{
+		if ( distTraveled > this.map.getDistToNext())
+		{
+			distTraveled = 0;
+			this.map.setCurr(this.map.getCurr().getNext());
+			this.map.setDistToNext(this.map.getCurr().getLocation().getDistanceTo());
+			if(this.map.getCurr() == this.map.getDest())
+			{
+				// you win the game
+			}
+			else if (this.map.getCurr().getLocation().getStore() != null)
+			{
+				// cue store using this.map.getCurr().getLocation.getStore()
+			}
+			else
+			{
+				// no store, proceed? add any other game elements you want
+			}
+			this.percentageToNext = 0;
+		}//end if
+		else
+		{
+			this.map.setDistToNext(distTraveled);
+			this.percentageToNext = (double)distTraveled / (double)this.map.getCurr().getLocation().getDistanceTo();
+		}
 	}
 }
