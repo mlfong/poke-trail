@@ -26,6 +26,10 @@ public class Wagon
 		this.percentageToNext = 1;
 	}
 	
+	/**
+	 * Creates the map for the game
+	 * @return the map
+	 */
 	private PokeMap makeMap()
 	{
 		MapNode m01 = makeMapNode("Pallet Town", true, 0);
@@ -63,6 +67,14 @@ public class Wagon
 		m16.setNext(m17);
 		return new PokeMap(m01, m17);
 	}
+	
+	/**
+	 * Helper method for makeMap()
+	 * @param town the name for the location in the node
+	 * @param store true if there is a store at the location, else false
+	 * @param dTo distance to this location from the previous location
+	 * @return the map node
+	 */
 	private MapNode makeMapNode(String town, boolean store, int dTo)
 	{
 		return new MapNode(new Location(town, store==false? null : new Store(town+" Market"), dTo));
@@ -136,6 +148,10 @@ public class Wagon
 		setWeight(this.weight - weight);
 	}
 	
+	/**
+	 * The percent of the distance traveled from the previous location to the next location
+	 * @param p
+	 */
 	public void setPercentageToNext(double p)
 	{
 		this.percentageToNext = p;
@@ -146,6 +162,10 @@ public class Wagon
 		this.weight = weight;
 	}
 	
+	/**
+	 * 
+	 * @param dist
+	 */
 	public void addDistTraveled(int dist)
 	{
 		this.distTraveled += dist;
@@ -224,6 +244,10 @@ public class Wagon
 		return MAX_WEIGHT - this.weight;
 	}
 	
+	/**
+	 * Checks where in the map, the wagon is. If the wagon hits the next location, the party is sent
+	 * into the store. Else update the distance traveled and percentage
+	 */
 	public void updateLocation()
 	{
 		if ( distTraveled > this.map.getDistToNext())

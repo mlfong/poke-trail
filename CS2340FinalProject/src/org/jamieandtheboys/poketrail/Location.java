@@ -6,6 +6,12 @@ public class Location
 	private Store store;
 	private int distanceTo;
 	
+	/**
+	 * Constructor for Location
+	 * @param name the name of the location
+	 * @param store the store the location holds, is null if there is no store
+	 * @param dTo distance to this location
+	 */
 	public Location(String name, Store store, int dTo)
 	{
 		this.name = name;
