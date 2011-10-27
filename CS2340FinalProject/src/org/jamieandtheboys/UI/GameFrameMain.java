@@ -710,9 +710,18 @@ public class GameFrameMain extends JFrame {
 		lblTraveled.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		leftPanel.add(lblTraveled, "cell 0 5");
 		
+		JLabel lblMiles_1 = new JLabel("0 miles");
+		lblMiles_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		leftPanel.add(lblMiles_1, "flow,cell 1 5");
+		
 		JLabel lblConditions = new JLabel("Conditions:");
 		lblConditions.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		leftPanel.add(lblConditions, "cell 0 6");
+		
+		JLabel lblFair = new JLabel("Fair");
+		lblFair.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblFair.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		leftPanel.add(lblFair, "flowx,cell 1 6");
 		
 		JLabel lblMoney = new JLabel("Money:");
 		lblMoney.setFont(new Font("Tahoma", Font.PLAIN, 13));
