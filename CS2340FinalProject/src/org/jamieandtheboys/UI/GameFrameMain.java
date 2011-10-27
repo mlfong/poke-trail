@@ -700,11 +700,15 @@ public class GameFrameMain extends JFrame {
 		
 		JLabel lblDay = new JLabel("Day:");
 		lblDay.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		leftPanel.add(lblDay, "cell 0 4 2 1,alignx left");
+		leftPanel.add(lblDay, "flowx,cell 0 4,alignx left");
 		
-		JLabel lblMilesTraveled = new JLabel("Miles Traveled: ");
-		lblMilesTraveled.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		leftPanel.add(lblMilesTraveled, "cell 0 5 2 1,alignx left");
+		JLabel label_22 = new JLabel("1");
+		label_22.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		leftPanel.add(label_22, "cell 1 4");
+		
+		JLabel lblTraveled = new JLabel("Traveled:");
+		lblTraveled.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		leftPanel.add(lblTraveled, "cell 0 5");
 		
 		JLabel lblConditions = new JLabel("Conditions:");
 		lblConditions.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -712,11 +716,20 @@ public class GameFrameMain extends JFrame {
 		
 		JLabel lblMoney = new JLabel("Money:");
 		lblMoney.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		leftPanel.add(lblMoney, "cell 0 7 2 1");
+		leftPanel.add(lblMoney, "flowx,cell 0 7");
+		
+		JLabel lblPokedollars = new JLabel("0 Pokedollars");
+		lblPokedollars.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		leftPanel.add(lblPokedollars, "cell 1 7");
 		
 		JLabel lblFood_1 = new JLabel("Food:");
 		lblFood_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		leftPanel.add(lblFood_1, "cell 0 8 2 1");
+		leftPanel.add(lblFood_1, "flowx,cell 0 8");
+		
+		JLabel lblMiles = new JLabel("0 lbs");
+		lblMiles.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblMiles.setHorizontalAlignment(SwingConstants.TRAILING);
+		leftPanel.add(lblMiles, "cell 1 8,alignx leading");
 		
 		JLabel lblHealth = new JLabel("Health:");
 		lblHealth.setFont(new Font("Tahoma", Font.PLAIN, 13));
