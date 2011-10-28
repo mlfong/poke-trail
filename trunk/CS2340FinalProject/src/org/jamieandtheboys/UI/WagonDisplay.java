@@ -1,3 +1,5 @@
+package org.jamieandtheboys.UI;
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
