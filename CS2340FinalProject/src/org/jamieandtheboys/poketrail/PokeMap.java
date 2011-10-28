@@ -7,6 +7,7 @@ public class PokeMap
 	private MapNode dest;
 	private int distToNext;
 	private int totalDist;
+	private int between;
 	
 	/**
 	 * The Map for the game
@@ -20,6 +21,7 @@ public class PokeMap
 		this.dest = dest;
 		distToNext = 0;
 		totalDist = 0;
+		between = 0;
 	}
 	
 	public MapNode getHead()
@@ -35,6 +37,11 @@ public class PokeMap
 	public int getDistToNext()
 	{
 		return this.distToNext;
+	}
+	
+	public int getDistBetween()
+	{
+		return this.between;
 	}
 	
 	public int getTotalDist()
@@ -59,6 +66,11 @@ public class PokeMap
 	public void setDistToNext(int dist)
 	{
 		this.distToNext = dist;
+	}
+	
+	public void setDistBetween(int bet)
+	{
+		between = bet;
 	}
 	
 	public void setCurr(MapNode curr)

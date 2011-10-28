@@ -712,7 +712,7 @@ public class GameFrameMain extends JFrame {
 		
 		JLabel lblMiles_1 = new JLabel("0 miles");
 		lblMiles_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		leftPanel.add(lblMiles_1, "flow,cell 1 5");
+		leftPanel.add(lblMiles_1, "cell 1 5");
 		
 		JLabel lblConditions = new JLabel("Conditions:");
 		lblConditions.setFont(new Font("Tahoma", Font.PLAIN, 13));

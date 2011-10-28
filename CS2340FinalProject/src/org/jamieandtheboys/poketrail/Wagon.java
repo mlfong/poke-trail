@@ -11,7 +11,7 @@ public class Wagon
 	private static final int MAX_WEIGHT = 3500;
 	private static final int GAME_LENGTH = 1;
 	private double percentageToNext;
-	
+
 	/**
 	 * Constructor for Wagon
 	 */
@@ -22,15 +22,16 @@ public class Wagon
 		this.pace = 0;
 		this.distTraveled = 0;
 		inventory = new HashMap<Item, Integer>();
-		this.map = makeMap();
+		//		this.map = makeMap();
+		this.map = makeMapTest();
 		this.percentageToNext = 1;
 	}
-	
+
 	/**
 	 * Creates the map for the game
 	 * @return the map
 	 */
-	private PokeMap makeMap()
+	/*	private PokeMap makeMap()
 	{
 		MapNode m01 = makeMapNode("Pallet Town", true, 0);
 		MapNode m02 = makeMapNode("Viridian City", true, 50 * GAME_LENGTH);
@@ -66,8 +67,20 @@ public class Wagon
 		m15.setNext(m16);
 		m16.setNext(m17);
 		return new PokeMap(m01, m17);
+	}*/
+
+
+	private PokeMap makeMapTest()
+	{
+		MapNode m01 = makeMapNode("Pallet Town", true, 0);
+		MapNode m02 = makeMapNode("Viridian City", true, 50);
+		MapNode m17 = makeMapNode("Indigo Plateau", false, 80);
+		m01.setNext(m02);
+		m02.setNext(m17);
+		PokeMap map = new PokeMap(m01, m17);
+		return map;
 	}
-	
+
 	/**
 	 * Helper method for makeMap()
 	 * @param town the name for the location in the node
@@ -79,8 +92,8 @@ public class Wagon
 	{
 		return new MapNode(new Location(town, store==false? null : new Store(town+" Market"), dTo));
 	}
-	
-	
+
+
 	/**
 	 * Checks if current weight is greater than MAX_WEIGHT
 	 * @return true if weight > MAX_WEIGHT, else false
@@ -89,47 +102,47 @@ public class Wagon
 	{
 		return this.weight > MAX_WEIGHT;
 	}
-	
+
 	public double getPercentagToNext()
 	{
 		return this.percentageToNext;
 	}
-	
+
 	public int getMaxWeight()
 	{
 		return MAX_WEIGHT;
 	}
-	
+
 	public int getHealth()
 	{
 		return this.health;
 	}
-	
+
 	public int getWeight()
 	{
 		return this.weight;
 	}
-	
+
 	public int getPace()
 	{
 		return this.pace;
 	}
-	
+
 	public HashMap<Item, Integer> getInventory()
 	{
 		return this.inventory;
 	}
-	
+
 	public PokeMap getMap()
 	{
 		return this.map;
 	}
-	
+
 	public int getDistTraveled()
 	{
 		return this.distTraveled;
 	}
-	
+
 	/**
 	 * Adds the specified amount of weight to the total weight in the wagon
 	 * @param weight the weight to add
@@ -138,7 +151,7 @@ public class Wagon
 	{
 		setWeight(this.weight + weight);
 	}
-	
+
 	/**
 	 * Subtracts the specified amount of weight from the total weight in the wagon
 	 * @param weight the weight to subtract
@@ -147,7 +160,7 @@ public class Wagon
 	{
 		setWeight(this.weight - weight);
 	}
-	
+
 	/**
 	 * The percent of the distance traveled from the previous location to the next location
 	 * @param p
@@ -156,12 +169,12 @@ public class Wagon
 	{
 		this.percentageToNext = p;
 	}
-	
+
 	public void setWeight(int weight)
 	{
 		this.weight = weight;
 	}
-	
+
 	/**
 	 * 
 	 * @param dist
@@ -174,7 +187,7 @@ public class Wagon
 	{
 		this.distTraveled = dist;
 	}
-	
+
 	/**
 	 * Adds to the wagon's health by the specified amount
 	 * @param health the amount of health to add
@@ -183,7 +196,7 @@ public class Wagon
 	{
 		setHealth(this.health + health);
 	}
-	
+
 	/**
 	 * Subtracts from the wagon's health by the specified amount
 	 * @param health the amount of health to subtract
@@ -192,17 +205,17 @@ public class Wagon
 	{
 		setHealth(this.health - health);
 	}
-	
+
 	private void setHealth(int health)
 	{
 		this.health = health;
 	}
-	
+
 	public void setPace(int pace)
 	{
 		this.pace = pace;
 	}
-	
+
 	/**
 	 * Adds a specified amount of an Item to the inventory
 	 * @param i the item to add
@@ -215,7 +228,7 @@ public class Wagon
 			currAmount = 0;
 		this.inventory.put(i, currAmount + amount);
 	}
-	
+
 	/**
 	 * Removes a specified amount of an Item from the inventory, if the Item is not there or amount specified is
 	 * greater than amount in inventory, return.
@@ -234,7 +247,7 @@ public class Wagon
 		else // subtract
 			this.inventory.put(i, currAmount - amount);
 	}
-	
+
 	/**
 	 * Returns available weight of wagon
 	 * @return max weight - current weight
@@ -243,23 +256,26 @@ public class Wagon
 	{
 		return MAX_WEIGHT - this.weight;
 	}
-	
+
 	/**
 	 * Checks where in the map, the wagon is. If the wagon hits the next location, the party is sent
 	 * into the store. Else update the distance traveled and percentage
 	 */
 	public void updateLocation()
 	{
-		if ( distTraveled > this.map.getDistToNext())
+		if ( distTraveled >= this.map.getDistBetween())
 		{
+			if(this.map.getCurr() == this.map.getDest())
+			{
+				return;
+				// you win the game
+			}
 			distTraveled = 0;
 			this.map.setCurr(this.map.getCurr().getNext());
 			this.map.setDistToNext(this.map.getCurr().getLocation().getDistanceTo());
-			if(this.map.getCurr() == this.map.getDest())
-			{
-				// you win the game
-			}
-			else if (this.map.getCurr().getLocation().getStore() != null)
+			this.map.setDistBetween(this.map.getCurr().getLocation().getDistanceTo());
+			System.out.println(this.map.getCurr().getLocation().getDistanceTo());
+			if (this.map.getCurr().getLocation().getStore() != null)
 			{
 				// cue store using this.map.getCurr().getLocation.getStore()
 			}
@@ -271,7 +287,8 @@ public class Wagon
 		}//end if
 		else
 		{
-			this.map.setDistToNext(distTraveled);
+			System.out.println("Location not hit");
+			this.map.setDistToNext(this.map.getDistBetween() - distTraveled);
 			this.percentageToNext = (double)distTraveled / (double)this.map.getCurr().getLocation().getDistanceTo();
 		}
 	}
