@@ -22,8 +22,8 @@ public class Wagon
 		this.pace = 0;
 		this.distTraveled = 0;
 		inventory = new HashMap<Item, Integer>();
-		//		this.map = makeMap();
-		this.map = makeMapTest();
+		this.map = makeMap();
+//		this.map = makeMapTest();
 		this.percentageToNext = 1;
 	}
 
@@ -31,7 +31,7 @@ public class Wagon
 	 * Creates the map for the game
 	 * @return the map
 	 */
-	/*	private PokeMap makeMap()
+		private PokeMap makeMap()
 	{
 		MapNode m01 = makeMapNode("Pallet Town", true, 0);
 		MapNode m02 = makeMapNode("Viridian City", true, 50 * GAME_LENGTH);
@@ -67,7 +67,7 @@ public class Wagon
 		m15.setNext(m16);
 		m16.setNext(m17);
 		return new PokeMap(m01, m17);
-	}*/
+	}
 
 
 	private PokeMap makeMapTest()

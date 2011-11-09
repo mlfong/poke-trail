@@ -21,7 +21,7 @@ public class PokeMap
 		this.dest = dest;
 		distToNext = 0;
 		totalDist = 0;
-		between = 0;
+		between = curr.getNext().getLocation().getDistanceTo();
 	}
 	
 	public MapNode getHead()
