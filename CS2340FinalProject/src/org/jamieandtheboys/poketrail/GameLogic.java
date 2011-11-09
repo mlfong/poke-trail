@@ -17,7 +17,7 @@ public class GameLogic
 	private final static int LEISURELY = 3;
 	private final static int NORMAL = 5;
 	private final static int FAST = 7;
-	
+	static GameFrameMain frame;
 	public static Store s;
 	public static Wagon w;
 	public static ArrayList<Person> p;
@@ -81,7 +81,7 @@ public class GameLogic
 			{
 				try
 				{
-					GameFrameMain frame = new GameFrameMain();
+					frame = new GameFrameMain();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -202,5 +202,9 @@ public class GameLogic
 		catch (NumberFormatException nfe)
 		{return false;}
 		return true;
+	}
+	
+	public static void endgame(){
+		frame.dispose();
 	}
 }

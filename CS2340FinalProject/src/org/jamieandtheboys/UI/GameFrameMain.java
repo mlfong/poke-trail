@@ -42,6 +42,7 @@ import org.jamieandtheboys.items.SpareWheel;
 import org.jamieandtheboys.persons.Person;
 import org.jamieandtheboys.poketrail.GameInitObj;
 import org.jamieandtheboys.poketrail.GameLogic;
+import org.jamieandtheboys.poketrail.PokeMap;
 import org.jamieandtheboys.poketrail.Store;
 import org.jamieandtheboys.poketrail.Wagon;
 import org.jdesktop.beansbinding.BeanProperty;
@@ -66,6 +67,7 @@ public class GameFrameMain extends JFrame {
 	 Integer oxen=0,clothing=0,pokeballs=0,medicine=0,spareaxle=0,sparewheel=0,sparetongue=0, food=0, playerFood=1;
 	 String youhave = "You have "+Party0.getMoney()+" Pokedollars";
 	 String currentweight = "Current Weight: "+w.getWeight()+" lbs out of "+w.getMaxWeight()+" lbs";
+	 PokeMap map = w.getMap();
 	 private int TotalPrice, TotalWeight=w.getWeight();
 	 private int pace=5, distance=0, rations=1, peoplealive=5;
 	 private Integer day=0;
@@ -88,6 +90,7 @@ public class GameFrameMain extends JFrame {
 	protected JLabel lblMiles;
 	protected JLabel lblMiles_1;
 	protected JLabel label_22;
+	protected JProgressBar progressBar;
 	
 	/**
 	 * Launch the application.
@@ -109,6 +112,7 @@ public class GameFrameMain extends JFrame {
 	 * Create the frame.
 	 */
 	public GameFrameMain() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1040, 768);
 		contentPane = new JPanel();
@@ -155,8 +159,26 @@ public class GameFrameMain extends JFrame {
 					lblMiles.setText(playerFood+" lbs");
 				}
 				//increase distance
-				distance = distance+pace;
-				lblMiles_1.setText(distance +" miles");
+				map.addToTotalDist(pace);
+				lblMiles_1.setText(map.getTotalDist() +" miles");
+				map.setDistToNext(map.getDistToNext()+pace);
+				System.out.println(((double)map.getDistToNext()/(double)map.getDistBetween())*100);
+				progressBar.setValue((int)(((double)map.getDistToNext()/(double)map.getDistBetween())*100)); 
+				if(map.getDistToNext()>=map.getDistBetween()){
+					if(map.getCurr().equals(map.getDest())){
+						JOptionPane.showMessageDialog(contentPane,
+							    "You have reached " + map.getCurr().getLocation().getName() +"! You Win!");	
+						GameLogic.endgame();
+					}
+					else{
+					JOptionPane.showMessageDialog(contentPane,
+						    "You have reached " + map.getCurr().getLocation().getName());	
+					map.setCurr(map.getCurr().getNext());
+					map.setDistToNext(0);
+					if(map.getCurr().getNext()!=null)
+						map.setDistBetween(map.getCurr().getNext().getLocation().getDistanceTo());
+					}
+				}
 				//increase day
 				day++;
 				label_22.setText(day.toString());
@@ -729,7 +751,7 @@ public class GameFrameMain extends JFrame {
 		 */
 		
 		
-		JProgressBar progressBar = new JProgressBar();
+		progressBar = new JProgressBar();
 		progressBar.setStringPainted(true);
 		progressBar.setBackground(Color.WHITE);
 		progressBar.setForeground(new Color(0, 204, 51));
