@@ -1,6 +1,7 @@
 package org.jamieandtheboys.poketrail;
 
 import org.jamieandtheboys.diseases.*;
+import org.jamieandtheboys.io.SaveAndLoad;
 import org.jamieandtheboys.items.*;
 import org.jamieandtheboys.persons.*;
 
@@ -33,7 +34,7 @@ public class Test
 				// later, will check for health, and then death
 			}*/
 			w.updateLocation();
-				System.out.println(stuff);
+			System.out.println(stuff);
 			}
 
 	}
@@ -46,6 +47,7 @@ public class Test
 
 	public static void testHashSL()
 	{
+		/*
 		//test hashing for save and loading
 		String s = "jamieandtheboys";
 		//		String pw = "33mdmamdasndamd";
@@ -68,7 +70,7 @@ public class Test
 		System.out.println(s2);
 		System.out.println(s3);
 		System.out.println(s.length() == s3.length());
-		System.out.println(s.equals(s3));
+		System.out.println(s.equals(s3));*/
 	}
 
 	public static void testHM()
