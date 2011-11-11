@@ -34,11 +34,15 @@ public class Wagon
 		private PokeMap makeMap()
 	{
 		MapNode m01 = makeMapNode("Pallet Town", true, 0);
-		MapNode m02 = makeMapNode("Viridian City", true, 50 * GAME_LENGTH);
-		MapNode m03 = makeMapNode("Viridian Forest", false, 45 * GAME_LENGTH);
+		MapNode m02 = makeMapNode("River Crossing", false, 50 * GAME_LENGTH);
+		m02.isARiver=true;
+		m02.riverDepth=2;
+		MapNode m03 = makeMapNode("Viridian Forest", true, 45 * GAME_LENGTH);
 		MapNode m04 = makeMapNode("Pewter City", true, 20 * GAME_LENGTH);
 		MapNode m05 = makeMapNode("Mt. Moon", false, 40 * GAME_LENGTH);
-		MapNode m06 = makeMapNode("Cerulean City", true, 60 * GAME_LENGTH);
+		MapNode m06 = makeMapNode("River Crossing 2.0!", false, 60 * GAME_LENGTH);
+		m06.isARiver=true;
+		m04.riverDepth=2;
 		MapNode m07 = makeMapNode("Vermilion City", true, 60 * GAME_LENGTH);
 		MapNode m08 = makeMapNode("Dark Cave", false, 65 * GAME_LENGTH);
 		MapNode m09 = makeMapNode("Lavender Town", true, 40 * GAME_LENGTH);

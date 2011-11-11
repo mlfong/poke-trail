@@ -4,6 +4,8 @@ public class MapNode
 {
 	private Location location;
 	private MapNode next;
+	public boolean isARiver=false;
+	public int riverDepth;
 	
 	/**
 	 * Constructor for MapNode
