@@ -7,6 +7,7 @@ public abstract class Person
 	public String name, type;
 	public int health, hunger, money, fatigue;
 	public Disease disease;
+	private int diseaseDuration = 0;
 	
 	/**
 	 * Constructor for Person
@@ -31,6 +32,12 @@ public abstract class Person
 	public void doDisease()
 	{
 		this.disease.doEffect(this);
+		diseaseDuration++;
+	}
+	
+	public int getDiseaseDuration()
+	{
+		return diseaseDuration;
 	}
 	
 	public Boolean isSick()
