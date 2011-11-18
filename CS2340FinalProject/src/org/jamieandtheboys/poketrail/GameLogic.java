@@ -397,6 +397,11 @@ public class GameLogic
 			}
 		}
 		
+      int totalHealth = 0;
+    for(int i = 0; i < Party.size(); i++)
+       totalHealth += Party.get(i).getHealth();
+    if(totalHealth = Party.size() * 100)
+      return;
 		
 		//Generate for diseases
 		for(int i = 0; i < Party.size(); i++)
