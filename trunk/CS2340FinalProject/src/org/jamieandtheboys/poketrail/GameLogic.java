@@ -103,6 +103,9 @@ public class GameLogic
 						GameFrameMain.rightPanel.add(GameFrameMain.GoPanel, "cell 0 0,growx,aligny center");
 						GameFrameMain.rightPanel.updateUI();
 						GameFrameMain.textArea.setText(GameInitObj.log);
+						GameFrameMain.lblMiles.setText(Wagon.getDistTraveled()+" Miles");
+						GameFrameMain.lblPokedollars.setText(Party.get(0).getMoney().toString());
+						GameFrameMain.lblFoodSupply.setText(Wagon.inventory.get(new Food()).toString());
 					}
 					frame.setVisible(true);
 				} catch (Exception e) {
