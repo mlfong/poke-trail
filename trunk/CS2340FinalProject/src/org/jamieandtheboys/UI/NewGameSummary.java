@@ -43,8 +43,8 @@ public class NewGameSummary {
 	// fields that are databound to JLabels
 	private String PlayerName = GameLogic.gameData.Party.get(0).getName();
 	private String PlayerType = GameLogic.gameData.Party.get(0).getType();
-	private String Pace= GameLogic.gameData.Pace;
-	private String Rations= GameLogic.gameData.Rations;
+	private String Pace= GameLogic.gameData.PaceString;
+	private String Rations= GameLogic.gameData.RationsString;
 	private String PartyName0= GameLogic.gameData.Party.get(1).getName();
 	private String PartyName1= GameLogic.gameData.Party.get(2).getName();
 	private String PartyName2= GameLogic.gameData.Party.get(3).getName();

@@ -1,6 +1,8 @@
 package org.jamieandtheboys.poketrail;
 
-public class PokeMap
+import java.io.Serializable;
+
+public class PokeMap implements Serializable
 {
 	private MapNode head;
 	private MapNode curr;

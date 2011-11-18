@@ -1,9 +1,10 @@
 package org.jamieandtheboys.poketrail;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.jamieandtheboys.items.*;
 
-public class Store
+public class Store implements Serializable
 {
 	private ArrayList<Item> stock;
 	private String name;
