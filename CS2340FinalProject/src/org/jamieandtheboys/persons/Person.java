@@ -67,7 +67,7 @@ public abstract class Person implements Serializable
 		return this.hunger;
 	}
 
-	public int getMoney()
+	public Integer getMoney()
 	{
 		return this.money;
 	}
