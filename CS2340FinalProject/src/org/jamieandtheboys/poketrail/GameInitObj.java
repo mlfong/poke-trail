@@ -13,7 +13,10 @@ import org.jamieandtheboys.persons.Person;
 
 public class GameInitObj {
 	public static ArrayList<Person> Party = new ArrayList<Person>();
-	public String Pace, Rations;
+	public static String PaceString, RationsString;
+	public static int Pace,Day,Rations;
+	public static Wagon Wagon = new Wagon();
+	public static boolean tired,gameover;
 	
 	GameInitObj(){};
 	

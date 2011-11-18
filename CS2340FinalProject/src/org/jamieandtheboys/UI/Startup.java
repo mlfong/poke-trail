@@ -27,6 +27,7 @@ import org.jamieandtheboys.persons.Person;
 import org.jamieandtheboys.persons.Professor;
 import org.jamieandtheboys.persons.Trainer;
 import org.jamieandtheboys.poketrail.GameLogic;
+import org.jamieandtheboys.poketrail.Wagon;
 
 import java.awt.Color;
 import java.awt.SystemColor;
@@ -258,19 +259,35 @@ public class Startup extends JDialog {
 						Rations=(String) comboBox.getSelectedItem();
 						Player.name = txtAsh.getText();
 						Player.type = (String) comboBox_1.getSelectedItem();
-						GameLogic.gameData.Pace=Pace;
-						GameLogic.gameData.Rations=Rations;
+						if(Pace.equals("Leasurely"))
+							GameLogic.gameData.Pace = 3;
+						if(Pace.equals("Steady"))
+							GameLogic.gameData.Pace = 5;
+						if(Pace.equals("Grueling"))
+							GameLogic.gameData.Pace = 7;
+						GameLogic.gameData.PaceString=Pace;
+						if(Rations.equals("Bare-Bones"))
+							GameLogic.gameData.Pace = 5;
+						if(Rations.equals("Meager"))
+							GameLogic.gameData.Pace = 10;
+						if(Rations.equals("Normal"))
+							GameLogic.gameData.Pace = 15;
+						if(Rations.equals("Well-Fed"))
+							GameLogic.gameData.Pace = 20;
+						GameLogic.gameData.RationsString=Rations;
 						if(Player.getType().equals("Breeder"))
 							Player = new Breeder(Player.getName());
 						else if(Player.getType().equals("Trainer"))
 							Player = new Trainer(Player.getName());
 						else 
 							Player = new Professor(Player.getName());
+						GameLogic.Wagon = new Wagon();
 						GameLogic.gameData.Party.add(Player);
 						GameLogic.gameData.Party.add(party0);
 						GameLogic.gameData.Party.add(party1);
 						GameLogic.gameData.Party.add(party2);
 						GameLogic.gameData.Party.add(party3);
+						GameLogic.gameData.Day = 0;
 						jdia.setVisible(false);
 						try {
 							NewGameSummary window = new NewGameSummary();

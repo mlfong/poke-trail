@@ -1,77 +1,80 @@
 package org.jamieandtheboys.io;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import org.jamieandtheboys.persons.*;
 import org.jamieandtheboys.poketrail.Wagon;
 
 public class FileManager implements Serializable {
 	
+	/**
+	 * 
+	 */
+	Integer Day;
 	Wagon wagon;
-	Person[] players = new Person[5];
+	ArrayList<Person> Party = new ArrayList<Person>();
+	boolean tired, gameover;
+	int Pace, Rations;
 	
 	public FileManager()
 	{
 		wagon = null;
 	}
 	
-	public void setPlayer(Person player)
-	{
-		players[0] = player;
+	public void setParty(ArrayList<Person> Party){
+		this.Party=Party;
 	}
 	
-	public void setParty0(Person party0)
-	{
-		players[1] = party0;
-	}
-	
-	public void setParty1(Person party1)
-	{
-		players[2] = party1;
-	}
-	
-	public void setParty2(Person party2)
-	{
-		players[3] = party2;
-	}
-	
-	public void setParty3(Person party3)
-	{
-		players[4] = party3;
-	}
 	
 	public void setWagon(Wagon w)
 	{
 		wagon = w;
 	}
 	
-	
-	public Person getPlayer()
-	{
-		return players[0];
+	public void setTired(boolean tired){
+		this.tired=tired;
 	}
 	
-	public Person getParty0()
-	{
-		return players[1];
+	public void setGameOver(boolean gameover){
+		this.gameover=gameover;
 	}
 	
-	public Person getParty1()
-	{
-		return players[2];
+	public void setDay(Integer Day){
+		this.Day = Day;
 	}
 	
-	public Person getParty2()
-	{
-		return players[3];
+	public void setPace(int Day){
+		this.Pace = Day;
+	}
+	public void setRations(int Day){
+		this.Rations = Day;
 	}
 	
-	public Person setParty3()
-	{
-		return players[4];
+	
+	public boolean getGameOver(){
+		return gameover;
+	}
+	public Integer getPace(){
+		return Pace;
+	}
+	
+	public Integer getRations(){
+		return Rations;
+	}
+	
+	public Integer getDay(){
+		return Day;
+	}
+	
+	public boolean getTired(){
+		return tired;
 	}
 	
 	public Wagon getWagon()
 	{
 		return wagon;
+	}
+	public ArrayList<Person> getParty(){
+		return Party;
 	}
 }

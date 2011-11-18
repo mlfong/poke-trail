@@ -1,13 +1,14 @@
 package org.jamieandtheboys.poketrail;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import org.jamieandtheboys.items.*;
 
-public class Wagon
+public class Wagon implements Serializable
 {
 	private int health, weight, pace, distTraveled;
-	private HashMap<Item, Integer> inventory;
-	private PokeMap map;
+	public HashMap<Item, Integer> inventory;
+	public PokeMap map;
 	private static final int MAX_WEIGHT = 3500;
 	private static final int GAME_LENGTH = 1;
 	private double percentageToNext;
@@ -25,6 +26,7 @@ public class Wagon
 		this.map = makeMap();
 //		this.map = makeMapTest();
 		this.percentageToNext = 1;
+		addItem(new Oxen(), 2);
 	}
 
 	/**

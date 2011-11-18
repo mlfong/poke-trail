@@ -1,6 +1,8 @@
 package org.jamieandtheboys.poketrail;
 
-public class MapNode
+import java.io.Serializable;
+
+public class MapNode implements Serializable
 {
 	private Location location;
 	private MapNode next;
