@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.lang.Character;
 
-/**
+/****
  * Will handle all of the saving and loading, as well as keep track of user information
  * For connection between UI and back-end, just worry about the first 4 functions.
  * Also take a look at FileManager
@@ -28,12 +28,19 @@ public class SaveAndLoad
 	private FileOutputStream fos = null;
 	private ObjectOutputStream out = null;
 
+  /*
+  * Standard constructor
+  */
 	public SaveAndLoad()
 	{
 		loadUsers();
 	}//end constructor
 
-
+  /*
+  * desc creates a new user for the game
+  * @param Strings name and password
+  * @ret boolean - if user was created
+  */
 	public boolean createUser(String name, String pass)
 	{
 		try
@@ -51,7 +58,11 @@ public class SaveAndLoad
 			return false;
 		}
 	}
-
+  /*
+  * desc - deletes a user give proper credentials
+  * @param - Strings name and password
+  * @ret - boolean, if user was deleted or not
+  */
 	public boolean deleteUser(String name, String pass)
 	{
 		boolean deleted = true;
@@ -62,7 +73,12 @@ public class SaveAndLoad
 
 		return deleted;
 	}
-
+  
+  /* 
+  * desc - method for actual game loading
+  * @param - Strings naem and password
+  * @ret - FileManager, state of loaded game
+  */
 	public FileManager loadSaveFile(String name, String pass)
 	{
 		FileManager userFile = null;
@@ -72,11 +88,21 @@ public class SaveAndLoad
 		return userFile;
 	}
 	
+   /*
+   * desc - checks if a user String exists
+   * @param - String user
+   * @ret - boolean, if user exists
+   */
 	public boolean exists(String user)
 	{
 		return users.exists(user);
 	}
-
+  
+  /*
+  * desc - method for game saving
+  * @param - String, FileManager
+  * @ret - boolean, if save was successful
+  */
 	public boolean saveFile(String name, FileManager saveFile)
 	{
 		try
@@ -93,8 +119,8 @@ public class SaveAndLoad
 		}
 	}
 
-	/**
-	 * Loads the user list from a file
+	/*
+	 * desc - Loads the user list from a file
 	 */
 	private void loadUsers()
 	{
@@ -114,7 +140,11 @@ public class SaveAndLoad
 			ex.printStackTrace();
 		}
 	}
-
+  /*
+  * desc - creates FileManager from a file
+  * @param - String fileName
+  * @ret - FileManager, as accessible by the file name given
+  */
 	private FileManager loadFile(String fileName)
 	{
 		try
@@ -136,7 +166,11 @@ public class SaveAndLoad
 			return null;
 		}
 	}
-
+  /*
+  * desc - checks validity of name and password combination
+  * @param - String name, password
+  * @ret - boolean, if name/pw matches
+  */
 	private boolean verify(String name, String pass)
 	{
 		String password = users.returnUserPassword(name);
@@ -148,7 +182,12 @@ public class SaveAndLoad
 		return false;
 		//valid characters for this string of value 32 through 126;
 	}
-
+  
+  /*
+  * desc - encodes our keyword using user's password
+  * @param - String password
+  * @ret - String encoded keyword
+  */
 	private String encode(String pass)
 	{
 		String encoded = "";
@@ -189,7 +228,13 @@ public class SaveAndLoad
 	//	{
 	//		return a;
 	//	}//end getA
-
+  
+  /*
+  *  desc - changes a String to an int dependng on summation of its characters
+  *     if summation > 600, return half of that
+  * @param - String
+  * @ret - int
+  */
 	private static int convertToInt(String s)
 	{
 		int ret = 0;
