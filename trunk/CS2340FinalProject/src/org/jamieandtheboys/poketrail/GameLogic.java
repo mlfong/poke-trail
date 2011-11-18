@@ -132,6 +132,7 @@ public class GameLogic
 		Wagon.map.setDistToNext(Wagon.map.getDistToNext()+Pace);
 		//update progress bar
 		GameFrameMain.progressBar.setValue((int)(((double)Wagon.map.getDistToNext()/(double)Wagon.map.getDistBetween())*100)); 
+		randomEvent();
 		if(Wagon.map.getDistToNext()>=Wagon.map.getDistBetween()){
 			//notify reached destination and won
 			if(Wagon.map.getCurr().equals(Wagon.map.getDest())){
@@ -282,153 +283,166 @@ public class GameLogic
 
 	private static void randomEvent()
 	{
-//		int rand = generator.nextInt(100);
-//		
-//		//Just some arbitrary numbers to decide if the random events should be done or not 
-//		if(rand < 5)
-//		{
-//			//Articuno uses blizzard! Lose a few days
-//			//Replace the strings with your variables you use to keep track
-//			int delay = generator.nextInt(3);
-//			"day" += delay + 1;
-//			for(int i = 0; i < delay; i++)
-//				w.subItem(new Food(), "rations");
-//		}
-//		else if(rand >= 10 && rand < 18)
-//		{
-//			//Team rocket steals something!
-//			int rand2 = generator.nextInt(7);
-//			if(rand2 == 0)
-//			{
-//				int amount = (int) ((int) w.getInventory().get(new Clothing())*.10);
-//				int rand3 = generator.nextInt(amount);
-//				w.subItem(new Clothing(), rand3);
-//			}
-//			if(rand2 == 1)
-//			{
-//				int amount = (int) ((int) w.getInventory().get(new Food())*.10);
-//				int rand3 = generator.nextInt(amount);
-//				w.subItem(new Food(), rand3);
-//			}
-//			if(rand2 == 2)
-//			{
-//				int amount = (int) ((int) w.getInventory().get(new FullHeal())*.10);
-//				int rand3 = generator.nextInt(amount);
-//				w.subItem(new FullHeal(), rand3);
-//			}
-//			if(rand2 == 3)
-//			{
-//				int amount = (int) ((int) w.getInventory().get(new Pokeball())*.10);
-//				int rand3 = generator.nextInt(amount);
-//				w.subItem(new Pokeball(), rand3);
-//			}
-//			if(rand2 == 4 && (int) w.getInventory().get(new SpareAxle()) > 0)
-//			{
-//				w.subItem(new SpareAxle(), 1);
-//			}
-//			if(rand2 == 5 && (int) w.getInventory().get(new SpareTongue()) > 0)
-//			{
-//				w.subItem(new SpareTongue(), 1);
-//			}
-//			if(rand2 == 6 && (int) w.getInventory().get(new SpareWheel()) > 0)
-//			{
-//				w.subItem(new SpareWheel(), 1);
-//			}
-//		}
-//		else if(rand >= 65 && rand < 70)
-//		{
-//			//Wagon part is broken!
-//			int rand2 = generator.nextInt(3);
-//			if(rand2 == 0 && (int) w.getInventory().get(new SpareAxle()) > 0)
-//			{
-//				w.subItem(new SpareAxle(), 1);
-//			}
-//			else if(rand2 == 1 && (int) w.getInventory().get(new SpareTongue()) > 0)
-//			{
-//				w.subItem(new SpareTongue(), 1);
-//			}
-//			else if(rand2 == 2 && (int) w.getInventory().get(new SpareWheel()) > 0)
-//			{
-//				w.subItem(new SpareWheel(), 1);
-//			}
-//			else
-//				tired = true;
-//		}
-//		else if(rand >= 42 && rand < 49)
-//		{
-//			//The PokeFan club gives your party some food!
-//			int amount = generator.nextInt(91) + 10;
-//			w.addItem(new Food(), amount);
-//		}
-//		else if(rand >= 90 && tired == true)
-//		{
-//			//A Tauros has died!
-//			w.subItem(new Oxen(), 1);
-//			if(w.getInventory().get(new Oxen()) <= 0)
-//				gameover = true;
-//		}
-//		
-//		//Tauros is tired! 
-//		if(tired == true)
-//		{
-//			/*Temporarily set wagon pace to lower pace,
-//			 *  I'll leave this unfinished until random events is connected
-//			 */
-//			if(w.getPace() == "leisurely")
-//				tired = false;
-//		}
-//		else
-//		{	//You'll have to replace grueling with whatever you're using to keep track of pace
-//			if(w.getPace() == "grueling" || "Been on steady pace for ten turns straight or more");
-//			{
-//				if(generator.nextInt(2) == 1)
-//					tired = true;
-//			}
-//		}
-//		
-//		
-//		//Generate for diseases
-//		for(int i = 0; i < p.size(); i++)
-//		{
-//			if(p.get(i).isSick() == false)
-//			{
-//				double phealth = p.get(i).getHealth()/100;
-//				double pfatigue = p.get(i).getFatigue()/100;
-//
-//				//Maximum chance of getting a disease is a little less than 90%
-//				int chance = (int) ((1 - phealth*pfatigue)*90);
-//				if(chance >= generator.nextInt(100))
-//				{
-//					int rand2 = generator.nextInt(3);
-//					if(rand2 == 0)
-//					{
-//						p.get(i).setDisease(new Dysentery());
-//					}
-//					if(rand2 == 1)
-//					{
-//						p.get(i).setDisease(new Paralysis());
-//					}
-//					if(rand2 == 2)
-//					{
-//						p.get(i).setDisease(new Poison());
-//					}
-//				}
-//				else
-//				{//Player stays healthy
-//				}
-//			}
-//			else
-//			{
-//				if(p.get(i).getDiseaseDuration() > 7)
-//				{
-//					//Person is healthy again
-//					if(generator.nextInt(2) == 0)
-//						p.get(i).setDisease(null);
-//				}
-//				p.get(i).doDisease();
-//			}
-//			//To Do: Remove diseases after a certain amount of time has passed
-//		}
+		int rand = generator.nextInt(100);
+		
+		//Just some arbitrary numbers to decide if the random events should be done or not 
+		if(rand < 5)
+		{
+			GameFrameMain.textArea.append("Articuno uses blizzard! Lose a few days");
+			//Replace the strings with your variables you use to keep track
+			int delay = generator.nextInt(3);
+			Day += delay + 1;
+			for(int i = 0; i < delay; i++)
+				Wagon.subItem(new Food(), Rations);
+		}
+		else if(rand >= 10 && rand < 18)
+		{
+			//Team rocket steals something!
+			int rand2 = generator.nextInt(7);
+			if(rand2 == 0)
+			{
+				int amount = (int) ((int) Wagon.getInventory().get(new Clothing())*.10);
+				int rand3 = generator.nextInt(amount);
+				Wagon.subItem(new Clothing(), rand3);
+				GameFrameMain.textArea.append("\nOh no! Team Rocket stole " + rand3+" amount of clothes!");
+			}
+			if(rand2 == 1)
+			{
+				int amount = (int) ((int) Wagon.getInventory().get(new Food())*.10);
+				int rand3 = generator.nextInt(amount);
+				Wagon.subItem(new Food(), rand3);
+				GameFrameMain.textArea.append("\nOh no! Team Rocket stole "+rand3+" amount of food!");
+			}
+			if(rand2 == 2)
+			{
+				int amount = (int) ((int) Wagon.getInventory().get(new FullHeal())*.10);
+				int rand3 = generator.nextInt(amount);
+				Wagon.subItem(new FullHeal(), rand3);
+				GameFrameMain.textArea.append("\nOh no! Team Rocket stole "+rand3+" amount of Medicine!");
+			}
+			if(rand2 == 3)
+			{
+				int amount = (int) ((int) Wagon.getInventory().get(new Pokeball())*.10);
+				int rand3 = generator.nextInt(amount);
+				Wagon.subItem(new Pokeball(), rand3);
+				GameFrameMain.textArea.append("\nOh no! Team Rocket stole "+rand3+" amount of Pokeballs!");
+			}
+			if(rand2 == 4 &&  Wagon.getInventory().get(new SpareAxle())!=null)
+			{
+				Wagon.subItem(new SpareAxle(), 1);
+				GameFrameMain.textArea.append("\nOh no! Team Rocket stole a Spare Axle!");
+			}
+			if(rand2 == 5 && Wagon.getInventory().get(new SpareTongue())!=null)
+			{
+				Wagon.subItem(new SpareTongue(), 1);
+				GameFrameMain.textArea.append("\nOh no! Team Rocket stole a Spare Tongue!");
+				
+			}
+			if(rand2 == 6 && Wagon.getInventory().get(new SpareWheel()) !=null)
+			{
+				Wagon.subItem(new SpareWheel(), 1);
+				GameFrameMain.textArea.append("\nOh no! Team Rocket stole a Spare Wheel!");
+			}
+		}
+		else if(rand >= 65 && rand < 70)
+		{
+			GameFrameMain.textArea.append("\nWagon part is broken!");
+			int rand2 = generator.nextInt(3);
+			if(rand2 == 0 && Wagon.getInventory().get(new SpareAxle())!=null)
+			{
+				Wagon.subItem(new SpareAxle(), 1);
+			}
+			else if(rand2 == 1 && Wagon.getInventory().get(new SpareTongue())!=null)
+			{
+				Wagon.subItem(new SpareTongue(), 1);
+			}
+			else if(rand2 == 2 &&  Wagon.getInventory().get(new SpareWheel())!=null)
+			{
+				Wagon.subItem(new SpareWheel(), 1);
+			}
+			else
+				tired = true;
+		}
+		else if(rand >= 42 && rand < 49)
+		{
+			GameFrameMain.textArea.append("\nThe PokeFan club gives your party some food!");
+			int amount = generator.nextInt(91) + 10;
+			Wagon.addItem(new Food(), amount);
+		}
+		else if(rand >= 90 && tired == true)
+		{
+			GameFrameMain.textArea.append("\nA Tauros has died!");
+			Wagon.subItem(new Oxen(), 1);
+			if(Wagon.getInventory().get(new Oxen()) <= 0)
+				gameover = true;
+		}
+		
+		
+		if(tired == true)
+		{
+			GameFrameMain.textArea.append("\nTauros is tired!"); 
+			/*Temporarily set wagon pace to lower pace,
+			 *  I'll leave this unfinished until random events is connected
+			 */
+			if(Pace== LEISURELY)
+				tired = false;
+		}
+		else
+		{	//You'll have to replace grueling with whatever you're using to keep track of pace
+			if(Pace == FAST);
+			{
+				if(generator.nextInt(2) == 1)
+					tired = true;
+			}
+		}
+		
+		
+		//Generate for diseases
+		for(int i = 0; i < Party.size(); i++)
+		{
+			if(Party.get(i).isSick() == false)
+			{
+				double phealth = Party.get(i).getHealth()/100;
+				double pfatigue = Party.get(i).getFatigue()/100;
+
+				//Maximum chance of getting a disease is a little less than 90%
+				int chance = (int) ((1 - phealth*pfatigue)*90);
+				if(chance >= generator.nextInt(100))
+				{
+					int rand2 = generator.nextInt(3);
+					if(rand2 == 0)
+					{
+						Party.get(i).setDisease(new Dysentery());
+						GameFrameMain.textArea.append("\n"+Party.get(i).getName()+" now has Dysentery.");
+					}
+					if(rand2 == 1)
+					{
+						Party.get(i).setDisease(new Paralysis());
+						GameFrameMain.textArea.append("\n"+Party.get(i).getName()+" now has Paralysis.");
+					}
+					if(rand2 == 2)
+					{
+						Party.get(i).setDisease(new Poison());
+						GameFrameMain.textArea.append("\n"+Party.get(i).getName()+" now has Poison.");
+					}
+				}
+				else
+				{//Player stays healthy
+				}
+			}
+			else
+			{
+				if(Party.get(i).getDiseaseDuration() > 7)
+				{
+					//Person is healthy again
+					if(generator.nextInt(2) == 0)
+						Party.get(i).setDisease(null);
+					GameFrameMain.textArea.append("\n"+Party.get(i).getName()+" has been cured of disease.");
+				}
+				Party.get(i).doDisease();
+			}
+			//To Do: Remove diseases after a certain amount of time has passed
+		}
 	}
 
 	public static void endgame(){
