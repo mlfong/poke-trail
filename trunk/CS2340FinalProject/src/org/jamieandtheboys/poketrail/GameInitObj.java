@@ -17,6 +17,7 @@ public class GameInitObj {
 	public static int Pace,Day,Rations;
 	public static Wagon Wagon = new Wagon();
 	public static boolean tired,gameover;
+	public static String log;
 	
 	GameInitObj(){};
 	

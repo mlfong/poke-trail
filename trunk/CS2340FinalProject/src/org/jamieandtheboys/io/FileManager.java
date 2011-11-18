@@ -15,6 +15,7 @@ public class FileManager implements Serializable {
 	ArrayList<Person> Party = new ArrayList<Person>();
 	boolean tired, gameover;
 	int Pace, Rations;
+	String log;
 	
 	public FileManager()
 	{
@@ -25,6 +26,12 @@ public class FileManager implements Serializable {
 		this.Party=Party;
 	}
 	
+	public void setLog(String log){
+		this.log=log;
+	}
+	public String getLog(){
+		return log;
+	}
 	
 	public void setWagon(Wagon w)
 	{
