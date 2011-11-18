@@ -98,19 +98,19 @@ public class GameLogic
 				try
 				{
 					frame = new GameFrameMain();
+					if(!isNewGame){
+						GameFrameMain.rightPanel.remove(GameFrameMain.displayPanel);
+						GameFrameMain.rightPanel.add(GameFrameMain.GoPanel, "cell 0 0,growx,aligny center");
+						GameFrameMain.rightPanel.updateUI();
+						GameFrameMain.textArea.setText(GameInitObj.log);
+					}
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
-//		if(!isNewGame){
-//			GameFrameMain.rightPanel.remove(GameFrameMain.displayPanel);
-//			GameFrameMain.rightPanel.add(GameFrameMain.GoPanel, "cell 0 0,growx,aligny center");
-//			GameFrameMain.rightPanel.updateUI();
-//			GameFrameMain.btnBeginAdventure.
-//			
-//		}
+
 	}
 
 	public static String update()
@@ -400,7 +400,7 @@ public class GameLogic
       int totalHealth = 0;
     for(int i = 0; i < Party.size(); i++)
        totalHealth += Party.get(i).getHealth();
-    if(totalHealth = Party.size() * 100)
+    if(totalHealth == Party.size() * 100)
       return;
 		
 		//Generate for diseases
@@ -532,6 +532,7 @@ public class GameLogic
 		fm.setRations(Rations);
 		fm.setParty(Party);
 		fm.setWagon(Wagon);
+		fm.setLog(GameFrameMain.textArea.getText());
 		SaveAndLoad snl = new SaveAndLoad();
 		snl.createUser("Ash", "password");
 		snl.saveFile("Ash", fm);
@@ -546,6 +547,7 @@ public class GameLogic
 		GameInitObj.Day = fm.getDay();
 		GameInitObj.Pace = fm.getPace();
 		GameInitObj.Rations=fm.getRations();
+		GameInitObj.log=fm.getLog();
 		tired = fm.getTired();
 		gameover = fm.getGameOver();
 	}
