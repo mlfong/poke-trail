@@ -284,7 +284,8 @@ public class GameLogic
 	private static void randomEvent()
 	{
 		int rand = generator.nextInt(100);
-		
+		int doItOrNo = generator.nextInt(10);
+  if(doItOrNo < 3) {
 		//Just some arbitrary numbers to decide if the random events should be done or not 
 		if(rand < 5)
 		{
@@ -443,6 +444,7 @@ public class GameLogic
 			}
 			//To Do: Remove diseases after a certain amount of time has passed
 		}
+           }
 	}
 
 	public static void endgame(){
