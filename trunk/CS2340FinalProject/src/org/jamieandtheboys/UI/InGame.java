@@ -55,7 +55,7 @@ public class InGame {
 		lblNewLabel.setIcon(new ImageIcon(InGame.class.getResource("/images/wagongamescreen.jpg")));
 		displayPanel.add(lblNewLabel, BorderLayout.CENTER);
 		
-		JButton btnNewButton = new JButton("Take A Turn");
+		JButton btnNewButton = new JButton("Take A Turn | Progress to next town below");
 		displayPanel.add(btnNewButton, BorderLayout.SOUTH);
 	}
 

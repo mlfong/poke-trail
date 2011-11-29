@@ -154,7 +154,7 @@ public class GameFrameMain extends JFrame {
 		lblNewLabel1.setIcon(new ImageIcon(InGame.class.getResource("/images/wagongamescreen.jpg")));
 		GoPanel.add(lblNewLabel1, BorderLayout.CENTER);
 		
-		JButton btnTakeTurn = new JButton("Take A Turn");
+		JButton btnTakeTurn = new JButton("Take A Turn | Progress to next town below");
 		btnTakeTurn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
