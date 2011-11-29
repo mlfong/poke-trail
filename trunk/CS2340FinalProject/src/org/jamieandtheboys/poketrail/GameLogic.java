@@ -41,9 +41,6 @@ public class GameLogic
 	public static Integer Day=0;
 	public static boolean isNewGame = true;
 	
-	//I'm assuming our player is in position 1 of the Party
-	public static String profession = Party.get(0).getName();
-	
 
 	public static void main(String[] args)
 	{
@@ -287,7 +284,7 @@ public class GameLogic
 	
 	public static void scavenge()
 	{
-		if(profession.equals("Breeder"))
+		if(Party.get(1).getName().equals("Breeder"))
 		{
 			int amount = generator.nextInt(6);
 			Wagon.addItem(new Food(), amount);
@@ -414,7 +411,7 @@ public class GameLogic
 			else if(rand >= 65 && rand < 70)
 			{
 				GameFrameMain.textArea.append("\nWagon part is broken!");
-				if(profession.equals("Trainer"))
+				if(Party.get(1).equals("Trainer"))
 				{
 					//do nothing, the carpenter can fix the part
 				}
