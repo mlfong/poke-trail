@@ -50,7 +50,7 @@ import java.awt.event.MouseEvent;
 public class Startup extends JDialog {
 	private JTextField txtAsh;
 	private JTextField txtPikachu;
-	private JTextField txtPidgioto;
+	private JTextField txtPidgeotto;
 	private JTextField txtButterfree;
 	private JTextField txtBulbasaur;
 	public Person Player, party0,party1,party2,party3;
@@ -78,7 +78,7 @@ public class Startup extends JDialog {
 	public Startup() {
 		Player = new Trainer("Ash");
 		party0 = new Trainer("Pikachu");
-		party1 = new Trainer("Pidgioto");
+		party1 = new Trainer("Pidgeotto");
 		party2 = new Trainer("Buterfree");
 		party3 = new Trainer("Bulbasaur");
 		Pace = "Leasurely";
@@ -158,11 +158,11 @@ public class Startup extends JDialog {
 					panel.add(label, "cell 0 2,alignx trailing");
 				}
 				{
-					txtPidgioto = new JTextField();
-					txtPidgioto.setText("Pidgioto");
-					txtPidgioto.setFont(new Font("Tahoma", Font.PLAIN, 13));
-					txtPidgioto.setColumns(20);
-					panel.add(txtPidgioto, "cell 1 2,alignx left");
+					txtPidgeotto = new JTextField();
+					txtPidgeotto.setText("Pidgeotto");
+					txtPidgeotto.setFont(new Font("Tahoma", Font.PLAIN, 13));
+					txtPidgeotto.setColumns(20);
+					panel.add(txtPidgeotto, "cell 1 2,alignx left");
 				}
 				{
 					JLabel label = new JLabel("Name Party Member:");
@@ -252,7 +252,7 @@ public class Startup extends JDialog {
 						//Package game data and send to summary window
 						//need to parse names?
 						party0.name=txtPikachu.getText();
-						party1.name=txtPidgioto.getText();
+						party1.name=txtPidgeotto.getText();
 						party2.name=txtButterfree.getText();
 						party3.name=txtBulbasaur.getText();
 						Pace = (String) comboBox_2.getSelectedItem();
@@ -320,7 +320,7 @@ public class Startup extends JDialog {
 		autoBinding_2.bind();
 		//
 		BeanProperty<JTextField, String> jTextFieldBeanProperty_2 = BeanProperty.create("text");
-		AutoBinding<JTextField, String, Person, String> autoBinding_3 = Bindings.createAutoBinding(UpdateStrategy.READ, txtPidgioto, jTextFieldBeanProperty_2, party1, personBeanProperty, "P1");
+		AutoBinding<JTextField, String, Person, String> autoBinding_3 = Bindings.createAutoBinding(UpdateStrategy.READ, txtPidgeotto, jTextFieldBeanProperty_2, party1, personBeanProperty, "P1");
 		autoBinding_3.bind();
 		//
 		BeanProperty<JTextField, String> jTextFieldBeanProperty_3 = BeanProperty.create("text");

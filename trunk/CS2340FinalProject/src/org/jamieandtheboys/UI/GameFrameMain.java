@@ -419,15 +419,15 @@ public class GameFrameMain extends JFrame {
 		displayPanel.add(label_6, "cell 5 5");
 		
 		JLabel label_7 = new JLabel("");
-		label_7.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/exitgame.png")));
+		label_7.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/axle.png")));
 		displayPanel.add(label_7, "cell 6 5");
 		
 		JLabel label_8 = new JLabel("");
-		label_8.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/exitgame.png")));
+		label_8.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/tongue.png")));
 		displayPanel.add(label_8, "cell 7 5");
 		
 		JLabel label_9 = new JLabel("");
-		label_9.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/exitgame.png")));
+		label_9.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/wheel.png")));
 		displayPanel.add(label_9, "cell 8 5");
 		
 		JLabel lblyoke = new JLabel("$40");
@@ -1138,7 +1138,7 @@ public class GameFrameMain extends JFrame {
 		menuPanel.add(btnHeal, "cell 3 0,aligny center");
 		
 		JButton btnRepairWagon = new JButton("Trade");
-		btnRepairWagon.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/exitgame.png")));
+		btnRepairWagon.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/trade.png")));
 		btnRepairWagon.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnRepairWagon.setMargin(new Insets(2, 6, 2, 5));
 		btnRepairWagon.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -1147,7 +1147,7 @@ public class GameFrameMain extends JFrame {
 		menuPanel.add(btnRepairWagon, "cell 4 0,aligny center");
 		
 		JButton btnTrade = new JButton("Repair Wagon");
-		btnTrade.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/exitgame.png")));
+		btnTrade.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/repair.png")));
 		btnTrade.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnTrade.setMargin(new Insets(2, 6, 2, 5));
 		btnTrade.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -1319,7 +1319,7 @@ public class GameFrameMain extends JFrame {
 		menuPanel.add(btnViewSupplies, "cell 8 0,aligny center");
 		
 		JButton btnViewMap = new JButton("View Map");
-		btnViewMap.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/exitgame.png")));
+		btnViewMap.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/map.png")));
 		btnViewMap.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnViewMap.setMargin(new Insets(2, 6, 2, 5));
 		btnViewMap.setHorizontalTextPosition(SwingConstants.CENTER);
