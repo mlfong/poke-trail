@@ -40,8 +40,10 @@ public class GameLogic
 	public static PokeMap Map;
 	public static Integer Day=0;
 	public static boolean isNewGame = true;
-
-
+	
+	//I'm assuming our player is in position 1 of the Party
+	public static String profession = Party.get(0).getName();
+	
 
 	public static void main(String[] args)
 	{
@@ -76,9 +78,6 @@ public class GameLogic
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-
-
 	}
 
 
@@ -184,6 +183,8 @@ public class GameLogic
 
 	}
 
+	
+	
 	/**
 	 * Text-based store simulator. For reference purposes only
 	 */
@@ -283,7 +284,18 @@ public class GameLogic
 		return true;
 	}
 
-
+	
+	public static void scavenge()
+	{
+		if(profession.equals("Breeder"))
+		{
+			int amount = generator.nextInt(6);
+			Wagon.addItem(new Food(), amount);
+		}
+		else  //Not a Breeder! Can't scavenge
+		{}
+	}
+	
 	private static void updateHealth()
 	{
 		int minusHealth;
@@ -291,7 +303,7 @@ public class GameLogic
 		if(Pace == FAST)
 		{
 			minusHealth = 1;
-			plusFatigue = 20;
+			plusFatigue = 15;
 		}
 		else if(Pace == NORMAL)
 		{
@@ -303,6 +315,15 @@ public class GameLogic
 			minusHealth = -1;
 			plusFatigue = 5;
 		}
+		
+		if(Rations == 0)
+			plusFatigue += 10;
+		if(Rations == Party.size())
+			plusFatigue += 5;
+		if(Rations == 2*Party.size())
+			plusFatigue += 2;
+		if(Rations == 4*Party.size())
+			plusFatigue -= 5;
 		
 		for(int i = 0; i < Party.size(); i++)
 		{
@@ -393,21 +414,28 @@ public class GameLogic
 			else if(rand >= 65 && rand < 70)
 			{
 				GameFrameMain.textArea.append("\nWagon part is broken!");
-				int rand2 = generator.nextInt(3);
-				if(rand2 == 0 && Wagon.getInventory().get(new SpareAxle())!=null)
+				if(profession.equals("Trainer"))
 				{
-					Wagon.subItem(new SpareAxle(), 1);
-				}
-				else if(rand2 == 1 && Wagon.getInventory().get(new SpareTongue())!=null)
-				{
-					Wagon.subItem(new SpareTongue(), 1);
-				}
-				else if(rand2 == 2 &&  Wagon.getInventory().get(new SpareWheel())!=null)
-				{
-					Wagon.subItem(new SpareWheel(), 1);
+					//do nothing, the carpenter can fix the part
 				}
 				else
-					tired = true;
+				{
+					int rand2 = generator.nextInt(3);
+					if(rand2 == 0 && Wagon.getInventory().get(new SpareAxle())!=null)
+					{
+						Wagon.subItem(new SpareAxle(), 1);
+					}
+					else if(rand2 == 1 && Wagon.getInventory().get(new SpareTongue())!=null)
+					{
+						Wagon.subItem(new SpareTongue(), 1);
+					}
+					else if(rand2 == 2 &&  Wagon.getInventory().get(new SpareWheel())!=null)
+					{
+						Wagon.subItem(new SpareWheel(), 1);
+					}
+					else
+						tired = true; //just using the same boolean as the oxen is tired
+				}
 			}
 			else if(rand >= 42 && rand < 49)
 			{
