@@ -281,6 +281,23 @@ public class GameLogic
 		return true;
 	}
 
+	public static void hunt()
+	{
+		if(Wagon.getInventory().containsKey(new Pokeball()))
+		{
+			Wagon.subItem(new Pokeball(), 1);
+			int rand = generator.nextInt(10);
+			if( rand < 4)
+			{
+				Wagon.addItem(new Food(), 2);
+				GameFrameMain.textArea.append("You hunted and got 2 more food!");
+			}
+			else
+				GameFrameMain.textArea.append("You hunted but didn't catch anything...");
+		}
+		else
+			GameFrameMain.textArea.append("You need at least 1 Pokeball to hunt.");
+	}
 	
 	public static void scavenge()
 	{
@@ -288,9 +305,13 @@ public class GameLogic
 		{
 			int amount = generator.nextInt(6);
 			Wagon.addItem(new Food(), amount);
+			GameFrameMain.textArea.append("You scavenged and got "
+					+ amount + " more food!");
 		}
 		else  //Not a Breeder! Can't scavenge
-		{}
+		{
+			GameFrameMain.textArea.append("Only breeders can scavenge.");
+		}
 	}
 	
 	private static void updateHealth()
@@ -348,7 +369,8 @@ public class GameLogic
 	{
 		int rand = generator.nextInt(100);
 		int doItOrNo = generator.nextInt(10);
-		if(doItOrNo < 3) {
+		if(doItOrNo < 3)
+		{
 			//Just some arbitrary numbers to decide if the random events should be done or not 
 			if(rand < 5)
 			{
@@ -400,7 +422,6 @@ public class GameLogic
 				{
 					Wagon.subItem(new SpareTongue(), 1);
 					GameFrameMain.textArea.append("\nOh no! Team Rocket stole a Spare Tongue!");
-
 				}
 				if(rand2 == 6 && Wagon.getInventory().containsKey(new SpareWheel()))
 				{
@@ -527,10 +548,12 @@ public class GameLogic
 		frame.dispose();
 	}
 
-	public static String FerryCrossing() {
+	public static String FerryCrossing()
+	{
 		String notify="";
 		//if you have enough money
-		if(Party.get(0).getMoney()>50){
+		if(Party.get(0).getMoney() > 50)
+		{
 			Party.get(0).subMoney(50);
 			GameFrameMain.lblPokedollars.setText(Party.get(0).getMoney()+" PokeDollars");
 			notify = "You made it across the river safely.";
@@ -538,11 +561,9 @@ public class GameLogic
 			GameFrameMain.rightPanel.add(GameFrameMain.GoPanel, "cell 0 0,growx,aligny center");
 			GameFrameMain.rightPanel.updateUI();
 		}
-		else{
+		else
 			notify = "You don't have enough money!";
-		}
 		return notify;
-
 	}
 
 	public static String FordCrossing() {
@@ -550,15 +571,15 @@ public class GameLogic
 		int probability;
 
 		Random random = new Random();
-		if(Wagon.map.getCurr().riverDepth<3){
+		if(Wagon.map.getCurr().riverDepth<3)
 			probability = 2;
-		}
-		else{
+		else
 			probability = 5;
-		}
 
-		if(random.nextInt(10)<probability){
-			if(random.nextInt(10)>1){
+		if(random.nextInt(10)<probability)
+		{
+			if(random.nextInt(10)>1)
+			{
 				results="Your wagon flipped and you lost an item!";
 				//take away an item
 			}
