@@ -373,7 +373,7 @@ public class GameLogic
 			//Just some arbitrary numbers to decide if the random events should be done or not 
 			if(rand < 5)
 			{
-				GameFrameMain.textArea.append("Articuno uses blizzard! Lose a few days");
+				GameFrameMain.textArea.append("\nArticuno uses blizzard! Lose a few days");
 				//Replace the strings with your variables you use to keep track
 				int delay = generator.nextInt(3);
 				day += delay + 1;
