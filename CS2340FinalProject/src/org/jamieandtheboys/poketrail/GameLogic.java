@@ -31,14 +31,14 @@ public class GameLogic
 
 	public static boolean tired = false;
 	public static boolean gameover = false;
-	public static Store Store;
-	public static Wagon Wagon;
-	public static ArrayList<Person> Party;
+	public static Store store;
+	public static Wagon wagon;
+	public static ArrayList<Person> party;
 	public static GameInitObj gameData = new GameInitObj();
 	public static Startup dialog;
-	public static int Pace, Rations;
-	public static PokeMap Map;
-	public static Integer Day=0;
+	public static int pace, rations;
+	public static PokeMap map;
+	public static Integer day=0;
 	public static boolean isNewGame = true;
 	
 
@@ -52,7 +52,6 @@ public class GameLogic
 
 	public static void startScreen()
 	{
-
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -81,12 +80,12 @@ public class GameLogic
 	public static void run()
 	{
 		//This is where gameData unloads its information
-		Store = new Store("Pallet Town General Store");
-		Party = GameInitObj.Party;
-		Wagon = GameInitObj.Wagon;
-		Day = GameInitObj.Day;
-		Pace = GameInitObj.Pace;
-		Rations = GameInitObj.Rations;
+		store = new Store("Pallet Town General Store");
+		party = GameInitObj.Party;
+		wagon = GameInitObj.Wagon;
+		day = GameInitObj.Day;
+		pace = GameInitObj.Pace;
+		rations = GameInitObj.Rations;
 		EventQueue.invokeLater(new Runnable()
 		{
 			public void run()
@@ -99,9 +98,9 @@ public class GameLogic
 						GameFrameMain.rightPanel.add(GameFrameMain.GoPanel, "cell 0 0,growx,aligny center");
 						GameFrameMain.rightPanel.updateUI();
 						GameFrameMain.textArea.setText(GameInitObj.log);
-						GameFrameMain.lblMiles.setText(Wagon.getDistTraveled()+" Miles");
-						GameFrameMain.lblPokedollars.setText(Party.get(0).getMoney().toString());
-						GameFrameMain.lblFoodSupply.setText(Wagon.inventory.get(new Food()).toString());
+						GameFrameMain.lblMiles.setText(wagon.getDistTraveled()+" Miles");
+						GameFrameMain.lblPokedollars.setText(party.get(0).getMoney().toString());
+						GameFrameMain.lblFoodSupply.setText(wagon.inventory.get(new Food()).toString());
 					}
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -116,54 +115,54 @@ public class GameLogic
 	{
 		String notify="";
 		//sub food
-		if(Wagon.inventory.containsKey(new Food()) && Wagon.inventory.get(new Food())>0){
-			Wagon.subItem(new Food(), Rations);
+		if(wagon.inventory.containsKey(new Food()) && wagon.inventory.get(new Food())>0){
+			wagon.subItem(new Food(), rations);
 			//update food label
-			GameFrameMain.lblFoodSupply.setText(Wagon.inventory.get(new Food()).toString());
+			GameFrameMain.lblFoodSupply.setText(wagon.inventory.get(new Food()).toString());
 		}
 		else{
 			//set out-of-food variable
 		}
 		//increase distance
-		Wagon.map.addToTotalDist(Pace);
+		wagon.map.addToTotalDist(pace);
 		//update total distance
-		GameFrameMain.lblMiles.setText(Wagon.map.getTotalDist() +" miles");
-		Wagon.map.setDistToNext(Wagon.map.getDistToNext()+Pace);
+		GameFrameMain.lblMiles.setText(wagon.map.getTotalDist() +" miles");
+		wagon.map.setDistToNext(wagon.map.getDistToNext()+pace);
 		//update progress bar
-		GameFrameMain.progressBar.setValue((int)(((double)Wagon.map.getDistToNext()/(double)Wagon.map.getDistBetween())*100)); 
+		GameFrameMain.progressBar.setValue((int)(((double)wagon.map.getDistToNext()/(double)wagon.map.getDistBetween())*100)); 
 		randomEvent();
-		if(Wagon.map.getDistToNext()>=Wagon.map.getDistBetween()){
+		if(wagon.map.getDistToNext()>=wagon.map.getDistBetween()){
 			//notify reached destination and won
-			if(Wagon.map.getCurr().equals(Wagon.map.getDest())){
-				notify = "You have reached " + Wagon.map.getCurr().getLocation().getName() +"! You Win!";	
+			if(wagon.map.getCurr().equals(wagon.map.getDest())){
+				notify = "You have reached " + wagon.map.getCurr().getLocation().getName() +"! You Win!";	
 				gameover=true;
 			}
 			//notify reached new location
 			else{
-				notify = "You have reached " + Wagon.map.getCurr().getLocation().getName();
+				notify = "You have reached " + wagon.map.getCurr().getLocation().getName();
 			}
 			//go to river events if new location is a river
-			if(Wagon.map.getCurr().isARiver){
+			if(wagon.map.getCurr().isARiver()){
 				GameFrameMain.rightPanel.remove(GameFrameMain.GoPanel);
 				GameFrameMain.rightPanel.add(GameFrameMain.RiverPanel, "cell 0 0,growx,aligny center");
 				GameFrameMain.rightPanel.updateUI();
 			}
 			//notify store event if new location is store
-			if(Wagon.map.getCurr().getLocation().getStore()!=null){
+			if(wagon.map.getCurr().getLocation().getStore()!=null){
 				GameFrameMain.rightPanel.remove(GameFrameMain.GoPanel);
 				GameFrameMain.rightPanel.add(GameFrameMain.displayPanel, "cell 0 0,growx,aligny center");
-				GameFrameMain.lblYouHave.setText("You have "+ Party.get(0).getMoney() +" PokeDollars.");
+				GameFrameMain.lblYouHave.setText("You have "+ party.get(0).getMoney() +" PokeDollars.");
 				GameFrameMain.rightPanel.updateUI();
 			}
-			Wagon.map.setCurr(Wagon.map.getCurr().getNext());
-			Wagon.map.setDistToNext(0);
-			if(Wagon.map.getCurr().getNext()!=null)
-				Wagon.map.setDistBetween(Wagon.map.getCurr().getNext().getLocation().getDistanceTo());
+			wagon.map.setCurr(wagon.map.getCurr().getNext());
+			wagon.map.setDistToNext(0);
+			if(wagon.map.getCurr().getNext()!=null)
+				wagon.map.setDistBetween(wagon.map.getCurr().getNext().getLocation().getDistanceTo());
 		}
 		//increase day
-		Day++;
+		day++;
 		//update day label
-		GameFrameMain.days.setText(Day.toString());
+		GameFrameMain.days.setText(day.toString());
 		//hunger levels and fatigue
 		//health
 
@@ -187,21 +186,21 @@ public class GameLogic
 	 */
 	public static void storeEvent()
 	{
-		System.out.println("Welcome to the " + Store.getName());
+		System.out.println("Welcome to the " + store.getName());
 		System.out.println("Look at our selection of items:");
-		Store.printStock();
-		System.out.println("Current money: $" + Party.get(0).getMoney());
-		System.out.println("Current weight: " + Wagon.getWeight() + "lbs");
-		System.out.println("Available weight: " + Wagon.availableWeight() + "lbs");
+		store.printStock();
+		System.out.println("Current money: $" + party.get(0).getMoney());
+		System.out.println("Current weight: " + wagon.getWeight() + "lbs");
+		System.out.println("Available weight: " + wagon.availableWeight() + "lbs");
 		Scanner sc = new Scanner(System.in);
 		String choice = "";
 		while(!choice.equalsIgnoreCase("quit"))
 		{
 			System.out.println("What do you want to buy? (or quit)");
 			choice = sc.next();
-			if(Store.inStore(choice))
+			if(store.inStore(choice))
 			{
-				Item want = Store.getItem(choice);
+				Item want = store.getItem(choice);
 				System.out.println("You have chosen: " + want);
 				String amount = "";
 				while(!amount.equalsIgnoreCase("quit"))
@@ -220,12 +219,12 @@ public class GameLogic
 							decision = sc.next();
 							if(decision.equalsIgnoreCase("y"))
 							{
-								if(cost > Party.get(0).getMoney())
+								if(cost > party.get(0).getMoney())
 								{
 									System.out.println("Insufficient money, going back to main menu.");
 									break;
 								}//end if
-								else if(weight > Wagon.availableWeight())
+								else if(weight > wagon.availableWeight())
 								{
 									System.out.println("Insufficient room on wagon, going back to main menu.");
 									break;
@@ -233,9 +232,9 @@ public class GameLogic
 								else
 								{
 									System.out.println("You have purchased " + want.getName() + " x" + a);
-									Wagon.addItem(want, a);
-									Wagon.addWeight(weight);
-									Party.get(0).subMoney(cost);
+									wagon.addItem(want, a);
+									wagon.addWeight(weight);
+									party.get(0).subMoney(cost);
 								}//end if
 							}//end if
 							else if(decision.equalsIgnoreCase("n"))
@@ -253,14 +252,14 @@ public class GameLogic
 			else if(choice.equalsIgnoreCase("help"))
 			{
 				System.out.println("Look at our selection of items:");
-				Store.printStock();
-				System.out.println("Current money: $" + Party.get(0).getMoney());
-				System.out.println("Current weight: " + Wagon.getWeight() + "lbs");
-				System.out.println("Available weight: " + Wagon.availableWeight() + "lbs");
+				store.printStock();
+				System.out.println("Current money: $" + party.get(0).getMoney());
+				System.out.println("Current weight: " + wagon.getWeight() + "lbs");
+				System.out.println("Available weight: " + wagon.availableWeight() + "lbs");
 			}
 			else if(choice.equalsIgnoreCase("quit"))
 			{
-				System.out.println("Thanks for shopping at " + Store.getName() + "!");
+				System.out.println("Thanks for shopping at " + store.getName() + "!");
 				break;
 			}
 			else
@@ -283,13 +282,13 @@ public class GameLogic
 
 	public static void hunt()
 	{
-		if(Wagon.getInventory().containsKey(new Pokeball()))
+		if(wagon.getInventory().containsKey(new Pokeball()))
 		{
-			Wagon.subItem(new Pokeball(), 1);
+			wagon.subItem(new Pokeball(), 1);
 			int rand = generator.nextInt(10);
 			if( rand < 4)
 			{
-				Wagon.addItem(new Food(), 2);
+				wagon.addItem(new Food(), 2);
 				GameFrameMain.textArea.append("You hunted and got 2 more food!");
 			}
 			else
@@ -301,10 +300,10 @@ public class GameLogic
 	
 	public static void scavenge()
 	{
-		if(Party.get(1).getName().equals("Breeder"))
+		if(party.get(1).getName().equals("Breeder"))
 		{
 			int amount = generator.nextInt(6);
-			Wagon.addItem(new Food(), amount);
+			wagon.addItem(new Food(), amount);
 			GameFrameMain.textArea.append("You scavenged and got "
 					+ amount + " more food!");
 		}
@@ -318,12 +317,12 @@ public class GameLogic
 	{
 		int minusHealth;
 		int plusFatigue;
-		if(Pace == FAST)
+		if(pace == FAST)
 		{
 			minusHealth = 1;
 			plusFatigue = 15;
 		}
-		else if(Pace == NORMAL)
+		else if(pace == NORMAL)
 		{
 			minusHealth = 0;
 			plusFatigue = 10;
@@ -334,18 +333,18 @@ public class GameLogic
 			plusFatigue = 5;
 		}
 		
-		if(Rations == 0)
+		if(rations == 0)
 			plusFatigue += 10;
-		if(Rations == Party.size())
+		if(rations == party.size())
 			plusFatigue += 5;
-		if(Rations == 2*Party.size())
+		if(rations == 2*party.size())
 			plusFatigue += 2;
-		if(Rations == 4*Party.size())
+		if(rations == 4*party.size())
 			plusFatigue -= 5;
 		
-		for(int i = 0; i < Party.size(); i++)
+		for(int i = 0; i < party.size(); i++)
 		{
-			Person p = Party.get(i);
+			Person p = party.get(i);
 			int fatigue = p.getFatigue() + plusFatigue;
 			if(fatigue >= 100)
 			{
@@ -356,12 +355,12 @@ public class GameLogic
 			int health = p.getHealth() - minusHealth;
 			if(health <= 0)
 				//remove the player?
-				Party.remove(i);
+				party.remove(i);
 			else
 				p.setHealth(health);
 		}
 		
-		if(Party.size() <= 0)
+		if(party.size() <= 0)
 			gameover = true;
 	}
 	
@@ -377,79 +376,79 @@ public class GameLogic
 				GameFrameMain.textArea.append("Articuno uses blizzard! Lose a few days");
 				//Replace the strings with your variables you use to keep track
 				int delay = generator.nextInt(3);
-				Day += delay + 1;
+				day += delay + 1;
 				for(int i = 0; i < delay; i++)
-					Wagon.subItem(new Food(), Rations);
+					wagon.subItem(new Food(), rations);
 			}
 			else if(rand >= 10 && rand < 18)
 			{
 				//Team rocket steals something!
 				int rand2 = generator.nextInt(7);
-				if(rand2 == 0 && Wagon.getInventory().containsKey(new Clothing()) == true)
+				if(rand2 == 0 && wagon.getInventory().containsKey(new Clothing()) == true)
 				{
-					int amount = (int) ((int) Wagon.getInventory().get(new Clothing())*.10);
+					int amount = (int) ((int) wagon.getInventory().get(new Clothing())*.10);
 					int rand3 = generator.nextInt(amount);
-					Wagon.subItem(new Clothing(), rand3);
+					wagon.subItem(new Clothing(), rand3);
 					GameFrameMain.textArea.append("\nOh no! Team Rocket stole " + rand3+" amount of clothes!");
 				}
-				if(rand2 == 1 && Wagon.getInventory().containsKey(new Food()) == true)
+				if(rand2 == 1 && wagon.getInventory().containsKey(new Food()) == true)
 				{
-					int amount = (int) ((int) Wagon.getInventory().get(new Food())*.10);
+					int amount = (int) ((int) wagon.getInventory().get(new Food())*.10);
 					int rand3 = generator.nextInt(amount);
-					Wagon.subItem(new Food(), rand3);
+					wagon.subItem(new Food(), rand3);
 					GameFrameMain.textArea.append("\nOh no! Team Rocket stole "+rand3+" amount of food!");
 				}
-				if(rand2 == 2 && Wagon.getInventory().containsKey(new FullHeal()) == true)
+				if(rand2 == 2 && wagon.getInventory().containsKey(new FullHeal()) == true)
 				{
-					int amount = (int) ((int) Wagon.getInventory().get(new FullHeal())*.10);
+					int amount = (int) ((int) wagon.getInventory().get(new FullHeal())*.10);
 					int rand3 = generator.nextInt(amount);
-					Wagon.subItem(new FullHeal(), rand3);
+					wagon.subItem(new FullHeal(), rand3);
 					GameFrameMain.textArea.append("\nOh no! Team Rocket stole "+rand3+" amount of Medicine!");
 				}
-				if(rand2 == 3 && Wagon.getInventory().containsKey(new Pokeball()) == true)
+				if(rand2 == 3 && wagon.getInventory().containsKey(new Pokeball()) == true)
 				{
-					int amount = (int) ((int) Wagon.getInventory().get(new Pokeball())*.10);
+					int amount = (int) ((int) wagon.getInventory().get(new Pokeball())*.10);
 					int rand3 = generator.nextInt(amount);
-					Wagon.subItem(new Pokeball(), rand3);
+					wagon.subItem(new Pokeball(), rand3);
 					GameFrameMain.textArea.append("\nOh no! Team Rocket stole "+rand3+" amount of Pokeballs!");
 				}
-				if(rand2 == 4 &&  Wagon.getInventory().containsKey(new SpareAxle()))
+				if(rand2 == 4 &&  wagon.getInventory().containsKey(new SpareAxle()))
 				{
-					Wagon.subItem(new SpareAxle(), 1);
+					wagon.subItem(new SpareAxle(), 1);
 					GameFrameMain.textArea.append("\nOh no! Team Rocket stole a Spare Axle!");
 				}
-				if(rand2 == 5 && Wagon.getInventory().containsKey(new SpareTongue()))
+				if(rand2 == 5 && wagon.getInventory().containsKey(new SpareTongue()))
 				{
-					Wagon.subItem(new SpareTongue(), 1);
+					wagon.subItem(new SpareTongue(), 1);
 					GameFrameMain.textArea.append("\nOh no! Team Rocket stole a Spare Tongue!");
 				}
-				if(rand2 == 6 && Wagon.getInventory().containsKey(new SpareWheel()))
+				if(rand2 == 6 && wagon.getInventory().containsKey(new SpareWheel()))
 				{
-					Wagon.subItem(new SpareWheel(), 1);
+					wagon.subItem(new SpareWheel(), 1);
 					GameFrameMain.textArea.append("\nOh no! Team Rocket stole a Spare Wheel!");
 				}
 			}
 			else if(rand >= 65 && rand < 70)
 			{
 				GameFrameMain.textArea.append("\nWagon part is broken!");
-				if(Party.get(1).equals("Trainer"))
+				if(party.get(1).equals("Trainer"))
 				{
 					//do nothing, the carpenter can fix the part
 				}
 				else
 				{
 					int rand2 = generator.nextInt(3);
-					if(rand2 == 0 && Wagon.getInventory().get(new SpareAxle())!=null)
+					if(rand2 == 0 && wagon.getInventory().get(new SpareAxle())!=null)
 					{
-						Wagon.subItem(new SpareAxle(), 1);
+						wagon.subItem(new SpareAxle(), 1);
 					}
-					else if(rand2 == 1 && Wagon.getInventory().get(new SpareTongue())!=null)
+					else if(rand2 == 1 && wagon.getInventory().get(new SpareTongue())!=null)
 					{
-						Wagon.subItem(new SpareTongue(), 1);
+						wagon.subItem(new SpareTongue(), 1);
 					}
-					else if(rand2 == 2 &&  Wagon.getInventory().get(new SpareWheel())!=null)
+					else if(rand2 == 2 &&  wagon.getInventory().get(new SpareWheel())!=null)
 					{
-						Wagon.subItem(new SpareWheel(), 1);
+						wagon.subItem(new SpareWheel(), 1);
 					}
 					else
 						tired = true; //just using the same boolean as the oxen is tired
@@ -459,13 +458,13 @@ public class GameLogic
 			{
 				GameFrameMain.textArea.append("\nThe PokeFan club gives your party some food!");
 				int amount = generator.nextInt(91) + 10;
-				Wagon.addItem(new Food(), amount);
+				wagon.addItem(new Food(), amount);
 			}
 			else if(rand >= 90 && tired == true)
 			{
 				GameFrameMain.textArea.append("\nA Tauros has died!");
-				Wagon.subItem(new Oxen(), 1);
-				if(Wagon.getInventory().get(new Oxen()) <= 0)
+				wagon.subItem(new Oxen(), 1);
+				if(wagon.getInventory().get(new Oxen()) <= 0)
 					gameover = true;
 			}
 
@@ -476,12 +475,12 @@ public class GameLogic
 				/*Temporarily set wagon pace to lower pace,
 				 *  I'll leave this unfinished until random events is connected
 				 */
-				if(Pace == LEISURELY)
+				if(pace == LEISURELY)
 					tired = false;
 			}
 			else
 			{
-				if(Pace == FAST);
+				if(pace == FAST);
 				{
 					if(generator.nextInt(2) == 1)
 						tired = true;
@@ -495,12 +494,12 @@ public class GameLogic
 			//      return;
 
 			//Generate for diseases
-			for(int i = 0; i < Party.size(); i++)
+			for(int i = 0; i < party.size(); i++)
 			{
-				if(Party.get(i).isSick() == false)
+				if(party.get(i).isSick() == false)
 				{
-					double phealth = Party.get(i).getHealth()/100;
-					double pfatigue = (100 - Party.get(i).getFatigue())/100;
+					double phealth = party.get(i).getHealth()/100;
+					double pfatigue = (100 - party.get(i).getFatigue())/100;
 
 
 
@@ -511,18 +510,18 @@ public class GameLogic
 						int rand2 = generator.nextInt(3);
 						if(rand2 == 0)
 						{
-							Party.get(i).setDisease(new Dysentery());
-							GameFrameMain.textArea.append("\n"+Party.get(i).getName()+" now has Dysentery.");
+							party.get(i).setDisease(new Dysentery());
+							GameFrameMain.textArea.append("\n"+party.get(i).getName()+" now has Dysentery.");
 						}
 						if(rand2 == 1)
 						{
-							Party.get(i).setDisease(new Paralysis());
-							GameFrameMain.textArea.append("\n"+Party.get(i).getName()+" now has Paralysis.");
+							party.get(i).setDisease(new Paralysis());
+							GameFrameMain.textArea.append("\n"+party.get(i).getName()+" now has Paralysis.");
 						}
 						if(rand2 == 2)
 						{
-							Party.get(i).setDisease(new Poison());
-							GameFrameMain.textArea.append("\n"+Party.get(i).getName()+" now has Poison.");
+							party.get(i).setDisease(new Poison());
+							GameFrameMain.textArea.append("\n"+party.get(i).getName()+" now has Poison.");
 						}
 					}
 					else
@@ -531,14 +530,14 @@ public class GameLogic
 				}
 				else
 				{
-					if(Party.get(i).getDiseaseDuration() > 7)
+					if(party.get(i).getDiseaseDuration() > 7)
 					{
 						//Person is healthy again
 						if(generator.nextInt(2) == 0)
-							Party.get(i).setDisease(null);
-						GameFrameMain.textArea.append("\n"+Party.get(i).getName()+" has been cured of disease.");
+							party.get(i).setDisease(null);
+						GameFrameMain.textArea.append("\n"+party.get(i).getName()+" has been cured of disease.");
 					}
-					Party.get(i).doDisease();
+					party.get(i).doDisease();
 				}
 			}
 		}
@@ -552,10 +551,10 @@ public class GameLogic
 	{
 		String notify="";
 		//if you have enough money
-		if(Party.get(0).getMoney() > 50)
+		if(party.get(0).getMoney() > 50)
 		{
-			Party.get(0).subMoney(50);
-			GameFrameMain.lblPokedollars.setText(Party.get(0).getMoney()+" PokeDollars");
+			party.get(0).subMoney(50);
+			GameFrameMain.lblPokedollars.setText(party.get(0).getMoney()+" PokeDollars");
 			notify = "You made it across the river safely.";
 			GameFrameMain.rightPanel.remove(GameFrameMain.RiverPanel);
 			GameFrameMain.rightPanel.add(GameFrameMain.GoPanel, "cell 0 0,growx,aligny center");
@@ -571,7 +570,7 @@ public class GameLogic
 		int probability;
 
 		Random random = new Random();
-		if(Wagon.map.getCurr().riverDepth<3)
+		if(wagon.map.getCurr().getRiverDepth() < 3)
 			probability = 2;
 		else
 			probability = 5;
@@ -617,13 +616,13 @@ public class GameLogic
 	public static void saveGame(){
 		FileManager fm = new FileManager();
 		//import data to fm
-		fm.setDay(Day);
+		fm.setDay(day);
 		fm.setGameOver(gameover);
-		fm.setPace(Pace);
+		fm.setPace(pace);
 		fm.setTired(tired);
-		fm.setRations(Rations);
-		fm.setParty(Party);
-		fm.setWagon(Wagon);
+		fm.setRations(rations);
+		fm.setParty(party);
+		fm.setWagon(wagon);
 		fm.setLog(GameFrameMain.textArea.getText());
 		SaveAndLoad snl = new SaveAndLoad();
 		snl.createUser("Ash", "password");

@@ -33,18 +33,18 @@ public class Wagon implements Serializable
 	 * Creates the map for the game
 	 * @return the map
 	 */
-		private PokeMap makeMap()
+	private PokeMap makeMap()
 	{
 		MapNode m01 = makeMapNode("Pallet Town", true, 0);
 		MapNode m02 = makeMapNode("River Crossing", false, 50 * GAME_LENGTH);
-		m02.isARiver=true;
-		m02.riverDepth=2;
+		m02.setIsARiver(true);
+		m02.setDepth(2);
 		MapNode m03 = makeMapNode("Viridian Forest", true, 45 * GAME_LENGTH);
 		MapNode m04 = makeMapNode("Pewter City", true, 20 * GAME_LENGTH);
 		MapNode m05 = makeMapNode("Mt. Moon", false, 40 * GAME_LENGTH);
 		MapNode m06 = makeMapNode("River Crossing 2.0!", false, 60 * GAME_LENGTH);
-		m06.isARiver=true;
-		m04.riverDepth=2;
+		m06.setIsARiver(true);
+		m06.setDepth(2);
 		MapNode m07 = makeMapNode("Vermilion City", true, 60 * GAME_LENGTH);
 		MapNode m08 = makeMapNode("Dark Cave", false, 65 * GAME_LENGTH);
 		MapNode m09 = makeMapNode("Lavender Town", true, 40 * GAME_LENGTH);
@@ -109,7 +109,7 @@ public class Wagon implements Serializable
 		return this.weight > MAX_WEIGHT;
 	}
 
-	public double getPercentagToNext()
+	public double getPercentageToNext()
 	{
 		return this.percentageToNext;
 	}

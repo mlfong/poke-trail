@@ -60,18 +60,18 @@ public class GameFrameMain extends JFrame {
 	private JPanel contentPane;
 	private final JButton btnNewButton_1 = new JButton("Purchase");
 
-	 Store s=GameLogic.Store;
-	 Wagon w=GameLogic.Wagon;
-	 Person Party0= GameLogic.Party.get(0);
-	 Person Party1= GameLogic.Party.get(1);
-	 Person Party2= GameLogic.Party.get(2);
-	 Person Party3= GameLogic.Party.get(3);
-	 Person Party4= GameLogic.Party.get(4);
+	 Store s=GameLogic.store;
+	 Wagon w=GameLogic.wagon;
+	 Person Party0= GameLogic.party.get(0);
+	 Person Party1= GameLogic.party.get(1);
+	 Person Party2= GameLogic.party.get(2);
+	 Person Party3= GameLogic.party.get(3);
+	 Person Party4= GameLogic.party.get(4);
 	 Integer oxen=0,clothing=0,pokeballs=0,medicine=0,spareaxle=0,sparewheel=0,sparetongue=0, food=0, playerFood=1;
-	 String youhave = "You have "+GameLogic.Party.get(0).getMoney()+" Pokedollars";
-	 String currentweight = "Current Weight: 0 lbs out of "+(GameLogic.Wagon.getMaxWeight()-GameLogic.Wagon.getWeight())+" lbs available";
+	 String youhave = "You have "+GameLogic.party.get(0).getMoney()+" Pokedollars";
+	 String currentweight = "Current Weight: 0 lbs out of "+(GameLogic.wagon.getMaxWeight()-GameLogic.wagon.getWeight())+" lbs available";
 //	 PokeMap map = w.getMap();
-	 private int TotalPrice, TotalWeight=GameLogic.Wagon.getWeight();
+	 private int TotalPrice, TotalWeight=GameLogic.wagon.getWeight();
 	 private int pace=5, distance=0, rations=1, peoplealive=5;
 	 private Integer day=0;
 	 private JLabel lblPlayer;
@@ -503,7 +503,7 @@ public class GameFrameMain extends JFrame {
 					lblCurrentTotal.setText("Current Total: "+TotalPrice+" Pokedollars");
 					label_4.setText(oxen.toString());
 					TotalWeight=TotalWeight-s.getItem("oxen").getWeight();	
-					lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.Wagon.getMaxWeight()-GameLogic.Wagon.getWeight())+" lbs available");
+					lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.wagon.getMaxWeight()-GameLogic.wagon.getWeight())+" lbs available");
 					
 				}
 			}
@@ -521,7 +521,7 @@ public class GameFrameMain extends JFrame {
 					lblCurrentTotal.setText("Current Total: "+TotalPrice+" Pokedollars");
 					label_3.setText(food.toString());
 					TotalWeight=TotalWeight-s.getItem("food").getWeight();	
-					lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.Wagon.getMaxWeight()-GameLogic.Wagon.getWeight())+" lbs available");
+					lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.wagon.getMaxWeight()-GameLogic.wagon.getWeight())+" lbs available");
 				}
 			}
 		});
@@ -542,7 +542,7 @@ public class GameFrameMain extends JFrame {
 				lblCurrentTotal.setText("Current Total: "+TotalPrice+" Pokedollars");
 				label_3.setText(food.toString());
 				TotalWeight=TotalWeight+s.getItem("food").getWeight();	
-				lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.Wagon.getMaxWeight()-GameLogic.Wagon.getWeight())+" lbs available");
+				lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.wagon.getMaxWeight()-GameLogic.wagon.getWeight())+" lbs available");
 			}
 		});
 		button_1.setMargin(new Insets(2, 2, 2, 2));
@@ -562,7 +562,7 @@ public class GameFrameMain extends JFrame {
 				lblCurrentTotal.setText("Current Total: "+TotalPrice+" Pokedollars");
 				label_4.setText(oxen.toString());
 				TotalWeight=TotalWeight+s.getItem("oxen").getWeight();	
-				lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.Wagon.getMaxWeight()-GameLogic.Wagon.getWeight())+" lbs available");
+				lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.wagon.getMaxWeight()-GameLogic.wagon.getWeight())+" lbs available");
 			}
 		});
 		button_3.setMargin(new Insets(2, 2, 2, 2));
@@ -578,7 +578,7 @@ public class GameFrameMain extends JFrame {
 					lblCurrentTotal.setText("Current Total: "+TotalPrice+" Pokedollars");
 					label_16.setText(clothing.toString());
 					TotalWeight=TotalWeight-s.getItem("clothing").getWeight();	
-					lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.Wagon.getMaxWeight()-GameLogic.Wagon.getWeight())+" lbs available");
+					lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.wagon.getMaxWeight()-GameLogic.wagon.getWeight())+" lbs available");
 				}
 			}
 		});
@@ -595,7 +595,7 @@ public class GameFrameMain extends JFrame {
 					lblCurrentTotal.setText("Current Total: "+TotalPrice+" Pokedollars");
 					label_17.setText(pokeballs.toString());
 					TotalWeight=TotalWeight-s.getItem("pokeball").getWeight();	
-					lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.Wagon.getMaxWeight()-GameLogic.Wagon.getWeight())+" lbs available");
+					lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.wagon.getMaxWeight()-GameLogic.wagon.getWeight())+" lbs available");
 				}
 			}
 		});
@@ -612,7 +612,7 @@ public class GameFrameMain extends JFrame {
 					lblCurrentTotal.setText("Current Total: "+TotalPrice+" Pokedollars");
 					label_18.setText(medicine.toString());
 					TotalWeight=TotalWeight-s.getItem("FullHeal").getWeight();	
-					lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.Wagon.getMaxWeight()-GameLogic.Wagon.getWeight())+" lbs available");
+					lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.wagon.getMaxWeight()-GameLogic.wagon.getWeight())+" lbs available");
 				}
 			}
 		});
@@ -629,7 +629,7 @@ public class GameFrameMain extends JFrame {
 					lblCurrentTotal.setText("Current Total: "+TotalPrice+" Pokedollars");
 					label_19.setText(spareaxle.toString());
 					TotalWeight=TotalWeight-s.getItem("spareaxle").getWeight();	
-					lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.Wagon.getMaxWeight()-GameLogic.Wagon.getWeight())+" lbs available");
+					lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.wagon.getMaxWeight()-GameLogic.wagon.getWeight())+" lbs available");
 				}
 			}
 		});
@@ -646,7 +646,7 @@ public class GameFrameMain extends JFrame {
 					lblCurrentTotal.setText("Current Total: "+TotalPrice+" Pokedollars");
 					label_20.setText(sparewheel.toString());
 					TotalWeight=TotalWeight-s.getItem("sparewheel").getWeight();	
-					lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.Wagon.getMaxWeight()-GameLogic.Wagon.getWeight())+" lbs available");
+					lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.wagon.getMaxWeight()-GameLogic.wagon.getWeight())+" lbs available");
 				}
 			}
 		});
@@ -663,7 +663,7 @@ public class GameFrameMain extends JFrame {
 					lblCurrentTotal.setText("Current Total: "+TotalPrice+" Pokedollars");
 					label_21.setText(sparetongue.toString());
 					TotalWeight=TotalWeight-s.getItem("sparetongue").getWeight();	
-					lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.Wagon.getMaxWeight()-GameLogic.Wagon.getWeight())+" lbs available");
+					lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.wagon.getMaxWeight()-GameLogic.wagon.getWeight())+" lbs available");
 				}
 			}
 		});
@@ -681,13 +681,13 @@ public class GameFrameMain extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				//Checking out
-				if(GameLogic.Party.get(0).getMoney()<TotalPrice){
+				if(GameLogic.party.get(0).getMoney()<TotalPrice){
 					JOptionPane.showMessageDialog(contentPane,
 						    "You cannot afford this.",
 						    "Error",
 						    JOptionPane.ERROR_MESSAGE);
 				}
-				else if(TotalWeight>GameLogic.Wagon.getMaxWeight()){
+				else if(TotalWeight>GameLogic.wagon.getMaxWeight()){
 					JOptionPane.showMessageDialog(contentPane,
 						    "You're wagon cannot take on this much weight.",
 						    "Error",
@@ -700,54 +700,54 @@ public class GameFrameMain extends JFrame {
 						    JOptionPane.ERROR_MESSAGE);
 				}
 				else{
-					GameLogic.Party.get(0).subMoney(TotalPrice);
-					lblPokedollars.setText(GameLogic.Party.get(0).getMoney()+" Pokedollars");
-					lblYouHave.setText("You have "+GameLogic.Party.get(0).getMoney()+" Pokedollars");
-					GameLogic.Wagon.setWeight(TotalWeight);
+					GameLogic.party.get(0).subMoney(TotalPrice);
+					lblPokedollars.setText(GameLogic.party.get(0).getMoney()+" Pokedollars");
+					lblYouHave.setText("You have "+GameLogic.party.get(0).getMoney()+" Pokedollars");
+					GameLogic.wagon.setWeight(TotalWeight);
 					if(oxen>0){
-						GameLogic.Wagon.addItem(new Oxen(), oxen);
+						GameLogic.wagon.addItem(new Oxen(), oxen);
 						oxen=0;
 						label_4.setText("0");
 					}
 					if(food>0){
-						GameLogic.Wagon.addItem(new Food(), food);
+						GameLogic.wagon.addItem(new Food(), food);
 						food=0;
 						label_3.setText("0");
 					}
 					if(clothing>0){
-						GameLogic.Wagon.addItem(new Clothing(), clothing);
+						GameLogic.wagon.addItem(new Clothing(), clothing);
 						clothing=0;
 						label_16.setText("0");
 					}
 					if(pokeballs>0){
-						GameLogic.Wagon.addItem(new Pokeball(), pokeballs);
+						GameLogic.wagon.addItem(new Pokeball(), pokeballs);
 						pokeballs=0;
 						label_17.setText("0");
 					}
 					if(medicine>0){
-						GameLogic.Wagon.addItem(new FullHeal(), medicine);
+						GameLogic.wagon.addItem(new FullHeal(), medicine);
 						medicine=0;
 						label_18.setText("0");
 					}
 					if(spareaxle>0){
-						GameLogic.Wagon.addItem(new SpareAxle(), spareaxle);
+						GameLogic.wagon.addItem(new SpareAxle(), spareaxle);
 						spareaxle=0;
 						label_19.setText("0");
 					}
 					if(sparewheel>0){
-						GameLogic.Wagon.addItem(new SpareWheel(), sparewheel);
+						GameLogic.wagon.addItem(new SpareWheel(), sparewheel);
 						sparewheel=0;
 						label_20.setText("0");
 					}
 					if(sparetongue>0){
-						GameLogic.Wagon.addItem(new SpareTongue(), sparetongue);
+						GameLogic.wagon.addItem(new SpareTongue(), sparetongue);
 						sparetongue=0;
 						label_21.setText("0");
 					}
 					TotalPrice=0;
 					TotalWeight=0;
-					lblFoodSupply.setText(GameLogic.Wagon.inventory.get(new Food()).toString());
-					lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.Wagon.getMaxWeight()-GameLogic.Wagon.getWeight())+" lbs available");
+					lblFoodSupply.setText(GameLogic.wagon.inventory.get(new Food()).toString());
+					lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.wagon.getMaxWeight()-GameLogic.wagon.getWeight())+" lbs available");
 					lblCurrentTotal.setText("Current Total: "+TotalPrice+" PokeDollars");
 				}
 			}
@@ -758,7 +758,7 @@ public class GameFrameMain extends JFrame {
 		btnBeginAdventure.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-					HashMap<Item, Integer> inv= GameLogic.Wagon.getInventory();
+					HashMap<Item, Integer> inv= GameLogic.wagon.getInventory();
 					textArea.append("\nYou're inventory consists of: "+inv.toString());
 					//update food
 					if(w.getInventory().containsKey(new Food())){
@@ -819,7 +819,7 @@ public class GameFrameMain extends JFrame {
 				lblCurrentTotal.setText("Current Total: "+TotalPrice+" Pokedollars");
 				label_16.setText(clothing.toString());
 				TotalWeight=TotalWeight+s.getItem("clothing").getWeight();	
-				lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.Wagon.getMaxWeight()-GameLogic.Wagon.getWeight())+" lbs available");
+				lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.wagon.getMaxWeight()-GameLogic.wagon.getWeight())+" lbs available");
 				
 			}
 		});
@@ -835,7 +835,7 @@ public class GameFrameMain extends JFrame {
 				lblCurrentTotal.setText("Current Total: "+TotalPrice+" Pokedollars");
 				label_17.setText(pokeballs.toString());
 				TotalWeight=TotalWeight+s.getItem("pokeball").getWeight();	
-				lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.Wagon.getMaxWeight()-GameLogic.Wagon.getWeight())+" lbs available");
+				lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.wagon.getMaxWeight()-GameLogic.wagon.getWeight())+" lbs available");
 			}
 		});
 		button_11.setMargin(new Insets(2, 2, 2, 2));
@@ -850,7 +850,7 @@ public class GameFrameMain extends JFrame {
 				lblCurrentTotal.setText("Current Total: "+TotalPrice+" Pokedollars");
 				label_18.setText(medicine.toString());
 				TotalWeight=TotalWeight+s.getItem("FullHeal").getWeight();	
-				lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.Wagon.getMaxWeight()-GameLogic.Wagon.getWeight())+" lbs available");
+				lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.wagon.getMaxWeight()-GameLogic.wagon.getWeight())+" lbs available");
 			}
 		});
 		button_12.setMargin(new Insets(2, 2, 2, 2));
@@ -865,7 +865,7 @@ public class GameFrameMain extends JFrame {
 				lblCurrentTotal.setText("Current Total: "+TotalPrice+" Pokedollars");
 				label_19.setText(spareaxle.toString());
 				TotalWeight=TotalWeight+s.getItem("spareaxle").getWeight();	
-				lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.Wagon.getMaxWeight()-GameLogic.Wagon.getWeight())+" lbs available");
+				lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.wagon.getMaxWeight()-GameLogic.wagon.getWeight())+" lbs available");
 			}
 		});
 		button_13.setMargin(new Insets(2, 2, 2, 2));
@@ -880,7 +880,7 @@ public class GameFrameMain extends JFrame {
 				lblCurrentTotal.setText("Current Total: "+TotalPrice+" Pokedollars");
 				label_20.setText(sparewheel.toString());
 				TotalWeight=TotalWeight+s.getItem("sparewheel").getWeight();	
-				lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.Wagon.getMaxWeight()-GameLogic.Wagon.getWeight())+" lbs available");
+				lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.wagon.getMaxWeight()-GameLogic.wagon.getWeight())+" lbs available");
 			}
 		});
 		button_14.setMargin(new Insets(2, 2, 2, 2));
@@ -895,7 +895,7 @@ public class GameFrameMain extends JFrame {
 				lblCurrentTotal.setText("Current Total: "+TotalPrice+" Pokedollars");
 				label_21.setText(sparetongue.toString());
 				TotalWeight=TotalWeight+s.getItem("sparetongue").getWeight();	
-				lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.Wagon.getMaxWeight()-GameLogic.Wagon.getWeight())+" lbs available");
+				lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.wagon.getMaxWeight()-GameLogic.wagon.getWeight())+" lbs available");
 			}
 		});
 		button_15.setMargin(new Insets(2, 2, 2, 2));
@@ -939,7 +939,7 @@ public class GameFrameMain extends JFrame {
 		lblDay.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		leftPanel.add(lblDay, "flowx,cell 0 4,alignx left");
 		
-		days = new JLabel(GameLogic.Day.toString());
+		days = new JLabel(GameLogic.day.toString());
 		days.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		leftPanel.add(days, "cell 1 4");
 		
@@ -1184,7 +1184,7 @@ public class GameFrameMain extends JFrame {
 		mntmStopped.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				GameLogic.Pace=0;
+				GameLogic.pace=0;
 				btnSetPace.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/stop.gif")));
 				btnSetPace.updateUI();
 			}
@@ -1196,7 +1196,7 @@ public class GameFrameMain extends JFrame {
 		mntmLeasurely.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				GameLogic.Pace=5;
+				GameLogic.pace=5;
 				btnSetPace.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/slowpokeIcon.png")));
 				btnSetPace.updateUI();
 			}
@@ -1208,7 +1208,7 @@ public class GameFrameMain extends JFrame {
 		mntmSteady.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				System.out.println("steady");
-				GameLogic.Pace=10;
+				GameLogic.pace=10;
 				btnSetPace.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/taurosIcon.png")));
 				btnSetPace.updateUI();
 			}
@@ -1220,7 +1220,7 @@ public class GameFrameMain extends JFrame {
 		mntmGrueling.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				GameLogic.Pace=15;
+				GameLogic.pace=15;
 				btnSetPace.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/rapidashIcon.png")));
 				btnSetPace.updateUI();
 			}
@@ -1245,7 +1245,7 @@ public class GameFrameMain extends JFrame {
 		mntmNone.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				GameLogic.Rations=0;
+				GameLogic.rations=0;
 				btnSetRations.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/None.png")));
 				btnSetRations.updateUI();
 			}
@@ -1257,7 +1257,7 @@ public class GameFrameMain extends JFrame {
 		mntmBarebones.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				GameLogic.Rations=1*GameLogic.Party.size();
+				GameLogic.rations=1*GameLogic.party.size();
 				btnSetRations.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/barebones.png")));
 				btnSetRations.updateUI();
 			}
@@ -1269,7 +1269,7 @@ public class GameFrameMain extends JFrame {
 		mntmMeager.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				GameLogic.Rations=2*GameLogic.Party.size();
+				GameLogic.rations=2*GameLogic.party.size();
 				btnSetRations.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/meager.png")));
 				btnSetRations.updateUI();
 			}
@@ -1281,7 +1281,7 @@ public class GameFrameMain extends JFrame {
 		mntmNormal.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				GameLogic.Rations=3*GameLogic.Party.size();
+				GameLogic.rations=3*GameLogic.party.size();
 				btnSetRations.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/foodIcon.png")));
 				btnSetRations.updateUI();
 			}
@@ -1293,7 +1293,7 @@ public class GameFrameMain extends JFrame {
 		mntmWellfed.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				GameLogic.Rations=4*GameLogic.Party.size();
+				GameLogic.rations=4*GameLogic.party.size();
 				btnSetRations.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/wellfed.png")));
 				btnSetRations.updateUI();
 			}
@@ -1306,7 +1306,7 @@ public class GameFrameMain extends JFrame {
 		btnViewSupplies.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
-				HashMap<Item, Integer> inv= GameLogic.Wagon.getInventory();
+				HashMap<Item, Integer> inv= GameLogic.wagon.getInventory();
 				textArea.append("\nYou're inventory consists of: "+inv.toString());
 			}
 		});
