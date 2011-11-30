@@ -746,7 +746,9 @@ public class GameFrameMain extends JFrame {
 					}
 					TotalPrice=0;
 					TotalWeight=0;
-					lblFoodSupply.setText(GameLogic.wagon.inventory.get(new Food()).toString());
+					if(GameLogic.wagon.inventory.get(new Food())!=null){
+						lblFoodSupply.setText(GameLogic.wagon.inventory.get(new Food()).toString());
+					}
 					lblCurrentWeightLeft.setText("Current Weight: "+TotalWeight+" lbs out of "+(GameLogic.wagon.getMaxWeight()-GameLogic.wagon.getWeight())+" lbs available");
 					lblCurrentTotal.setText("Current Total: "+TotalPrice+" PokeDollars");
 				}
