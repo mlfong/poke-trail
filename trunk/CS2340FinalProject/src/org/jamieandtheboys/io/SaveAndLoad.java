@@ -50,6 +50,8 @@ public class SaveAndLoad
 			fos = new FileOutputStream(userFile);
 			out = new ObjectOutputStream(fos);
 			out.writeObject(users);
+			out.close();
+			fos.close();
 			return true;
 		}
 		catch(IOException ex)
@@ -84,7 +86,9 @@ public class SaveAndLoad
 		FileManager userFile = null;
 		if(verify(name, pass) == true)
 			userFile = loadFile(name + ".ser");
-
+		
+		
+		
 		return userFile;
 	}
 	
@@ -110,6 +114,8 @@ public class SaveAndLoad
 			fos = new FileOutputStream(name + ".ser");
 			out = new ObjectOutputStream(fos);
 			out.writeObject(saveFile);
+			out.close();
+			fos.close();
 			return true;
 		}
 		catch(IOException ex)
@@ -129,6 +135,8 @@ public class SaveAndLoad
 			fis = new FileInputStream(userFile);
 			in = new ObjectInputStream(fis);
 			users = (UserList) in.readObject();
+			in.close();
+			fis.close();
 		}
 		catch(IOException ex)
 		{
@@ -153,6 +161,8 @@ public class SaveAndLoad
 			fis = new FileInputStream(fileName);
 			in = new ObjectInputStream(fis);
 			saveFile = (FileManager) in.readObject();
+			in.close();
+			fis.close();
 			return saveFile;
 		}
 		catch(IOException ex)
