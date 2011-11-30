@@ -6,9 +6,9 @@ import org.jamieandtheboys.diseases.*;
 
 public abstract class Person implements Serializable
 {
-	public String name, type;
-	public int health, hunger, money, fatigue;
-	public Disease disease;
+	private String name, type;
+	private int health, hunger, money, fatigue;
+	private Disease disease;
 	private int diseaseDuration = 0;
 	
 	/**
@@ -87,6 +87,11 @@ public abstract class Person implements Serializable
 		this.disease = disease;
 	}
 
+	public void setType(String type)
+	{
+		this.type = type;
+	}
+	
 	public void setFatigue(int fatigue)
 	{
 		this.fatigue = fatigue;
@@ -95,6 +100,11 @@ public abstract class Person implements Serializable
 	public void setHealth(int health)
 	{
 		this.health = health;
+	}
+	
+	public void setName(String n)
+	{
+		this.name = n;
 	}
 	
 	public void setHunger(int hunger)
