@@ -47,14 +47,15 @@ import java.awt.event.MouseEvent;
  *
  */
 
-public class Startup extends JDialog {
+public class Startup extends JDialog
+{
 	private JTextField txtAsh;
 	private JTextField txtPikachu;
 	private JTextField txtPidgeotto;
 	private JTextField txtButterfree;
 	private JTextField txtBulbasaur;
-	public Person Player, party0,party1,party2,party3;
-	public String Pace, Rations;
+	public Person player, party0,party1,party2,party3;
+	public String pace, rations;
 	private JComboBox comboBox_1;
 	private JComboBox comboBox_2;
 	private JComboBox comboBox;
@@ -62,7 +63,8 @@ public class Startup extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		try {
 			Startup dialog = new Startup();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -76,13 +78,13 @@ public class Startup extends JDialog {
 	 * Create the dialog.
 	 */
 	public Startup() {
-		Player = new Trainer("Ash");
+		player = new Trainer("Ash");
 		party0 = new Trainer("Pikachu");
 		party1 = new Trainer("Pidgeotto");
 		party2 = new Trainer("Buterfree");
 		party3 = new Trainer("Bulbasaur");
-		Pace = "Leasurely";
-		Rations = "Bare-Bones";	
+		pace = "Leasurely";
+		rations = "Bare-Bones";	
 		final JDialog jdia = this;
 		getContentPane().setBackground(SystemColor.activeCaption);
 		setBounds(100, 100, 550, 400);
@@ -251,38 +253,38 @@ public class Startup extends JDialog {
 					public void mouseReleased(MouseEvent arg0) {
 						//Package game data and send to summary window
 						//need to parse names?
-						party0.name=txtPikachu.getText();
-						party1.name=txtPidgeotto.getText();
-						party2.name=txtButterfree.getText();
-						party3.name=txtBulbasaur.getText();
-						Pace = (String) comboBox_2.getSelectedItem();
-						Rations=(String) comboBox.getSelectedItem();
-						Player.name = txtAsh.getText();
-						Player.type = (String) comboBox_1.getSelectedItem();
-						if(Pace.equals("Leasurely"))
+						party0.setName(txtPikachu.getText());
+						party1.setName(txtPidgeotto.getText());
+						party2.setName(txtButterfree.getText());
+						party3.setName(txtBulbasaur.getText());
+						pace = (String) comboBox_2.getSelectedItem();
+						rations=(String) comboBox.getSelectedItem();
+						player.setName(txtAsh.getText());
+						player.setType((String) comboBox_1.getSelectedItem());
+						if(pace.equals("Leasurely"))
 							GameLogic.gameData.Pace = 3;
-						if(Pace.equals("Steady"))
+						if(pace.equals("Steady"))
 							GameLogic.gameData.Pace = 5;
-						if(Pace.equals("Grueling"))
+						if(pace.equals("Grueling"))
 							GameLogic.gameData.Pace = 7;
-						GameLogic.gameData.PaceString=Pace;
-						if(Rations.equals("Bare-Bones"))
+						GameLogic.gameData.PaceString=pace;
+						if(rations.equals("Bare-Bones"))
 							GameLogic.gameData.Pace = 5;
-						if(Rations.equals("Meager"))
+						if(rations.equals("Meager"))
 							GameLogic.gameData.Pace = 10;
-						if(Rations.equals("Normal"))
+						if(rations.equals("Normal"))
 							GameLogic.gameData.Pace = 15;
-						if(Rations.equals("Well-Fed"))
+						if(rations.equals("Well-Fed"))
 							GameLogic.gameData.Pace = 20;
-						GameLogic.gameData.RationsString=Rations;
-						if(Player.getType().equals("Breeder"))
-							Player = new Breeder(Player.getName());
-						else if(Player.getType().equals("Trainer"))
-							Player = new Trainer(Player.getName());
+						GameLogic.gameData.RationsString=rations;
+						if(player.getType().equals("Breeder"))
+							player = new Breeder(player.getName());
+						else if(player.getType().equals("Trainer"))
+							player = new Trainer(player.getName());
 						else 
-							Player = new Professor(Player.getName());
+							player = new Professor(player.getName());
 						GameLogic.wagon = new Wagon();
-						GameLogic.gameData.Party.add(Player);
+						GameLogic.gameData.Party.add(player);
 						GameLogic.gameData.Party.add(party0);
 						GameLogic.gameData.Party.add(party1);
 						GameLogic.gameData.Party.add(party2);
@@ -307,12 +309,12 @@ public class Startup extends JDialog {
 	protected void initDataBindings() {
 		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty.create("text");
 		BeanProperty<Person, String> personBeanProperty = BeanProperty.create("name");
-		AutoBinding<JTextField, String, Person, String> autoBinding = Bindings.createAutoBinding(UpdateStrategy.READ, txtAsh, jTextFieldBeanProperty, Player, personBeanProperty, "PName");
+		AutoBinding<JTextField, String, Person, String> autoBinding = Bindings.createAutoBinding(UpdateStrategy.READ, txtAsh, jTextFieldBeanProperty, player, personBeanProperty, "PName");
 		autoBinding.bind();
 		//
 		BeanProperty<JComboBox, Integer> jComboBoxBeanProperty = BeanProperty.create("selectedIndex");
 		BeanProperty<Person, String> personBeanProperty_1 = BeanProperty.create("type");
-		AutoBinding<JComboBox, Integer, Person, String> autoBinding_1 = Bindings.createAutoBinding(UpdateStrategy.READ, comboBox_1, jComboBoxBeanProperty, Player, personBeanProperty_1, "PType");
+		AutoBinding<JComboBox, Integer, Person, String> autoBinding_1 = Bindings.createAutoBinding(UpdateStrategy.READ, comboBox_1, jComboBoxBeanProperty, player, personBeanProperty_1, "PType");
 		autoBinding_1.bind();
 		//
 		BeanProperty<JTextField, String> jTextFieldBeanProperty_1 = BeanProperty.create("text");
@@ -332,10 +334,10 @@ public class Startup extends JDialog {
 		autoBinding_5.bind();
 		//
 		ObjectProperty<String> stringObjectProperty = ObjectProperty.create();
-		AutoBinding<JComboBox, Integer, String, String> autoBinding_6 = Bindings.createAutoBinding(UpdateStrategy.READ, comboBox_2, jComboBoxBeanProperty, Pace, stringObjectProperty, "Pace");
+		AutoBinding<JComboBox, Integer, String, String> autoBinding_6 = Bindings.createAutoBinding(UpdateStrategy.READ, comboBox_2, jComboBoxBeanProperty, pace, stringObjectProperty, "Pace");
 		autoBinding_6.bind();
 		//
-		AutoBinding<JComboBox, Integer, String, String> autoBinding_7 = Bindings.createAutoBinding(UpdateStrategy.READ, comboBox, jComboBoxBeanProperty, Rations, stringObjectProperty, "Rations");
+		AutoBinding<JComboBox, Integer, String, String> autoBinding_7 = Bindings.createAutoBinding(UpdateStrategy.READ, comboBox, jComboBoxBeanProperty, rations, stringObjectProperty, "Rations");
 		autoBinding_7.bind();
 	}
 }
