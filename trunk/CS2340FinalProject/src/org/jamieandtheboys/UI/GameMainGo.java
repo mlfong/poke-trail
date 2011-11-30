@@ -56,13 +56,13 @@ public class GameMainGo extends JFrame {
 	private JPanel contentPane;
 	private final JButton btnNewButton_1 = new JButton("Purchase");
 
-	 Store s=GameLogic.Store;
-	 Wagon w=GameLogic.Wagon;
-	 Person Party0= GameLogic.Party.get(0);
-	 Person Party1= GameLogic.Party.get(1);
-	 Person Party2= GameLogic.Party.get(2);
-	 Person Party3= GameLogic.Party.get(3);
-	 Person Party4= GameLogic.Party.get(4);
+	 Store s=GameLogic.store;
+	 Wagon w=GameLogic.wagon;
+	 Person Party0= GameLogic.party.get(0);
+	 Person Party1= GameLogic.party.get(1);
+	 Person Party2= GameLogic.party.get(2);
+	 Person Party3= GameLogic.party.get(3);
+	 Person Party4= GameLogic.party.get(4);
 	 Integer oxen=0,clothing=0,pokeballs=0,medicine=0,spareaxle=0,sparewheel=0,sparetongue=0, food=0;
 	 String youhave = "You have "+Party0.getMoney()+" Pokedollars";
 	 String currentweight = "Current Weight: "+w.getWeight()+" lbs out of "+w.getMaxWeight()+" lbs";

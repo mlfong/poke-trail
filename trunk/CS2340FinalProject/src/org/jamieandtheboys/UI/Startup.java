@@ -281,7 +281,7 @@ public class Startup extends JDialog {
 							Player = new Trainer(Player.getName());
 						else 
 							Player = new Professor(Player.getName());
-						GameLogic.Wagon = new Wagon();
+						GameLogic.wagon = new Wagon();
 						GameLogic.gameData.Party.add(Player);
 						GameLogic.gameData.Party.add(party0);
 						GameLogic.gameData.Party.add(party1);
