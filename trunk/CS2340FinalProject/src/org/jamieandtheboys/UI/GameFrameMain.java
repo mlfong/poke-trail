@@ -399,7 +399,7 @@ public class GameFrameMain extends JFrame {
 		JLabel label = new JLabel("");
 		label.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				playerFood= 10000000;
 			}
 		});
@@ -1183,7 +1183,7 @@ public class GameFrameMain extends JFrame {
 		JMenuItem mntmStopped = new JMenuItem("Stopped");
 		mntmStopped.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				GameLogic.pace=0;
 				btnSetPace.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/stop.gif")));
 				btnSetPace.updateUI();
@@ -1195,7 +1195,7 @@ public class GameFrameMain extends JFrame {
 		JMenuItem mntmLeasurely = new JMenuItem("Leasurely");
 		mntmLeasurely.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				GameLogic.pace=5;
 				btnSetPace.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/slowpokeIcon.png")));
 				btnSetPace.updateUI();
@@ -1206,7 +1206,7 @@ public class GameFrameMain extends JFrame {
 		
 		JMenuItem mntmSteady = new JMenuItem("Steady");
 		mntmSteady.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				System.out.println("steady");
 				GameLogic.pace=10;
 				btnSetPace.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/taurosIcon.png")));
@@ -1219,7 +1219,7 @@ public class GameFrameMain extends JFrame {
 		JMenuItem mntmGrueling = new JMenuItem("Grueling");
 		mntmGrueling.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				GameLogic.pace=15;
 				btnSetPace.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/rapidashIcon.png")));
 				btnSetPace.updateUI();
@@ -1244,7 +1244,7 @@ public class GameFrameMain extends JFrame {
 		mntmNone.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/None.png")));
 		mntmNone.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				GameLogic.rations=0;
 				btnSetRations.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/None.png")));
 				btnSetRations.updateUI();
@@ -1256,7 +1256,7 @@ public class GameFrameMain extends JFrame {
 		mntmBarebones.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/barebones.png")));
 		mntmBarebones.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				GameLogic.rations=1*GameLogic.party.size();
 				btnSetRations.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/barebones.png")));
 				btnSetRations.updateUI();
@@ -1268,7 +1268,7 @@ public class GameFrameMain extends JFrame {
 		mntmMeager.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/meager.png")));
 		mntmMeager.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				GameLogic.rations=2*GameLogic.party.size();
 				btnSetRations.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/meager.png")));
 				btnSetRations.updateUI();
@@ -1280,7 +1280,7 @@ public class GameFrameMain extends JFrame {
 		mntmNormal.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/foodIcon.png")));
 		mntmNormal.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				GameLogic.rations=3*GameLogic.party.size();
 				btnSetRations.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/foodIcon.png")));
 				btnSetRations.updateUI();
@@ -1292,7 +1292,7 @@ public class GameFrameMain extends JFrame {
 		mntmWellfed.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/wellfed.png")));
 		mntmWellfed.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				GameLogic.rations=4*GameLogic.party.size();
 				btnSetRations.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/wellfed.png")));
 				btnSetRations.updateUI();
@@ -1331,7 +1331,7 @@ public class GameFrameMain extends JFrame {
 
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				if (e.isPopupTrigger()) {
 					showMenu(e);
 				}
