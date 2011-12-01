@@ -753,7 +753,7 @@ JPanel GoPanel = new JPanel();
 		JMenuItem mntmStopped = new JMenuItem("Stopped");
 		popupMenu.add(mntmStopped);
 		
-		JMenuItem mntmLeasurely = new JMenuItem("Leasurely");
+		JMenuItem mntmLeasurely = new JMenuItem("Leisurely");
 		mntmLeasurely.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/slowpokeIcon.png")));
 		popupMenu.add(mntmLeasurely);
 		
