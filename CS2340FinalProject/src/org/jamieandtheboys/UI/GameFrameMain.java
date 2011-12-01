@@ -1194,7 +1194,7 @@ public class GameFrameMain extends JFrame {
 		mntmStopped.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/stop.gif")));
 		popupMenu.add(mntmStopped);
 		
-		JMenuItem mntmLeasurely = new JMenuItem("Leasurely");
+		JMenuItem mntmLeasurely = new JMenuItem("Leisurely");
 		mntmLeasurely.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

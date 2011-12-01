@@ -83,7 +83,7 @@ public class Startup extends JDialog
 		party1 = new Trainer("Pidgeotto");
 		party2 = new Trainer("Buterfree");
 		party3 = new Trainer("Bulbasaur");
-		pace = "Leasurely";
+		pace = "Leisurely";
 		rations = "Bare-Bones";	
 		final JDialog jdia = this;
 		getContentPane().setBackground(SystemColor.activeCaption);
@@ -209,7 +209,7 @@ public class Startup extends JDialog
 				{
 					   comboBox_2 = new JComboBox();
 					   comboBox_2.setFont(new Font("Tahoma", Font.PLAIN, 13));
-					   comboBox_2.setModel(new DefaultComboBoxModel(new String[]{"Leasurely", "Steady", "Grueling"}));
+					   comboBox_2.setModel(new DefaultComboBoxModel(new String[]{"Leisurely", "Steady", "Grueling"}));
 					   panel.add(comboBox_2, "cell 1 0,alignx left");
 				}
 				{
@@ -261,7 +261,7 @@ public class Startup extends JDialog
 						rations=(String) comboBox.getSelectedItem();
 						player.setName(txtAsh.getText());
 						player.setType((String) comboBox_1.getSelectedItem());
-						if(pace.equals("Leasurely"))
+						if(pace.equals("Leisurely"))
 							GameLogic.gameData.Pace = 3;
 						if(pace.equals("Steady"))
 							GameLogic.gameData.Pace = 5;

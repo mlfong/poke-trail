@@ -51,7 +51,7 @@ public class Wagon implements Serializable
 		MapNode m10 = makeMapNode("Celadon City", true, 45 * GAME_LENGTH);
 		MapNode m11 = makeMapNode("Saffron City", true, 30 * GAME_LENGTH);
 		MapNode m12 = makeMapNode("Fuchsia City", true, 55 * GAME_LENGTH);
-		MapNode m13 = makeMapNode("Seafom Islands", false, 70 * GAME_LENGTH);
+		MapNode m13 = makeMapNode("Seafoam Islands", false, 70 * GAME_LENGTH);
 		MapNode m14 = makeMapNode("Cinnabar Island", true, 50 * GAME_LENGTH);
 		MapNode m15 = makeMapNode("Viridian City", true, 35 * GAME_LENGTH);
 		MapNode m16 = makeMapNode("Victory Road", false, 20 * GAME_LENGTH);
