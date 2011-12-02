@@ -24,7 +24,6 @@ import javax.swing.JPopupMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -50,6 +49,7 @@ import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
+import org.jamieandtheboys.io.Logger;
 
 
 
@@ -70,7 +70,7 @@ public class GameFrameMain extends JFrame {
 	Integer oxen=0,clothing=0,pokeballs=0,medicine=0,spareaxle=0,sparewheel=0,sparetongue=0, food=0, playerFood=1;
 	String youhave = "You have "+GameLogic.party.get(0).getMoney()+" Pokedollars";
 	String currentweight = "Current Weight: 0 lbs out of "+(GameLogic.wagon.getMaxWeight()-GameLogic.wagon.getWeight())+" lbs available";
-	//	 PokeMap map = w.getMap();
+	//PokeMap map = w.getMap();
 	private int TotalPrice, TotalWeight=GameLogic.wagon.getWeight();
 	private int pace=5, distance=0, rations=1, peoplealive=5;
 	private Integer day=0;
@@ -100,6 +100,7 @@ public class GameFrameMain extends JFrame {
 	public static TextArea textArea;
 	public static JButton btnBeginAdventure;
 	private Random random = new Random();
+	public Logger log= new Logger();
 
 	/**
 	 * Launch the application.
@@ -162,10 +163,12 @@ public class GameFrameMain extends JFrame {
 				if(!(notify.equals(""))){
 					JOptionPane.showMessageDialog(contentPane, notify);	
 					textArea.append("\n"+notify);
+					log.entry(notify);
 				}
 				if(GameLogic.gameover)
 					GameLogic.endgame();
 				textArea.append("\nTurn taken");
+				log.entry("Turn taken");
 				/**
 				//take a turn:
 				//sub food
@@ -239,6 +242,7 @@ public class GameFrameMain extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				String notify = GameLogic.FerryCrossing();
 				textArea.append("\n"+notify);
+				log.entry(notify);
 				JOptionPane.showMessageDialog(contentPane,
 						"You made it across the river safely.",
 						"W00t!",
@@ -279,6 +283,7 @@ public class GameFrameMain extends JFrame {
 						notify,
 						"Ford Crossing", JOptionPane.INFORMATION_MESSAGE);
 				textArea.append("\n"+notify);
+				log.entry(notify);
 
 				/**
 						String results="";
@@ -324,6 +329,7 @@ public class GameFrameMain extends JFrame {
 						notify,
 						"Ford Crossing", JOptionPane.INFORMATION_MESSAGE);
 				textArea.append("\n"+notify);
+				log.entry(notify);
 				/**
 						String results="";
 						if(random.nextInt(10)<5){
@@ -761,7 +767,8 @@ public class GameFrameMain extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				HashMap<Item, Integer> inv= GameLogic.wagon.getInventory();
-				textArea.append("\nYou're inventory consists of: "+inv.toString());
+				textArea.append("\nYour inventory consists of: "+inv.toString());
+				log.entry("Your inventory consists of: "+inv.toString());
 				//update food
 				if(w.getInventory().containsKey(new Food())){
 
@@ -920,6 +927,7 @@ public class GameFrameMain extends JFrame {
 		textArea.setForeground(Color.BLACK);
 		textArea.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		textArea.setText("Welcome to Pallet Town, young adventurer.");
+		log.entry("Welcome to Pallet Town, young adventurer.");
 		textArea.setBackground(Color.WHITE);
 		textArea.setEditable(false);
 		rightPanel.add(textArea, "cell 0 2,grow");
@@ -1093,6 +1101,8 @@ public class GameFrameMain extends JFrame {
 			public void mouseReleased(MouseEvent e) {
 				GameLogic.saveGame();
 				textArea.append("\nGame Saved!");
+				log.entry("Game Saved!");
+				log.createLogFile(Party0);
 			}
 		});
 		btnS.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/savegame.png")));
@@ -1309,7 +1319,8 @@ public class GameFrameMain extends JFrame {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
 				HashMap<Item, Integer> inv= GameLogic.wagon.getInventory();
-				textArea.append("\nYou're inventory consists of: "+inv.toString());
+				textArea.append("\nYour inventory consists of: "+inv.toString());
+				log.entry("Your inventory consists of: "+inv.toString());
 			}
 		});
 		btnViewSupplies.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/clothingIcon.png")));
