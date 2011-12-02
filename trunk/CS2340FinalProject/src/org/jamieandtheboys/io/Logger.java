@@ -34,10 +34,10 @@ public class Logger {
 		  oos.close();
 		 
 		  // Read it in??
-		  FileInputStream fis = new FileInputStream(new File ("StringArray_demo.txt"));
-		  ObjectInputStream ois = new ObjectInputStream(fis);
-		  String[] sAI = (String[])ois.readObject();
-		  System.out.println("sAI=" + Arrays.toString(sAI)); //sAI=[string 1, second string, third Str]
+		  //FileInputStream fis = new FileInputStream(new File ("StringArray_demo.txt"));
+		  //ObjectInputStream ois = new ObjectInputStream(fis);
+		  //String[] sAI = (String[])ois.readObject();
+		  //System.out.println("sAI=" + Arrays.toString(sAI)); //sAI=[string 1, second string, third Str]
 		 
 		} catch(Exception x) {
 		  x.printStackTrace();
