@@ -9,7 +9,12 @@ package org.jamieandtheboys.tests;
 
 import static org.junit.Assert.*;
 
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import org.jamieandtheboys.UI.GameFrameMain;
 import org.jamieandtheboys.items.*;
+import org.jamieandtheboys.persons.Breeder;
 import org.jamieandtheboys.poketrail.*;
 import org.junit.Test;
 
@@ -23,6 +28,8 @@ public class JUnit_mfong
 	 * 		setWeight(int)
 	 * 		isOverweight()
 	 * 		availableWeight()
+	 * 
+	 * Also tests Ferry Crossing!
 	 */
 	@Test
 	public void testWeight()
@@ -41,7 +48,7 @@ public class JUnit_mfong
 		assertFalse(w.isOverweight());
 		assertEquals(w.availableWeight(), 1);
 	}
-	
+
 	/*
 	 * Tests inventory of Wagon
 	 * Methods:
@@ -68,7 +75,7 @@ public class JUnit_mfong
 		w.subItem(new Food(), 1);
 		assertEquals(w.getInventory().size(), 1);
 	}
-	
+
 	/*
 	 * Tests Wagon's Map / location information
 	 * Methods:
@@ -94,6 +101,29 @@ public class JUnit_mfong
 		assertEquals(mn.getLocation().getName(), "River Crossing");
 		assertTrue(mn.isARiver());
 	}
-	
+
+	/*
+	 * Tests GameLogic.FerryCrossing()
+	 */
+	@Test
+	public void testFerryCrossing()
+	{
+		GameLogic gl = new GameLogic();
+		gl.run();
+		Breeder b = new Breeder("SomeName");
+		gl.party.add(b);
+		System.out.println(gl.party);
+		assertEquals(gl.party.toString(), "[SomeName(Breeder): Health 100 Hunger 0 Fatigue 0 Status Healthy]");
+		assertEquals(gl.party.get(0).getMoney(), new Integer(400));
+		gl.frame.lblPokedollars = new JLabel();
+		gl.frame.rightPanel = new JPanel();
+		gl.frame.RiverPanel = new JPanel();
+		gl.frame.GoPanel = new JPanel();
+		assertEquals("You made it across the river safely.", gl.FerryCrossing());
+		assertEquals(gl.party.get(0).getMoney(), new Integer(350));
+		gl.party.get(0).subMoney(349);
+		assertEquals(gl.party.get(0).getMoney(), new Integer(1));
+		assertEquals("You don't have enough money!", gl.FerryCrossing());
+	}
 
 }

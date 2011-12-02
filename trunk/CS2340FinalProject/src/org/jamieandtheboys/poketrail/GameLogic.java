@@ -27,7 +27,7 @@ public class GameLogic
 
 
 	private static Random generator = new Random();
-	static GameFrameMain frame;
+	public static GameFrameMain frame;
 
 	public static boolean tired = false;
 	public static boolean gameover = false;
@@ -379,6 +379,30 @@ public class GameLogic
 				day += delay + 1;
 				for(int i = 0; i < delay; i++)
 					wagon.subItem(new Food(), rations);
+			}
+			else if(rand == 11)
+			{
+				if(map.getCurr().getNext() != map.getDest())
+				{
+					map.setCurr(map.getCurr().getNext());
+					GameFrameMain.textArea.append("\nA Mew appeared and teleported you to the next area!");
+				}
+				else
+				{ /* nothing happens, we don't want auto-win */ }
+			}
+			else if(rand == 12)
+			{
+				for(int i = 1; i < party.size(); i++)
+				{
+					party.get(i).setHealth(1);
+				}
+				GameFrameMain.textArea.append("\nA Charizard burned your entire party, luckily you were not hurt!");
+			}
+			else if(rand == 13)
+			{
+				for(int i = 0; i < party.size(); i++)
+					party.get(i).setDisease(new Poison());
+				GameFrameMain.textArea.append("\nEKANS, EKANS EVERYWHERE. Your entire party was poisoned!");
 			}
 			else if(rand >= 10 && rand < 18)
 			{
