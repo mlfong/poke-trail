@@ -20,9 +20,9 @@ import javax.swing.JOptionPane;
 
 public class GameLogic
 {
-	private final static int LEISURELY = 3;
-	private final static int NORMAL = 5;
-	private final static int FAST = 7;
+	private final static int LEISURELY = 5;
+	private final static int NORMAL = 10;
+	private final static int FAST = 15;
 
 
 
@@ -41,6 +41,8 @@ public class GameLogic
 	public static Integer day=0;
 	public static boolean isNewGame = true;
 	
+	public GameLogic()
+	{}
 
 	public static void main(String[] args)
 	{
@@ -313,7 +315,7 @@ public class GameLogic
 		}
 	}
 	
-	private static void updateHealth()
+	public static void updateHealth()
 	{
 		int minusHealth;
 		int plusFatigue;
@@ -325,12 +327,17 @@ public class GameLogic
 		else if(pace == NORMAL)
 		{
 			minusHealth = 0;
-			plusFatigue = 10;
+			plusFatigue = 5;
 		}
-		else //Leisurely or the oxen are tired
+		else if(pace == LEISURELY) //Leisurely or the oxen are tired
 		{
 			minusHealth = -1;
-			plusFatigue = 5;
+			plusFatigue = -5;
+		}
+		else //Stopped
+		{
+			minusHealth = -5;
+			plusFatigue = -10;
 		}
 		
 		if(rations == 0)
@@ -346,16 +353,21 @@ public class GameLogic
 		{
 			Person p = party.get(i);
 			int fatigue = p.getFatigue() + plusFatigue;
-			if(fatigue >= 100)
+			if(fatigue > 100)
 			{
 				p.setFatigue(100);
 				minusHealth += 10;
 			}
+			else if(fatigue < 0)
+				p.setFatigue(0);
+			else
+				p.setFatigue(fatigue);
 			
 			int health = p.getHealth() - minusHealth;
 			if(health <= 0)
-				//remove the player?
 				party.remove(i);
+			else if(health > 100)
+				p.setHealth(100);
 			else
 				p.setHealth(health);
 		}
@@ -558,10 +570,15 @@ public class GameLogic
 					{
 						//Person is healthy again
 						if(generator.nextInt(2) == 0)
+						{
 							party.get(i).setDisease(null);
-						GameFrameMain.textArea.append("\n"+party.get(i).getName()+" has been cured of disease.");
+							GameFrameMain.textArea.append("\n"+party.get(i).getName()+" has been cured of disease.");
+						}
+						else
+							party.get(i).doDisease();
 					}
-					party.get(i).doDisease();
+					else
+						party.get(i).doDisease();
 				}
 			}
 		}
