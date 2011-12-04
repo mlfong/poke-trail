@@ -87,8 +87,6 @@ public class SaveAndLoad
 		if(verify(name, pass) == true)
 			userFile = loadFile(name + ".ser");
 		
-		
-		
 		return userFile;
 	}
 	
@@ -245,7 +243,7 @@ public class SaveAndLoad
   * @param - String
   * @ret - int
   */
-	private static int convertToInt(String s)
+	private int convertToInt(String s)
 	{
 		int ret = 0;
 		for(int i = 0; i < s.length(); i++)
