@@ -36,11 +36,11 @@ public class GameLogic
 	public static ArrayList<Person> party;
 	public static GameInitObj gameData = new GameInitObj();
 	public static Startup dialog;
-	public static int pace, rations;
+	public static int pace, previousPace, rations, tiredDuration;
 	public static PokeMap map;
 	public static Integer day=0;
 	public static boolean isNewGame = true;
-	
+
 	public GameLogic()
 	{}
 
@@ -181,8 +181,8 @@ public class GameLogic
 
 	}
 
-	
-	
+
+
 	/**
 	 * Text-based store simulator. For reference purposes only
 	 */
@@ -299,7 +299,7 @@ public class GameLogic
 		else
 			GameFrameMain.textArea.append("You need at least 1 Pokeball to hunt.");
 	}
-	
+
 	public static void scavenge()
 	{
 		if(party.get(1).getName().equals("Breeder"))
@@ -314,7 +314,7 @@ public class GameLogic
 			GameFrameMain.textArea.append("Only breeders can scavenge.");
 		}
 	}
-	
+
 	public static void updateHealth()
 	{
 		int minusHealth;
@@ -339,7 +339,7 @@ public class GameLogic
 			minusHealth = -5;
 			plusFatigue = -10;
 		}
-		
+
 		if(rations == 0)
 			plusFatigue += 10;
 		if(rations == party.size())
@@ -348,7 +348,7 @@ public class GameLogic
 			plusFatigue += 2;
 		if(rations == 4*party.size())
 			plusFatigue -= 5;
-		
+
 		for(int i = 0; i < party.size(); i++)
 		{
 			Person p = party.get(i);
@@ -362,7 +362,7 @@ public class GameLogic
 				p.setFatigue(0);
 			else
 				p.setFatigue(fatigue);
-			
+
 			int health = p.getHealth() - minusHealth;
 			if(health <= 0)
 				party.remove(i);
@@ -371,11 +371,11 @@ public class GameLogic
 			else
 				p.setHealth(health);
 		}
-		
+
 		if(party.size() <= 0)
 			gameover = true;
 	}
-	
+
 	private static void randomEvent()
 	{
 		int rand = generator.nextInt(100);
@@ -466,10 +466,9 @@ public class GameLogic
 			}
 			else if(rand >= 65 && rand < 70)
 			{
-				GameFrameMain.textArea.append("\nWagon part is broken!");
 				if(party.get(1).equals("Trainer"))
 				{
-					//do nothing, the carpenter can fix the part
+					GameFrameMain.textArea.append("\nWagon part is broken! But with your amazing trainer skills, you fixed it. All is well.");
 				}
 				else
 				{
@@ -477,14 +476,17 @@ public class GameLogic
 					if(rand2 == 0 && wagon.getInventory().get(new SpareAxle())!=null)
 					{
 						wagon.subItem(new SpareAxle(), 1);
+						GameFrameMain.textArea.append("\nWagon axle is broken!");
 					}
 					else if(rand2 == 1 && wagon.getInventory().get(new SpareTongue())!=null)
 					{
 						wagon.subItem(new SpareTongue(), 1);
+						GameFrameMain.textArea.append("\nWagon tongue is broken!");
 					}
 					else if(rand2 == 2 &&  wagon.getInventory().get(new SpareWheel())!=null)
 					{
 						wagon.subItem(new SpareWheel(), 1);
+						GameFrameMain.textArea.append("\nWagon wheel is broken!");
 					}
 					else
 						tired = true; //just using the same boolean as the oxen is tired
@@ -498,28 +500,39 @@ public class GameLogic
 			}
 			else if(rand >= 90 && tired == true)
 			{
-				GameFrameMain.textArea.append("\nA Tauros has died!");
-				wagon.subItem(new Oxen(), 1);
-				if(wagon.getInventory().get(new Oxen()) <= 0)
-					gameover = true;
+				int die = 0;
+				if(party.get(0).getName() == "Breeder")
+					die = generator.nextInt(3);
+				if(die == 0)
+				{
+					GameFrameMain.textArea.append("\nA Tauros has died!");
+					wagon.subItem(new Oxen(), 1);
+					if(wagon.getInventory().get(new Oxen()) <= 0)
+						gameover = true;
+				}
 			}
-
-
+			
 			if(tired == true)
 			{
-				GameFrameMain.textArea.append("\nTauros is tired!"); 
-				/*Temporarily set wagon pace to lower pace,
-				 *  I'll leave this unfinished until random events is connected
-				 */
-				if(pace == LEISURELY)
+				GameFrameMain.textArea.append("\nTauros is tired!");
+				pace = LEISURELY;
+				tiredDuration++;
+				if(tiredDuration == 4)
+				{
+					pace = previousPace;
 					tired = false;
+				}
 			}
 			else
 			{
 				if(pace == FAST);
 				{
-					if(generator.nextInt(2) == 1)
+					if(generator.nextInt(3) == 1)
+					{
+						previousPace = pace;
+						tiredDuration = 0;
 						tired = true;
+					}
 				}
 			}
 
@@ -586,6 +599,89 @@ public class GameLogic
 
 	public static void endgame(){
 		frame.dispose();
+	}
+
+	public static void trade()
+	{
+		Random generator = new Random();
+		int additem = generator.nextInt(7);
+		int amount, amount2;
+
+
+		Item getItem = null;
+		Item loseItem = null;
+
+		for(int i = 0; i < 2; i++)
+		{
+			if(additem == 0)
+			{
+				if(i == 0)
+					getItem = new Clothing();
+				else
+					loseItem = new Clothing();
+			}
+			if(additem == 1)
+			{
+				if(i == 0)
+					getItem = new Food();
+				else
+					loseItem = new Food();
+			}
+			if(additem == 2)
+			{
+				if(i == 0)
+					getItem = new FullHeal();
+				else
+					loseItem = new Pokeball();
+			}
+			if(additem == 3)
+			{
+				if(i == 0)
+					getItem = new Pokeball();
+				else
+					loseItem = new Pokeball();
+			}
+			if(additem == 4)
+			{
+				if(i == 0)
+					getItem = new SpareAxle();
+				else
+					loseItem = new SpareAxle();
+			}
+			if(additem == 5)
+			{
+				if(i == 0)
+					getItem = new SpareTongue();
+				else
+					loseItem = new SpareTongue();
+			}
+			if(additem == 6)
+			{
+				if(i == 0)
+					getItem = new SpareWheel();
+				else
+					loseItem = new SpareWheel();
+			}
+		}
+
+		if(wagon.getInventory().containsKey(getItem) == false || wagon.getInventory().containsKey(loseItem) == false)
+		{} // No-one wants to trade
+		else
+		{
+			amount = generator.nextInt( (int) (wagon.getInventory().get(getItem)*.1));
+			amount2 = generator.nextInt( (int) (wagon.getInventory().get(loseItem)*.1));
+
+			//Display items and amounts and ask if user wants to trade
+			if(1 == 1) //yes
+			{
+				wagon.addItem(getItem, amount);
+				wagon.subItem(loseItem, amount2);
+			}
+			else
+			{} // trade cancelled
+		}
+
+
 	}
 
 	public static String FerryCrossing()

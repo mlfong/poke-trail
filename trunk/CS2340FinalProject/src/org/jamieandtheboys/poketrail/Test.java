@@ -12,8 +12,16 @@ public class Test
 	public static void main(String[] args)
 	{
 //		testHashSL();
-		mapTest();
+//		mapTest();
 
+		Wagon w = new Wagon();
+		w.addItem(new Clothing(), 5);
+
+		Item clothes = new Clothing();
+		
+		System.out.println(w.getInventory().containsKey(clothes));
+		System.out.println(w.getInventory().get(clothes));
+		
 	}
 
 	public static void mapTest()
