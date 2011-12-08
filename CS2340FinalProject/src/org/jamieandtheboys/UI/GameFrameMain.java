@@ -791,7 +791,7 @@ public class GameFrameMain extends JFrame {
 		});
 		displayPanel.add(btnNewButton_1, "cell 6 11");
 
-		btnBeginAdventure = new JButton("Begin Adventure");
+		btnBeginAdventure = new JButton("Continue Adventure");
 		btnBeginAdventure.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
