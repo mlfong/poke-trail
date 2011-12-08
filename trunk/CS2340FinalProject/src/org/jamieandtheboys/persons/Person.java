@@ -2,6 +2,8 @@ package org.jamieandtheboys.persons;
 
 import java.io.Serializable;
 
+import javax.swing.JOptionPane;
+
 import org.jamieandtheboys.diseases.*;
 
 public abstract class Person implements Serializable
@@ -10,6 +12,7 @@ public abstract class Person implements Serializable
 	private int health, hunger, money, fatigue;
 	private Disease disease;
 	private int diseaseDuration = 0;
+	private boolean dead;
 	
 	/**
 	 * Constructor for Person
@@ -26,6 +29,7 @@ public abstract class Person implements Serializable
 		this.hunger = 0;
 		this.fatigue = 0;
 		this.money = money;
+		this.dead = false;
 	}
 	
 	/**
@@ -133,6 +137,13 @@ public abstract class Person implements Serializable
 	private void setMoney(int money)
 	{
 		this.money = money;
+	}
+	public boolean isDead(){
+		return dead;
+	}
+	public String death(){
+		dead = true;
+		return name+" has died.";
 	}
 	
 	/**

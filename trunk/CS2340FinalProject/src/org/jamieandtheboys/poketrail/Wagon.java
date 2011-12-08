@@ -36,41 +36,31 @@ public class Wagon implements Serializable
 	private PokeMap makeMap()
 	{
 		MapNode m01 = makeMapNode("Pallet Town", true, 0);
-		MapNode m02 = makeMapNode("River Crossing", false, 50 * GAME_LENGTH);
+		MapNode m02 = makeMapNode("Viridian River", false, 50 * GAME_LENGTH);
 		m02.setIsARiver(true);
 		m02.setDepth(2);
-		MapNode m03 = makeMapNode("Viridian Forest", true, 45 * GAME_LENGTH);
 		MapNode m04 = makeMapNode("Pewter City", true, 20 * GAME_LENGTH);
-		MapNode m05 = makeMapNode("Mt. Moon", false, 40 * GAME_LENGTH);
-		MapNode m06 = makeMapNode("River Crossing 2.0!", false, 60 * GAME_LENGTH);
+		MapNode m06 = makeMapNode("Lapras Lagoon", false, 60 * GAME_LENGTH);
 		m06.setIsARiver(true);
 		m06.setDepth(2);
 		MapNode m07 = makeMapNode("Vermilion City", true, 60 * GAME_LENGTH);
-		MapNode m08 = makeMapNode("Dark Cave", false, 65 * GAME_LENGTH);
 		MapNode m09 = makeMapNode("Lavender Town", true, 40 * GAME_LENGTH);
 		MapNode m10 = makeMapNode("Celadon City", true, 45 * GAME_LENGTH);
 		MapNode m11 = makeMapNode("Saffron City", true, 30 * GAME_LENGTH);
 		MapNode m12 = makeMapNode("Fuchsia City", true, 55 * GAME_LENGTH);
-		MapNode m13 = makeMapNode("Seafoam Islands", false, 70 * GAME_LENGTH);
 		MapNode m14 = makeMapNode("Cinnabar Island", true, 50 * GAME_LENGTH);
-		MapNode m15 = makeMapNode("Viridian City", true, 35 * GAME_LENGTH);
 		MapNode m16 = makeMapNode("Victory Road", false, 20 * GAME_LENGTH);
 		MapNode m17 = makeMapNode("Indigo Plateau", false, 80 * GAME_LENGTH);
 		m01.setNext(m02);
-		m02.setNext(m03);
-		m03.setNext(m04);
-		m04.setNext(m05);
-		m05.setNext(m06);
+		m02.setNext(m04);
+		m04.setNext(m06);
 		m06.setNext(m07);
-		m07.setNext(m08);
-		m08.setNext(m09);
+		m07.setNext(m09);
 		m09.setNext(m10);
 		m10.setNext(m11);
 		m11.setNext(m12);
-		m12.setNext(m13);
-		m13.setNext(m14);
-		m14.setNext(m15);
-		m15.setNext(m16);
+		m12.setNext(m14);
+		m14.setNext(m16);
 		m16.setNext(m17);
 		return new PokeMap(m01, m17);
 	}
