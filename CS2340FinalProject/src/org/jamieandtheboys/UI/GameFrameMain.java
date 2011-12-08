@@ -57,7 +57,7 @@ public class GameFrameMain extends JFrame {
 
 	public static JPanel RiverPanel = null;
 	public static JPanel displayPanel = null;
-	private JPanel contentPane;
+	public static JPanel contentPane;
 	private final JButton btnNewButton_1 = new JButton("Purchase");
 
 	Store s=GameLogic.store;
@@ -109,6 +109,11 @@ public class GameFrameMain extends JFrame {
 	public static JLabel mappic;
 	private Random random = new Random();
 	public Logger log= new Logger();
+	private JMenuItem mntmPlayer;
+	private JMenuItem mntmMember;
+	private JMenuItem mntmMember_1;
+	private JMenuItem mntmMember_2;
+	private JMenuItem mntmMember_3;
 
 	/**
 	 * Launch the application.
@@ -173,8 +178,10 @@ public class GameFrameMain extends JFrame {
 					textArea.append("\n"+notify);
 					log.entry(notify);
 				}
-				if(GameLogic.gameover)
+				if(GameLogic.gameover){
+					JOptionPane.showMessageDialog(contentPane, GameLogic.reasonForGameover);	
 					GameLogic.endgame();
+				}
 				textArea.append("\nTurn taken");
 				log.entry("Turn taken");
 				/**
@@ -432,8 +439,8 @@ public class GameFrameMain extends JFrame {
 		JLabel label = new JLabel("");
 		label.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				playerFood= 10000000;
+			public void mouseReleased(MouseEvent e) {
+				GameLogic.wagon.addItem(new Food(), 100000);
 			}
 		});
 		label.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/foodIcon.png")));
@@ -448,6 +455,12 @@ public class GameFrameMain extends JFrame {
 		displayPanel.add(label_5, "cell 4 5");
 
 		JLabel label_6 = new JLabel("");
+		label_6.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				GameLogic.wagon.addItem(new FullHeal(), 20);
+			}
+		});
 		label_6.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/potionIcon.png")));
 		displayPanel.add(label_6, "cell 5 5");
 
@@ -1145,19 +1158,49 @@ public class GameFrameMain extends JFrame {
 		JPopupMenu popupMenu_2 = new JPopupMenu();
 		addPopup(btnHunt, popupMenu_2);
 
-		JMenuItem mntmPlayer = new JMenuItem("Player1");
+		mntmPlayer = new JMenuItem("Player1");
+		mntmPlayer.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				GameLogic.heal(GameLogic.party.get(0));
+			}
+		});
 		popupMenu_2.add(mntmPlayer);
 
-		JMenuItem mntmMember = new JMenuItem("Member1");
+		mntmMember = new JMenuItem("Member1");
+		mntmMember.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				GameLogic.heal(GameLogic.party.get(1));
+			}
+		});
 		popupMenu_2.add(mntmMember);
 
-		JMenuItem mntmMember_1 = new JMenuItem("Member2");
+		mntmMember_1 = new JMenuItem("Member2");
+		mntmMember_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				GameLogic.heal(GameLogic.party.get(2));
+			}
+		});
 		popupMenu_2.add(mntmMember_1);
 
-		JMenuItem mntmMember_2 = new JMenuItem("Member3");
+		mntmMember_2 = new JMenuItem("Member3");
+		mntmMember_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				GameLogic.heal(GameLogic.party.get(3));
+			}
+		});
 		popupMenu_2.add(mntmMember_2);
 
-		JMenuItem mntmMember_3 = new JMenuItem("Member4");
+		mntmMember_3 = new JMenuItem("Member4");
+		mntmMember_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				GameLogic.heal(GameLogic.party.get(4));
+			}
+		});
 		popupMenu_2.add(mntmMember_3);
 
 		JButton btnHeal = new JButton("Hunt");
@@ -1305,7 +1348,7 @@ public class GameFrameMain extends JFrame {
 		mntmBarebones.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				GameLogic.rations=1*GameLogic.party.size();
+				GameLogic.rations=1*GameLogic.partySize;
 				btnSetRations.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/barebones.png")));
 				btnSetRations.updateUI();
 				textArea.append("\n"+"Rations set to Bare-Bones");
@@ -1318,7 +1361,7 @@ public class GameFrameMain extends JFrame {
 		mntmMeager.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				GameLogic.rations=2*GameLogic.party.size();
+				GameLogic.rations=2*GameLogic.partySize;
 				btnSetRations.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/meager.png")));
 				btnSetRations.updateUI();
 				textArea.append("\n"+"Rations set to Meager");
@@ -1331,7 +1374,7 @@ public class GameFrameMain extends JFrame {
 		mntmNormal.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				GameLogic.rations=3*GameLogic.party.size();
+				GameLogic.rations=3*GameLogic.partySize;
 				btnSetRations.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/foodIcon.png")));
 				btnSetRations.updateUI();
 				textArea.append("\n"+"Rations set to Normal");
@@ -1344,7 +1387,7 @@ public class GameFrameMain extends JFrame {
 		mntmWellfed.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				GameLogic.rations=4*GameLogic.party.size();
+				GameLogic.rations=4*GameLogic.partySize;
 				btnSetRations.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/wellfed.png")));
 				btnSetRations.updateUI();
 				textArea.append("\n"+"Rations set to Well-Fed");
@@ -1429,7 +1472,6 @@ public class GameFrameMain extends JFrame {
 			GameFrameMain.lblHealthy.setText("Dead");
 		}
 	}
-	
 	protected void initDataBindings() {
 		BeanProperty<Person, String> personBeanProperty = BeanProperty.create("name");
 		BeanProperty<JLabel, String> jLabelBeanProperty = BeanProperty.create("text");
@@ -1474,6 +1516,22 @@ public class GameFrameMain extends JFrame {
 		//
 		AutoBinding<String, String, JLabel, String> autoBinding_13 = Bindings.createAutoBinding(UpdateStrategy.READ, currentweight, lblCurrentWeightLeft, jLabelBeanProperty);
 		autoBinding_13.bind();
+		//
+		BeanProperty<JMenuItem, String> jMenuItemBeanProperty = BeanProperty.create("text");
+		AutoBinding<Person, String, JMenuItem, String> autoBinding_14 = Bindings.createAutoBinding(UpdateStrategy.READ, Party0, personBeanProperty, mntmPlayer, jMenuItemBeanProperty);
+		autoBinding_14.bind();
+		//
+		AutoBinding<Person, String, JMenuItem, String> autoBinding_15 = Bindings.createAutoBinding(UpdateStrategy.READ, Party1, personBeanProperty, mntmMember, jMenuItemBeanProperty);
+		autoBinding_15.bind();
+		//
+		AutoBinding<Person, String, JMenuItem, String> autoBinding_16 = Bindings.createAutoBinding(UpdateStrategy.READ, Party2, personBeanProperty, mntmMember_1, jMenuItemBeanProperty);
+		autoBinding_16.bind();
+		//
+		AutoBinding<Person, String, JMenuItem, String> autoBinding_17 = Bindings.createAutoBinding(UpdateStrategy.READ, Party3, personBeanProperty, mntmMember_2, jMenuItemBeanProperty);
+		autoBinding_17.bind();
+		//
+		AutoBinding<Person, String, JMenuItem, String> autoBinding_18 = Bindings.createAutoBinding(UpdateStrategy.READ, Party4, personBeanProperty, mntmMember_3, jMenuItemBeanProperty);
+		autoBinding_18.bind();
 	}
 }
 

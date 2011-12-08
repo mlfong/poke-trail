@@ -41,9 +41,11 @@ public class GameLogic
 	public static GameInitObj gameData = new GameInitObj();
 	public static Startup dialog;
 	public static int pace, previousPace, rations, tiredDuration;
-	public static Integer day=0;
+	public static Integer day=0, partySize=5;
 	public static boolean isNewGame = true;
 	public static boolean changeNext=true;
+	public static String reasonForGameover;
+	private static boolean outOfFood;
 
 	public GameLogic()
 	{}
@@ -151,16 +153,18 @@ public class GameLogic
 	{
 		String notify="";
 		//sub food
-		if(wagon.inventory.containsKey(new Food()) && wagon.inventory.get(new Food())>0){
+		if(wagon.inventory.containsKey(new Food()) && wagon.inventory.get(new Food())>rations){
+			outOfFood=false;
 			wagon.subItem(new Food(), rations);
 			//update food label
 			GameFrameMain.lblFoodSupply.setText(wagon.inventory.get(new Food()).toString());
 		}
 		else{
-			//set out-of-food variable
+			wagon.inventory.put(new Food(), 0);
+			outOfFood = true;
 		}
 		//move ahead on map if needed
-		if(changeNext){
+		if(changeNext&&!(wagon.map.getCurr().equals(wagon.map.getDest()))){
 			GameFrameMain.mappic.setIcon(new ImageIcon(InGame.class.getResource("/images/"+maps.poll())));
 			changeNext=false;
 		}
@@ -175,7 +179,7 @@ public class GameLogic
 		if(wagon.map.getDistToNext()>=wagon.map.getDistBetween()){
 			//notify reached destination and won
 			if(wagon.map.getCurr().equals(wagon.map.getDest())){
-				notify = "You have reached " + wagon.map.getCurr().getLocation().getName() +"! You Win!";	
+				reasonForGameover = "You have reached " + wagon.map.getCurr().getLocation().getName() +"! You Win!";	
 				gameover=true;
 			}
 			//notify reached new location
@@ -384,16 +388,21 @@ public class GameLogic
 			plusFatigue = -10;
 		}
 
-		if(rations == 0)
-			plusFatigue += 10;
-		if(rations == party.size())
-			plusFatigue += 5;
-		if(rations == 2*party.size())
-			plusFatigue += 2;
-		if(rations == 4*party.size())
-			plusFatigue -= 5;
+		if(outOfFood)
+			plusFatigue +=10;
+		else{
+			if(rations == 0)
+				plusFatigue += 10;
+			if(rations == partySize)
+				plusFatigue += 5;
+			if(rations == 2*partySize)
+				plusFatigue += 2;
+			if(rations == 4*partySize)
+				plusFatigue -= 5;
+		}
+		
 
-		for(int i = 0; i < party.size(); i++)
+		for(int i = 0; i < partySize; i++)
 		{
 			Person p = party.get(i);
 			if(!(p.isDead())){
@@ -409,8 +418,14 @@ public class GameLogic
 					p.setFatigue(fatigue);
 	
 				int health = p.getHealth() - minusHealth;
-				if(health <= 0)
-					GameFrameMain.textArea.append("\n"+p.death());
+				if(health <= 0){
+					String notify = p.death();
+					GameFrameMain.textArea.append("\n"+notify);
+					JOptionPane.showMessageDialog(GameFrameMain.contentPane, notify);	
+					partySize--;
+					rations=rations-(rations/(partySize+1));
+				}
+				
 				else if(health > 100)
 					p.setHealth(100);
 				else
@@ -449,8 +464,10 @@ public class GameLogic
 		}
 
 		
-		if(party.get(0).isDead()&&party.get(1).isDead()&&party.get(2).isDead()&&party.get(3).isDead()&&party.get(0).isDead())
+		if(party.get(0).isDead()&&party.get(1).isDead()&&party.get(2).isDead()&&party.get(3).isDead()&&party.get(4).isDead()){
+			reasonForGameover = "Everyone in your party has died. You lose.";
 			gameover = true;
+		}
 	}
 
 	private static void randomEvent()
@@ -481,7 +498,7 @@ public class GameLogic
 			}
 			else if(rand == 12)
 			{
-				for(int i = 1; i < party.size(); i++)
+				for(int i = 1; i < partySize; i++)
 				{
 					party.get(i).setHealth(1);
 				}
@@ -489,7 +506,7 @@ public class GameLogic
 			}
 			else if(rand == 13)
 			{
-				for(int i = 0; i < party.size(); i++)
+				for(int i = 0; i < partySize; i++)
 					party.get(i).setDisease(new Poison());
 				GameFrameMain.textArea.append("\nEKANS, EKANS EVERYWHERE. Your entire party was poisoned!");
 			}
@@ -584,8 +601,11 @@ public class GameLogic
 				{
 					GameFrameMain.textArea.append("\nA Tauros has died!");
 					wagon.subItem(new Oxen(), 1);
-					if(wagon.getInventory().get(new Oxen()) == null)
+					if(wagon.getInventory().get(new Oxen()) == null){
 						gameover = true;
+						reasonForGameover = "You do not have any Tauros left to pull your wagon. You lose.";
+					}
+						
 					else{
 						GameFrameMain.taurosDead((wagon.inventory.get(new Oxen())));
 					}
@@ -594,11 +614,12 @@ public class GameLogic
 			
 			if(tired == true)
 			{
-				GameFrameMain.textArea.append("\nTauros is tired!");
+				
 				pace = LEISURELY;
 				tiredDuration++;
 				if(tiredDuration == 4)
 				{
+					GameFrameMain.textArea.append("\nTauros are feeling better!");
 					GameFrameMain.taurosTired(false);
 					pace = previousPace;
 					tired = false;
@@ -610,6 +631,7 @@ public class GameLogic
 				{
 					if(generator.nextInt(3) == 1)
 					{
+						GameFrameMain.textArea.append("\nTauros is tired!");
 						GameFrameMain.taurosTired(true);
 						previousPace = pace;
 						tiredDuration = 0;
@@ -619,13 +641,13 @@ public class GameLogic
 			}
 
 			//      int totalHealth = 0;
-			//    for(int i = 0; i < Party.size(); i++)
+			//    for(int i = 0; i < partySize; i++)
 			//       totalHealth += Party.get(i).getHealth();
-			//    if(totalHealth == Party.size() * 100)
+			//    if(totalHealth == partySize * 100)
 			//      return;
 
 			//Generate for diseases
-			for(int i = 0; i < party.size(); i++)
+			for(int i = 0; i < partySize; i++)
 			{
 				if(party.get(i).isSick() == false)
 				{
@@ -889,6 +911,55 @@ public class GameLogic
 		GameInitObj.log=fm.getLog();
 		tired = fm.getTired();
 		gameover = fm.getGameOver();
+	}
+
+	public static void heal(Person person) {
+		if(person.isDead())
+			JOptionPane.showMessageDialog(GameFrameMain.contentPane, "You can't heal the dead!");	
+		else if(wagon.inventory.containsKey(new FullHeal())){
+			wagon.subItem(new FullHeal(), 1);
+			person.setHealth(100);
+			person.setDisease(null);
+			person.setFatigue(0);
+			person.setHunger(0);
+			GameFrameMain.textArea.append("\n"+person.getName()+" has been fully healed!");
+			JOptionPane.showMessageDialog(GameFrameMain.contentPane, person.getName()+" has been fully healed!");	
+			//refresh health bars really fast (crappy copy pasta code)
+			if(party.get(0).isDead()){
+				GameFrameMain.progressBar_1.setValue(0);
+			}
+			else{
+				GameFrameMain.progressBar_1.setValue(party.get(0).getHealth());
+			}
+			if(party.get(1).isDead()){
+				GameFrameMain.progressBar_2.setValue(0);
+			}
+			else{
+				GameFrameMain.progressBar_2.setValue(party.get(1).getHealth());
+			}
+			if(party.get(2).isDead()){
+				GameFrameMain.progressBar_3.setValue(0);
+			}
+			else{
+				GameFrameMain.progressBar_3.setValue(party.get(2).getHealth());
+			}
+			if(party.get(3).isDead()){
+				GameFrameMain.progressBar_4.setValue(0);
+			}
+			else{
+				GameFrameMain.progressBar_4.setValue(party.get(3).getHealth());
+			}
+			if(party.get(4).isDead()){
+				GameFrameMain.progressBar_5.setValue(0);
+			}
+			else{
+				GameFrameMain.progressBar_5.setValue(party.get(4).getHealth());
+			}
+		}
+		else{
+			JOptionPane.showMessageDialog(GameFrameMain.contentPane, "You don't have any medicine!");	
+		}
+		
 	}
 
 
