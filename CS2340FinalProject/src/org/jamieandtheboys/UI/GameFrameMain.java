@@ -99,6 +99,14 @@ public class GameFrameMain extends JFrame {
 	public static JPanel GoPanel;
 	public static TextArea textArea;
 	public static JButton btnBeginAdventure;
+	public static JProgressBar progressBar_1;
+	public static JProgressBar progressBar_2;
+	public static JProgressBar progressBar_3;
+	public static JProgressBar progressBar_4;
+	public static JProgressBar progressBar_5;
+	public static JLabel lblHealthy;
+	public static JLabel lblHealthy_1;
+	public static JLabel mappic;
 	private Random random = new Random();
 	public Logger log= new Logger();
 
@@ -357,6 +365,25 @@ public class GameFrameMain extends JFrame {
 		 * else
 		 * 	get Conditions and display appropriate picture
 		 */
+		
+		final JPanel mapPanel = new JPanel();
+		mapPanel.setLayout(new BorderLayout(0, 0));
+		
+		mappic = new JLabel("");
+		mappic.setIcon(new ImageIcon(InGame.class.getResource("/images/map1.png")));
+		mapPanel.add(mappic, BorderLayout.CENTER);
+		
+		JButton returnbutton = new JButton("Return to game");
+		mapPanel.add(returnbutton, BorderLayout.SOUTH);
+		returnbutton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				//switch back to adventure
+				GameFrameMain.rightPanel.remove(mapPanel);
+				GameFrameMain.rightPanel.add(GameFrameMain.GoPanel, "cell 0 0,growx,aligny center");
+				GameFrameMain.rightPanel.updateUI();
+			}
+		});
 
 		JLabel lblPalletTownGeneral = new JLabel("GENERAL STORE");
 		lblPalletTownGeneral.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -712,11 +739,13 @@ public class GameFrameMain extends JFrame {
 					GameLogic.wagon.setWeight(TotalWeight);
 					if(oxen>0){
 						GameLogic.wagon.addItem(new Oxen(), oxen);
+						if(GameLogic.wagon.inventory.get(new Oxen())-oxen==1)
+							GameFrameMain.lblHealthy.setText(lblHealthy_1.getText());
 						oxen=0;
 						label_4.setText("0");
 					}
 					if(food>0){
-						GameLogic.wagon.addItem(new Food(), food);
+						GameLogic.wagon.addItem(new Food(), food*5);
 						food=0;
 						label_3.setText("0");
 					}
@@ -995,7 +1024,7 @@ public class GameFrameMain extends JFrame {
 		lblPlayer.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		leftPanel.add(lblPlayer, "cell 0 12");
 
-		JProgressBar progressBar_1 = new JProgressBar();
+		progressBar_1 = new JProgressBar();
 		progressBar_1.setForeground(new Color(50, 205, 50));
 		progressBar_1.setStringPainted(true);
 		progressBar_1.setValue(100);
@@ -1005,7 +1034,7 @@ public class GameFrameMain extends JFrame {
 		lblMember.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		leftPanel.add(lblMember, "cell 0 13");
 
-		JProgressBar progressBar_2 = new JProgressBar();
+		progressBar_2 = new JProgressBar();
 		progressBar_2.setForeground(new Color(50, 205, 50));
 		progressBar_2.setStringPainted(true);
 		progressBar_2.setValue(100);
@@ -1015,7 +1044,7 @@ public class GameFrameMain extends JFrame {
 		lblMember_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		leftPanel.add(lblMember_1, "cell 0 14");
 
-		JProgressBar progressBar_3 = new JProgressBar();
+		progressBar_3 = new JProgressBar();
 		progressBar_3.setForeground(new Color(50, 205, 50));
 		progressBar_3.setStringPainted(true);
 		progressBar_3.setValue(100);
@@ -1025,7 +1054,7 @@ public class GameFrameMain extends JFrame {
 		lblMember_2.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		leftPanel.add(lblMember_2, "cell 0 15");
 
-		JProgressBar progressBar_4 = new JProgressBar();
+		progressBar_4 = new JProgressBar();
 		progressBar_4.setForeground(new Color(50, 205, 50));
 		progressBar_4.setStringPainted(true);
 		progressBar_4.setValue(100);
@@ -1035,7 +1064,7 @@ public class GameFrameMain extends JFrame {
 		lblMember_3.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		leftPanel.add(lblMember_3, "cell 0 16");
 
-		JProgressBar progressBar_5 = new JProgressBar();
+		progressBar_5 = new JProgressBar();
 		progressBar_5.setForeground(new Color(50, 205, 50));
 		progressBar_5.setStringPainted(true);
 		progressBar_5.setValue(100);
@@ -1048,32 +1077,23 @@ public class GameFrameMain extends JFrame {
 		JLabel lblWagon_1 = new JLabel("Wagon");
 		lblWagon_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		leftPanel.add(lblWagon_1, "cell 0 20");
-
-		JProgressBar progressBar_7 = new JProgressBar();
-		progressBar_7.setValue(100);
-		progressBar_7.setStringPainted(true);
-		progressBar_7.setForeground(new Color(50, 205, 50));
-		leftPanel.add(progressBar_7, "cell 1 20");
+		
+		JLabel lblFunctional = new JLabel("Functional");
+		leftPanel.add(lblFunctional, "cell 1 20");
 
 		JLabel lblTauros = new JLabel("Tauros");
 		lblTauros.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		leftPanel.add(lblTauros, "cell 0 21");
-
-		JProgressBar progressBar_8 = new JProgressBar();
-		progressBar_8.setValue(100);
-		progressBar_8.setStringPainted(true);
-		progressBar_8.setForeground(new Color(50, 205, 50));
-		leftPanel.add(progressBar_8, "cell 1 21");
+		
+		lblHealthy = new JLabel("Healthy");
+		leftPanel.add(lblHealthy, "cell 1 21");
 
 		JLabel lblTauros_1 = new JLabel("Tauros");
 		lblTauros_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		leftPanel.add(lblTauros_1, "cell 0 22");
-
-		JProgressBar progressBar_6 = new JProgressBar();
-		progressBar_6.setValue(100);
-		progressBar_6.setStringPainted(true);
-		progressBar_6.setForeground(new Color(50, 205, 50));
-		leftPanel.add(progressBar_6, "cell 1 22");
+		
+		lblHealthy_1 = new JLabel("Healthy");
+		leftPanel.add(lblHealthy_1, "cell 1 22");
 
 		JPanel menuPanel = new JPanel();
 		menuPanel.setBackground(Color.RED);
@@ -1141,6 +1161,12 @@ public class GameFrameMain extends JFrame {
 		popupMenu_2.add(mntmMember_3);
 
 		JButton btnHeal = new JButton("Hunt");
+		btnHeal.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				GameLogic.hunt();
+			}
+		});
 		btnHeal.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/ammoIcon.png")));
 		btnHeal.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnHeal.setMargin(new Insets(2, 6, 2, 5));
@@ -1150,6 +1176,12 @@ public class GameFrameMain extends JFrame {
 		menuPanel.add(btnHeal, "cell 3 0,aligny center");
 
 		JButton btnRepairWagon = new JButton("Trade");
+		btnRepairWagon.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				GameLogic.trade();
+			}
+		});
 		btnRepairWagon.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/trade.png")));
 		btnRepairWagon.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnRepairWagon.setMargin(new Insets(2, 6, 2, 5));
@@ -1195,10 +1227,11 @@ public class GameFrameMain extends JFrame {
 		JMenuItem mntmStopped = new JMenuItem("Stopped");
 		mntmStopped.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseReleased(MouseEvent e) {
 				GameLogic.pace=0;
 				btnSetPace.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/stop.gif")));
 				btnSetPace.updateUI();
+				textArea.append("\n"+"Pace set to Stopped");
 			}
 		});
 		mntmStopped.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/stop.gif")));
@@ -1207,10 +1240,11 @@ public class GameFrameMain extends JFrame {
 		JMenuItem mntmLeasurely = new JMenuItem("Leisurely");
 		mntmLeasurely.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseReleased(MouseEvent e) {
 				GameLogic.pace=5;
 				btnSetPace.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/slowpokeIcon.png")));
 				btnSetPace.updateUI();
+				textArea.append("\n"+"Pace set to Leisurely");
 			}
 		});
 		mntmLeasurely.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/slowpokeIcon.png")));
@@ -1218,11 +1252,11 @@ public class GameFrameMain extends JFrame {
 
 		JMenuItem mntmSteady = new JMenuItem("Steady");
 		mntmSteady.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				System.out.println("steady");
+			public void mouseReleased(MouseEvent e) {
 				GameLogic.pace=10;
 				btnSetPace.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/taurosIcon.png")));
 				btnSetPace.updateUI();
+				textArea.append("\n"+"Pace set to Steady");
 			}
 		});
 		mntmSteady.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/taurosIcon.png")));
@@ -1231,10 +1265,11 @@ public class GameFrameMain extends JFrame {
 		JMenuItem mntmGrueling = new JMenuItem("Grueling");
 		mntmGrueling.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseReleased(MouseEvent e) {
 				GameLogic.pace=15;
 				btnSetPace.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/rapidashIcon.png")));
 				btnSetPace.updateUI();
+				textArea.append("\n"+"Pace set to Grueling");
 			}
 		});
 		mntmGrueling.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/rapidashIcon.png")));
@@ -1256,10 +1291,11 @@ public class GameFrameMain extends JFrame {
 		mntmNone.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/None.png")));
 		mntmNone.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseReleased(MouseEvent e) {
 				GameLogic.rations=0;
 				btnSetRations.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/None.png")));
 				btnSetRations.updateUI();
+				textArea.append("\n"+"Rations set to None");
 			}
 		});
 		popupMenu_1.add(mntmNone);
@@ -1268,10 +1304,11 @@ public class GameFrameMain extends JFrame {
 		mntmBarebones.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/barebones.png")));
 		mntmBarebones.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseReleased(MouseEvent e) {
 				GameLogic.rations=1*GameLogic.party.size();
 				btnSetRations.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/barebones.png")));
 				btnSetRations.updateUI();
+				textArea.append("\n"+"Rations set to Bare-Bones");
 			}
 		});
 		popupMenu_1.add(mntmBarebones);
@@ -1280,10 +1317,11 @@ public class GameFrameMain extends JFrame {
 		mntmMeager.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/meager.png")));
 		mntmMeager.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseReleased(MouseEvent e) {
 				GameLogic.rations=2*GameLogic.party.size();
 				btnSetRations.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/meager.png")));
 				btnSetRations.updateUI();
+				textArea.append("\n"+"Rations set to Meager");
 			}
 		});
 		popupMenu_1.add(mntmMeager);
@@ -1292,10 +1330,11 @@ public class GameFrameMain extends JFrame {
 		mntmNormal.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/foodIcon.png")));
 		mntmNormal.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseReleased(MouseEvent e) {
 				GameLogic.rations=3*GameLogic.party.size();
 				btnSetRations.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/foodIcon.png")));
 				btnSetRations.updateUI();
+				textArea.append("\n"+"Rations set to Normal");
 			}
 		});
 		popupMenu_1.add(mntmNormal);
@@ -1304,10 +1343,11 @@ public class GameFrameMain extends JFrame {
 		mntmWellfed.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/wellfed.png")));
 		mntmWellfed.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseReleased(MouseEvent e) {
 				GameLogic.rations=4*GameLogic.party.size();
 				btnSetRations.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/wellfed.png")));
 				btnSetRations.updateUI();
+				textArea.append("\n"+"Rations set to Well-Fed");
 			}
 		});
 		popupMenu_1.add(mntmWellfed);
@@ -1332,6 +1372,16 @@ public class GameFrameMain extends JFrame {
 		menuPanel.add(btnViewSupplies, "cell 8 0,aligny center");
 
 		JButton btnViewMap = new JButton("View Map");
+		btnViewMap.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				GameFrameMain.rightPanel.remove(GoPanel);
+				GameFrameMain.rightPanel.remove(RiverPanel);
+				GameFrameMain.rightPanel.remove(displayPanel);
+				GameFrameMain.rightPanel.add(mapPanel, "cell 0 0,growx,aligny center");
+				GameFrameMain.rightPanel.updateUI();
+			}
+		});
 		btnViewMap.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/map.png")));
 		btnViewMap.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnViewMap.setMargin(new Insets(2, 6, 2, 5));
@@ -1360,6 +1410,26 @@ public class GameFrameMain extends JFrame {
 
 		});
 	}
+	
+	public static void taurosTired(boolean bool){
+		if(bool){
+			if(GameLogic.wagon.inventory.get(new Oxen())>1)
+				GameFrameMain.lblHealthy.setText("Tired");
+			GameFrameMain.lblHealthy_1.setText("Tired");
+		}
+		else{
+			if(GameLogic.wagon.inventory.get(new Oxen())>1)
+				GameFrameMain.lblHealthy.setText("Healthy");
+			GameFrameMain.lblHealthy_1.setText("Healthy");
+		}
+	}
+	
+	public static void taurosDead(int num){
+		if(num==1){
+			GameFrameMain.lblHealthy.setText("Dead");
+		}
+	}
+	
 	protected void initDataBindings() {
 		BeanProperty<Person, String> personBeanProperty = BeanProperty.create("name");
 		BeanProperty<JLabel, String> jLabelBeanProperty = BeanProperty.create("text");

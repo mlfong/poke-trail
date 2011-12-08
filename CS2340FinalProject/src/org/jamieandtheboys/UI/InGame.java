@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class InGame {
 
@@ -47,16 +49,21 @@ public class InGame {
 		frame.setBounds(100, 100, 761, 485);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel displayPanel = new JPanel();
-		frame.getContentPane().add(displayPanel, BorderLayout.CENTER);
-		displayPanel.setLayout(new BorderLayout(0, 0));
+		JPanel mapPanel = new JPanel();
+		frame.getContentPane().add(mapPanel, BorderLayout.CENTER);
+		mapPanel.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(InGame.class.getResource("/images/wagongamescreen.jpg")));
-		displayPanel.add(lblNewLabel, BorderLayout.CENTER);
+		JLabel mappic = new JLabel("");
+		mappic.setIcon(new ImageIcon(InGame.class.getResource("/images/map1.png")));
+		mapPanel.add(mappic, BorderLayout.CENTER);
 		
-		JButton btnNewButton = new JButton("Take A Turn | Progress to next town below");
-		displayPanel.add(btnNewButton, BorderLayout.SOUTH);
+		JButton returnbutton = new JButton("Return to game");
+		returnbutton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+		});
+		mapPanel.add(returnbutton, BorderLayout.SOUTH);
 	}
 
 }

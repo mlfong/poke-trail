@@ -1,6 +1,7 @@
 package org.jamieandtheboys.poketrail;
 
 
+import org.jamieandtheboys.UI.InGame;
 import org.jamieandtheboys.UI.StartScreen;
 import org.jamieandtheboys.UI.Startup;
 import org.jamieandtheboys.UI.GameFrameMain;
@@ -12,9 +13,12 @@ import org.jamieandtheboys.persons.*;
 
 import java.awt.EventQueue;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 import java.util.Scanner;
 
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -28,7 +32,7 @@ public class GameLogic
 
 	private static Random generator = new Random();
 	public static GameFrameMain frame;
-
+	public static Queue<String> maps;
 	public static boolean tired = false;
 	public static boolean gameover = false;
 	public static Store store;
@@ -37,9 +41,9 @@ public class GameLogic
 	public static GameInitObj gameData = new GameInitObj();
 	public static Startup dialog;
 	public static int pace, previousPace, rations, tiredDuration;
-	public static PokeMap map;
 	public static Integer day=0;
 	public static boolean isNewGame = true;
+	public static boolean changeNext=true;
 
 	public GameLogic()
 	{}
@@ -47,9 +51,38 @@ public class GameLogic
 	public static void main(String[] args)
 	{
 		//TO-DO
+		makeQueue();
 		startScreen();
 		//run();
 		//newGame();
+	}
+
+	private static void makeQueue() {
+		maps= new LinkedList<String>();
+		maps.add("map1.5.png");
+		maps.add("map2.png");
+		maps.add("map2.5.png");
+		maps.add("map3.png");
+		maps.add("map3.5.png");
+		maps.add("map4.png");
+		maps.add("map4.5.png");
+		maps.add("map5.png");
+		maps.add("map5.5.png");
+		maps.add("map6.png");
+		maps.add("map6.5.png");
+		maps.add("map7.png");
+		maps.add("map7.5.png");
+		maps.add("map8.png");
+		maps.add("map8.5.png");
+		maps.add("map9.png");
+		maps.add("map9.5.png");
+		maps.add("map10.png");
+		maps.add("map10.5.png");
+		maps.add("map11.png");
+		maps.add("map11.5.png");
+		maps.add("map12.png");
+		
+		
 	}
 
 	public static void startScreen()
@@ -102,7 +135,8 @@ public class GameLogic
 						GameFrameMain.textArea.setText(GameInitObj.log);
 						GameFrameMain.lblMiles.setText(wagon.getDistTraveled()+" Miles");
 						GameFrameMain.lblPokedollars.setText(party.get(0).getMoney().toString());
-						GameFrameMain.lblFoodSupply.setText(wagon.inventory.get(new Food()).toString());
+						if(wagon.inventory.containsKey(new Food()))
+							GameFrameMain.lblFoodSupply.setText(wagon.inventory.get(new Food()).toString());
 					}
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -125,6 +159,11 @@ public class GameLogic
 		else{
 			//set out-of-food variable
 		}
+		//move ahead on map if needed
+		if(changeNext){
+			GameFrameMain.mappic.setIcon(new ImageIcon(InGame.class.getResource("/images/"+maps.poll())));
+			changeNext=false;
+		}
 		//increase distance
 		wagon.map.addToTotalDist(pace);
 		//update total distance
@@ -142,6 +181,8 @@ public class GameLogic
 			//notify reached new location
 			else{
 				notify = "You have reached " + wagon.map.getCurr().getLocation().getName();
+				GameFrameMain.mappic.setIcon(new ImageIcon(InGame.class.getResource("/images/"+maps.poll())));
+				changeNext= true;
 			}
 			//go to river events if new location is a river
 			if(wagon.map.getCurr().isARiver()){
@@ -165,6 +206,7 @@ public class GameLogic
 		day++;
 		//update day label
 		GameFrameMain.days.setText(day.toString());
+		updateHealth();
 		//hunger levels and fatigue
 		//health
 
@@ -291,13 +333,15 @@ public class GameLogic
 			if( rand < 4)
 			{
 				wagon.addItem(new Food(), 2);
-				GameFrameMain.textArea.append("You hunted and got 2 more food!");
+				GameFrameMain.textArea.append("\nYou hunted and got 2 more food!");
+				GameFrameMain.lblFoodSupply.setText(wagon.inventory.get(new Food()).toString());
+				
 			}
 			else
-				GameFrameMain.textArea.append("You hunted but didn't catch anything...");
+				GameFrameMain.textArea.append("\nYou hunted but didn't catch anything...");
 		}
 		else
-			GameFrameMain.textArea.append("You need at least 1 Pokeball to hunt.");
+			GameFrameMain.textArea.append("\nYou need at least 1 Pokeball to hunt.");
 	}
 
 	public static void scavenge()
@@ -352,27 +396,60 @@ public class GameLogic
 		for(int i = 0; i < party.size(); i++)
 		{
 			Person p = party.get(i);
-			int fatigue = p.getFatigue() + plusFatigue;
-			if(fatigue > 100)
-			{
-				p.setFatigue(100);
-				minusHealth += 10;
+			if(!(p.isDead())){
+				int fatigue = p.getFatigue() + plusFatigue;
+				if(fatigue > 100)
+				{
+					p.setFatigue(100);
+					minusHealth += 10;
+				}
+				else if(fatigue < 0)
+					p.setFatigue(0);
+				else
+					p.setFatigue(fatigue);
+	
+				int health = p.getHealth() - minusHealth;
+				if(health <= 0)
+					GameFrameMain.textArea.append("\n"+p.death());
+				else if(health > 100)
+					p.setHealth(100);
+				else
+					p.setHealth(health);
 			}
-			else if(fatigue < 0)
-				p.setFatigue(0);
-			else
-				p.setFatigue(fatigue);
-
-			int health = p.getHealth() - minusHealth;
-			if(health <= 0)
-				party.remove(i);
-			else if(health > 100)
-				p.setHealth(100);
-			else
-				p.setHealth(health);
+		}
+		if(party.get(0).isDead()){
+			GameFrameMain.progressBar_1.setValue(0);
+		}
+		else{
+			GameFrameMain.progressBar_1.setValue(party.get(0).getHealth());
+		}
+		if(party.get(1).isDead()){
+			GameFrameMain.progressBar_2.setValue(0);
+		}
+		else{
+			GameFrameMain.progressBar_2.setValue(party.get(1).getHealth());
+		}
+		if(party.get(2).isDead()){
+			GameFrameMain.progressBar_3.setValue(0);
+		}
+		else{
+			GameFrameMain.progressBar_3.setValue(party.get(2).getHealth());
+		}
+		if(party.get(3).isDead()){
+			GameFrameMain.progressBar_4.setValue(0);
+		}
+		else{
+			GameFrameMain.progressBar_4.setValue(party.get(3).getHealth());
+		}
+		if(party.get(4).isDead()){
+			GameFrameMain.progressBar_5.setValue(0);
+		}
+		else{
+			GameFrameMain.progressBar_5.setValue(party.get(4).getHealth());
 		}
 
-		if(party.size() <= 0)
+		
+		if(party.get(0).isDead()&&party.get(1).isDead()&&party.get(2).isDead()&&party.get(3).isDead()&&party.get(0).isDead())
 			gameover = true;
 	}
 
@@ -394,9 +471,9 @@ public class GameLogic
 			}
 			else if(rand == 11)
 			{
-				if(map.getCurr().getNext() != map.getDest())
+				if(wagon.map.getCurr().getNext() != wagon.map.getDest())
 				{
-					map.setCurr(map.getCurr().getNext());
+					wagon.map.setCurr(wagon.map.getCurr().getNext());
 					GameFrameMain.textArea.append("\nA Mew appeared and teleported you to the next area!");
 				}
 				else
@@ -507,8 +584,11 @@ public class GameLogic
 				{
 					GameFrameMain.textArea.append("\nA Tauros has died!");
 					wagon.subItem(new Oxen(), 1);
-					if(wagon.getInventory().get(new Oxen()) <= 0)
+					if(wagon.getInventory().get(new Oxen()) == null)
 						gameover = true;
+					else{
+						GameFrameMain.taurosDead((wagon.inventory.get(new Oxen())));
+					}
 				}
 			}
 			
@@ -519,6 +599,7 @@ public class GameLogic
 				tiredDuration++;
 				if(tiredDuration == 4)
 				{
+					GameFrameMain.taurosTired(false);
 					pace = previousPace;
 					tired = false;
 				}
@@ -529,6 +610,7 @@ public class GameLogic
 				{
 					if(generator.nextInt(3) == 1)
 					{
+						GameFrameMain.taurosTired(true);
 						previousPace = pace;
 						tiredDuration = 0;
 						tired = true;
@@ -553,7 +635,7 @@ public class GameLogic
 
 
 					//Maximum chance of getting a disease is a little less than 90%
-					double chance = ((1.0 - phealth*pfatigue)*90);
+					double chance = ((1.0 - phealth*pfatigue)*20);
 					if(chance > generator.nextInt(100))
 					{
 						int rand2 = generator.nextInt(3);
@@ -662,23 +744,45 @@ public class GameLogic
 				else
 					loseItem = new SpareWheel();
 			}
+			additem = generator.nextInt(7);
 		}
 
 		if(wagon.getInventory().containsKey(getItem) == false || wagon.getInventory().containsKey(loseItem) == false)
-		{} // No-one wants to trade
+		{
+			GameFrameMain.textArea.append("\nNobody is around to trade");
+		} // No-one wants to trade
 		else
 		{
-			amount = generator.nextInt( (int) (wagon.getInventory().get(getItem)*.1));
-			amount2 = generator.nextInt( (int) (wagon.getInventory().get(loseItem)*.1));
+			int am = (int) Math.floor(wagon.getInventory().get(getItem)*.1);
+			if(am==0)
+				am=1;
+			int am2 = (int) Math.floor(wagon.getInventory().get(loseItem)*.1);
+			if(am2==0)
+				am2=1;
+			amount = generator.nextInt(am);
+			if (amount==0)
+				amount=1;
+			amount2 = generator.nextInt(am2);
+			if(amount2==0)
+				amount2=1;
 
 			//Display items and amounts and ask if user wants to trade
-			if(1 == 1) //yes
+			int answer = JOptionPane.showConfirmDialog(
+				    frame,
+				    "Would you like to trade "+amount2+" "+loseItem.getName()+" for "+amount+" "+getItem.getName()+"?",
+				    "Trading",
+				    JOptionPane.YES_NO_OPTION);
+				    		
+			if(answer == JOptionPane.YES_OPTION) //yes
 			{
 				wagon.addItem(getItem, amount);
 				wagon.subItem(loseItem, amount2);
+				GameFrameMain.textArea.append("\nYou traded "+amount2+" "+loseItem.getName()+" for "+amount+" "+getItem.getName());
 			}
 			else
-			{} // trade cancelled
+			{
+				GameFrameMain.textArea.append("\nYou declined the trade offer");
+			} // trade cancelled
 		}
 
 
@@ -724,6 +828,9 @@ public class GameLogic
 				//kill a party member
 			}
 		}
+		else{
+			results="You made it across the river safely.";
+		}
 		GameFrameMain.rightPanel.remove(GameFrameMain.RiverPanel);
 		GameFrameMain.rightPanel.add(GameFrameMain.GoPanel, "cell 0 0,growx,aligny center");
 		GameFrameMain.rightPanel.updateUI();
@@ -743,6 +850,9 @@ public class GameLogic
 				//kill a member
 			}
 		}
+		else{
+			results="You made it across the river safely.";
+		}
 		GameFrameMain.rightPanel.remove(GameFrameMain.RiverPanel);
 		GameFrameMain.rightPanel.add(GameFrameMain.GoPanel, "cell 0 0,growx,aligny center");
 		GameFrameMain.rightPanel.updateUI();
@@ -750,7 +860,7 @@ public class GameLogic
 	}
 
 
-	public static void saveGame(){
+	public static FileManager saveGame(){
 		FileManager fm = new FileManager();
 		//import data to fm
 		fm.setDay(day);
@@ -764,6 +874,7 @@ public class GameLogic
 		SaveAndLoad snl = new SaveAndLoad();
 		snl.createUser("Ash", "password");
 		snl.saveFile("Ash", fm);
+		return fm;
 	}
 
 	public static void loadGame(){
