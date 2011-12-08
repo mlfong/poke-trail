@@ -98,7 +98,7 @@ public class JUnit_mfong
 		assertEquals(dest.getLocation().getName(), "Indigo Plateau");
 		assertFalse(mn.isARiver());
 		mn = mn.getNext();
-		assertEquals(mn.getLocation().getName(), "River Crossing");
+		assertEquals(mn.getLocation().getName(), "Viridian River");
 		assertTrue(mn.isARiver());
 	}
 
