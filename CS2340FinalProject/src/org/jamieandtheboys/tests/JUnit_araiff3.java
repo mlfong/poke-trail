@@ -59,4 +59,27 @@ public class JUnit_araiff3
 		assertEquals(fm.getWagon().equals(w), true);
 		assertEquals(fm.getLog(), textareaans);
 	}
+	@Test
+	public void testLoadGame()
+	{
+
+		GameLogic.loadGame();
+		assertEquals(GameLogic.day, (Integer) 7);
+		assertEquals(GameLogic.gameover , false);
+		assertEquals((Integer) GameLogic.pace, (Integer) 3);
+		assertEquals(GameLogic.tired , false);
+		assertEquals((Integer)GameLogic.rations ,(Integer) 10);
+		ArrayList<Person> party = new ArrayList<Person>();
+		party.add(new GenericPerson("1"));
+		party.add(new GenericPerson("2"));
+		party.add(new GenericPerson("3"));
+		party.add(new GenericPerson("4"));
+		party.add(new GenericPerson("5"));
+		assertEquals(GameLogic.party.get(0).getName(),"1");
+		assertEquals(GameLogic.party.get(1).getName(),"2");
+		assertEquals(GameLogic.party.get(2).getName(),"3");
+		assertEquals(GameLogic.party.get(3).getName(),"4");
+		assertEquals(GameLogic.party.get(4).getName(),"5");
+		assertEquals(GameLogic.wagon.getInventory() , new Wagon().getInventory());
+	}
 }
