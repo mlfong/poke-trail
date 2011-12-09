@@ -1,11 +1,12 @@
-package org.jamieandtheboys.poketrail;
+package org.jamieandtheboys.poketrail.Store;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class StoreTest {
 
-	/*
+	/**
+	 * @test
 	 *	This tests the Store class methods: getName(), getItem() and inStore()
 	 */
 	public void test() {
