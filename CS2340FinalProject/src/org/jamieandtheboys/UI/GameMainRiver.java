@@ -135,7 +135,7 @@ RiverPanel.setBackground(Color.WHITE);
 		rightPanel.add(RiverPanel, "cell 0 0,growx,aligny center");
 		RiverPanel.setLayout(new MigLayout("", "[][][][][]", "[][][][]"));
 		
-		JLabel Rivermain = new JLabel("You have round a River! You have three choices");
+		JLabel Rivermain = new JLabel("You have found a River! You have three choices");
 		RiverPanel.add(Rivermain, "flowx,cell 1 0");
 		
 		JLabel ferryexpl = new JLabel("Pay 50 PokeDallars to get across the river safely.");
