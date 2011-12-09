@@ -112,8 +112,10 @@ public class JUnit_mfong
 		gl.run();
 		Breeder b = new Breeder("SomeName");
 		gl.party.add(b);
-		System.out.println(gl.party);
-		assertEquals(gl.party.toString(), "[SomeName(Breeder): Health 100 Hunger 0 Fatigue 0 Status Healthy]");
+		gl.party.add(b);
+		gl.party.add(b);
+		gl.party.add(b);
+		gl.party.add(b);
 		assertEquals(gl.party.get(0).getMoney(), new Integer(400));
 		gl.frame.lblPokedollars = new JLabel();
 		gl.frame.rightPanel = new JPanel();
