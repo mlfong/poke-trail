@@ -7,6 +7,7 @@ import java.awt.TextArea;
 import javax.swing.JProgressBar;
 
 import org.jamieandtheboys.diseases.*;
+import org.jamieandtheboys.items.Food;
 import org.jamieandtheboys.persons.Breeder;
 import org.jamieandtheboys.persons.GenericPerson;
 import org.jamieandtheboys.poketrail.GameLogic;
@@ -21,6 +22,7 @@ public class JUnit_wchen {
 	public void testHealth()
 	{
 		GameLogic gl = new GameLogic();
+		
 		gl.run();
 		
 		gl.frame.progressBar_1 = new JProgressBar();
@@ -30,12 +32,12 @@ public class JUnit_wchen {
 		gl.frame.progressBar_5 = new JProgressBar();
 		gl.frame.textArea = new TextArea();
 		
-		
+		gl.wagon.addItem(new Food(), 1000);
 		Breeder guy = new Breeder("Guy");
 		GenericPerson gal = new GenericPerson("Gal");
 		GenericPerson boy = new GenericPerson("Boy");
 		GenericPerson girl = new GenericPerson("Girl");
-		GenericPerson hermaphrodite = new GenericPerson("hermaphrodite");
+		GenericPerson hermaphrodite = new GenericPerson("Hermaphrodite");
 		
 		gl.party.add(guy);
 		gl.party.add(gal);	

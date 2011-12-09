@@ -411,8 +411,8 @@ public class GameLogic
 				plusFatigue -= 5;
 		}
 		
-
-		for(int i = 0; i < partySize; i++)
+		int currentSize = partySize;
+		for(int i = 0; i < currentSize; i++)
 		{
 			Person p = party.get(i);
 			if(!(p.isDead())){
@@ -443,6 +443,7 @@ public class GameLogic
 					p.setHealth(health);
 			}
 		}
+		
 		if(party.get(0).isDead()){
 			GameFrameMain.progressBar_1.setValue(0);
 		}
