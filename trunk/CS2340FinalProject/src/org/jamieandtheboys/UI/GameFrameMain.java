@@ -1125,7 +1125,7 @@ public class GameFrameMain extends JFrame {
 		btnNewButton.setMargin(new Insets(2, 4, 2, 4));
 		btnNewButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnNewButton.setVerticalTextPosition(SwingConstants.BOTTOM);
-		btnNewButton.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/exitgame.png")));
+		btnNewButton.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/exiticon.png")));
 		menuPanel.add(btnNewButton, "cell 0 0,aligny center");
 
 		JButton btnS = new JButton("Save Game");
