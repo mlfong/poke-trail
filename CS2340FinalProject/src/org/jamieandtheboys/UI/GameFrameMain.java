@@ -1455,15 +1455,17 @@ public class GameFrameMain extends JFrame {
 	}
 	
 	public static void taurosTired(boolean bool){
-		if(bool){
-			if(GameLogic.wagon.inventory.get(new Oxen())>1)
-				GameFrameMain.lblHealthy.setText("Tired");
-			GameFrameMain.lblHealthy_1.setText("Tired");
-		}
-		else{
-			if(GameLogic.wagon.inventory.get(new Oxen())>1)
-				GameFrameMain.lblHealthy.setText("Healthy");
-			GameFrameMain.lblHealthy_1.setText("Healthy");
+		if(GameLogic.wagon.inventory.get(new Oxen())!=null){
+			if(bool){
+				if(GameLogic.wagon.inventory.get(new Oxen())>1)
+					GameFrameMain.lblHealthy.setText("Tired");
+				GameFrameMain.lblHealthy_1.setText("Tired");
+			}
+			else{
+				if(GameLogic.wagon.inventory.get(new Oxen())>1)
+					GameFrameMain.lblHealthy.setText("Healthy");
+				GameFrameMain.lblHealthy_1.setText("Healthy");
+			}
 		}
 	}
 	

@@ -269,13 +269,13 @@ public class Startup extends JDialog
 							GameLogic.gameData.Pace = 7;
 						GameLogic.gameData.PaceString=pace;
 						if(rations.equals("Bare-Bones"))
-							GameLogic.gameData.Pace = 5;
+							GameLogic.gameData.Rations = 5;
 						if(rations.equals("Meager"))
-							GameLogic.gameData.Pace = 10;
+							GameLogic.gameData.Rations = 10;
 						if(rations.equals("Normal"))
-							GameLogic.gameData.Pace = 15;
+							GameLogic.gameData.Rations = 15;
 						if(rations.equals("Well-Fed"))
-							GameLogic.gameData.Pace = 20;
+							GameLogic.gameData.Rations = 20;
 						GameLogic.gameData.RationsString=rations;
 						if(player.getType().equals("Breeder"))
 							player = new Breeder(player.getName());

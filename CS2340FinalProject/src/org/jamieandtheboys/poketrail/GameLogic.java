@@ -201,11 +201,13 @@ public class GameLogic
 				GameFrameMain.lblYouHave.setText("You have "+ party.get(0).getMoney() +" PokeDollars.");
 				GameFrameMain.rightPanel.updateUI();
 			}
-			wagon.map.setCurr(wagon.map.getCurr().getNext());
-			wagon.map.setDistToNext(0);
-			if(wagon.map.getCurr().getNext()!=null)
-				wagon.map.setDistBetween(wagon.map.getCurr().getNext().getLocation().getDistanceTo());
-		}
+			if(!gameover){
+				wagon.map.setCurr(wagon.map.getCurr().getNext());
+				wagon.map.setDistToNext(0);
+				if(wagon.map.getCurr().getNext()!=null)
+					wagon.map.setDistBetween(wagon.map.getCurr().getNext().getLocation().getDistanceTo());
+				}
+			}
 		//increase day
 		day++;
 		//update day label
@@ -407,10 +409,10 @@ public class GameLogic
 			Person p = party.get(i);
 			if(!(p.isDead())){
 				int fatigue = p.getFatigue() + plusFatigue;
-				if(fatigue > 100)
+				if(fatigue > 50)
 				{
-					p.setFatigue(100);
-					minusHealth += 10;
+					p.setFatigue(50);
+					minusHealth += 5;
 				}
 				else if(fatigue < 0)
 					p.setFatigue(0);
