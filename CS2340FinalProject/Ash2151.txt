@@ -1,0 +1,27 @@
+Welcome to Pallet Town, young adventurer.
+Your inventory consists of: {Oxen=6, Food=20, Clothing=3, Pokeball=2}
+Turn taken
+Turn taken
+Turn taken
+Turn taken
+
+The PokeFan club gives your party some food!
+
+Tauros is tired!
+Turn taken
+
+You hunted but didn't catch anything...
+
+You hunted and got 2 more food!
+Turn taken
+Turn taken
+Turn taken
+Turn taken
+Turn taken
+Turn taken
+Turn taken
+Turn taken
+You have reached Pallet Town
+Turn taken
+Your inventory consists of: {Oxen=6, Food=39, Clothing=3}
+Game Saved!

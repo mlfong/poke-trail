@@ -108,7 +108,7 @@ public class GameFrameMain extends JFrame {
 	public static JLabel lblHealthy_1;
 	public static JLabel mappic;
 	private Random random = new Random();
-	public Logger log= new Logger();
+	public static Logger log= new Logger();
 	private JMenuItem mntmPlayer;
 	private JMenuItem mntmMember;
 	private JMenuItem mntmMember_1;
