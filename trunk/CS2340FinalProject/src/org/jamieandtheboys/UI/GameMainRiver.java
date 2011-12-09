@@ -128,7 +128,31 @@ public class GameMainRiver extends JFrame {
 		 * }
 		 */
 		
+/*
+
+test
+JPanel RiverPanel = new JPanel();
+RiverPanel.setBackground(Color.WHITE);
+		rightPanel.add(RiverPanel, "cell 0 0,growx,aligny center");
+		RiverPanel.setLayout(new MigLayout("", "[][][][][]", "[][][][]"));
 		
+		JLabel riverImage = new JLabel("");
+		riverImage.setIcon(new ImageIcon(GameFrameMain.class.getResource("/images/rivercrossing.jpg")));
+		RiverPanel.add(riverImage, "cell 2 0 3 1");
+		
+		JLabel Rivermain = new JLabel("You have found a River! You have three choices");
+		RiverPanel.add(Rivermain, "flowx,cell 2 1 3 1");
+		
+		JLabel ferryexpl = new JLabel("Pay 50 PokeDallars to get across the river safely.");
+		RiverPanel.add(ferryexpl, "cell 2 2");
+		
+		JLabel Fordexpl = new JLabel("Try to pull your wagon across.");
+		RiverPanel.add(Fordexpl, "cell 3 2");
+		
+		JLabel Caulkexpl = new JLabel("Plug up all holes and try to float.");
+		RiverPanel.add(Caulkexpl, "cell 4 2");
+
+*/		
 		
 JPanel RiverPanel = new JPanel();
 RiverPanel.setBackground(Color.WHITE);
