@@ -1,8 +1,10 @@
 package org.jamieandtheboys.diseases;
 
+import java.io.Serializable;
+
 import org.jamieandtheboys.persons.Person;
 
-public abstract class Disease
+public abstract class Disease implements Serializable
 {
 	private String name;
 	
