@@ -1,8 +1,10 @@
 package org.jamieandtheboys.diseases;
 
+import java.io.Serializable;
+
 import org.jamieandtheboys.persons.Person;
 
-public class Dysentery extends Disease
+public class Dysentery extends Disease implements Serializable
 {
 	public Dysentery()
 	{

@@ -1,8 +1,10 @@
 package org.jamieandtheboys.diseases;
 
+import java.io.Serializable;
+
 import org.jamieandtheboys.persons.Person;
 
-public class Paralysis extends Disease
+public class Paralysis extends Disease implements Serializable
 {
 	public Paralysis()
 	{

@@ -1,8 +1,10 @@
 package org.jamieandtheboys.diseases;
 
+import java.io.Serializable;
+
 import org.jamieandtheboys.persons.Person;
 
-public class Poison extends Disease
+public class Poison extends Disease implements Serializable
 {
 	public Poison()
 	{
