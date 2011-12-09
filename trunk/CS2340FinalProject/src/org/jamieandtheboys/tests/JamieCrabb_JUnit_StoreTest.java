@@ -1,4 +1,4 @@
-package org.jamieandtheboys.poketrail.tests;
+package org.jamieandtheboys.tests;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
