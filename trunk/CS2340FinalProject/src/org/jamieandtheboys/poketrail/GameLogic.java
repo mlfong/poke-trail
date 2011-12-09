@@ -538,6 +538,7 @@ public class GameLogic
 					wagon.subItem(new Clothing(), rand3);
 					GameFrameMain.textArea.append("\nOh no! Team Rocket stole " + rand3+" amount of clothes!");
 					GameFrameMain.log.entry("\nOh no! Team Rocket stole " + rand3+" amount of clothes!");
+					JOptionPane.showMessageDialog(frame, "Meowth! That's right!", "Surrender now or prepare to fight!", JOptionPane.WARNING_MESSAGE, GameLogic.class.getResource("/images/teamrocketsmall.jpg"));
 				}
 				if(rand2 == 1 && wagon.getInventory().containsKey(new Food()) == true)
 				{
