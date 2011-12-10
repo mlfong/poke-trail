@@ -4,6 +4,8 @@
  * 			-- to inventory
  * 			-- to location
  *  does not explicitly test basic getters / setters
+ *  
+ *  Tests ferry crossing
  */
 package org.jamieandtheboys.tests;
 
