@@ -531,7 +531,7 @@ public class GameLogic
 			else if(rand >= 10 && rand < 18)
 			{
 				//Team rocket steals something!
-				ImageIcon icon = createImageIcon("images/teamrocketsmall.jpg");
+				ImageIcon icon = new ImageIcon("images/teamrocketsmall.jpg");
 				JOptionPane.showMessageDialog(frame, "Meowth! That's right!", "Surrender now or prepare to fight!", JOptionPane.WARNING_MESSAGE, icon); 
 				int rand2 = generator.nextInt(7);
 				if(rand2 == 0 && wagon.getInventory().containsKey(new Clothing()) == true)
